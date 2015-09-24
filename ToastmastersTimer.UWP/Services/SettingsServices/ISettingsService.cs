@@ -1,0 +1,7 @@
+﻿namespace ToastmastersTimer.UWP.Services.SettingsServices
+{
+    public interface ISettingsService
+    {
+        bool UseShellBackButton { get; set; }
+    }
+}
