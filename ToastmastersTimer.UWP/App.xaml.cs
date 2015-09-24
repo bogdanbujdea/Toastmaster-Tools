@@ -36,7 +36,7 @@ namespace ToastmastersTimer.UWP
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             await Task.Delay(500);
-            NavigationService.Navigate(typeof(Views.MainPage));
+            NavigationService.Navigate(typeof(Views.HomeView));
         }
     }
 }
