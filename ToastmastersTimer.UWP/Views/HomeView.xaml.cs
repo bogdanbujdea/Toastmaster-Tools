@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using ToastmastersTimer.UWP.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -13,8 +14,11 @@ namespace ToastmastersTimer.UWP.Views
         public HomeView()
         {
             this.InitializeComponent();
-        }
 
-	    public HomeViewModel ViewModel => this.DataContext as HomeViewModel;
+            Window = Template10.Common.WindowWrapper.Current();
+        }
+        private static Template10.Common.WindowWrapper Window { get; set; }
+
+        public HomeViewModel ViewModel => this.DataContext as HomeViewModel;
     }
 }
