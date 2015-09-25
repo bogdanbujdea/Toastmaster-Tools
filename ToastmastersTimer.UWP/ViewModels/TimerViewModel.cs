@@ -8,5 +8,15 @@ namespace ToastmastersTimer.UWP.ViewModels
 		{
 			
 		}
+
+
+        #region Timer
+
+        public void StartTimer()
+        {
+
+        }
+
+        #endregion
     }
 }
