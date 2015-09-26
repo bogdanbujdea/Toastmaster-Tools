@@ -100,6 +100,7 @@
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Models\Speech.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />

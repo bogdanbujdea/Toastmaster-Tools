@@ -27,7 +27,7 @@
                 SelectedBackground = DarkBackground;
                 return;
             }
-            InitializeTimer();
+            ResetTimer();
         }
 
         public bool TimerIsRunning
@@ -39,7 +39,7 @@
                 RaisePropertyChanged();
             }
         }
-        
+
         #region Properties
 
         public Color SelectedBackground
@@ -117,14 +117,30 @@
 
         public void PauseTimer()
         {
-            
+            if (_dispatcherTimer.IsEnabled)
+            {
+                _dispatcherTimer.Stop();
+                _stopWatch.Stop();
+                TimerIsRunning = false;
+            }
+            else
+            {
+                _dispatcherTimer.Start();
+                _stopWatch.Start();
+                TimerIsRunning = true;
+            }
+        }
+
+        public void StopTimer()
+        {
+            ResetTimer();
         }
 
         #endregion
 
         #region Private
 
-        private void InitializeTimer()
+        private void ResetTimer()
         {
             SelectedBackground = DarkBackground;
             MinutesText = SecondsText = "00";
