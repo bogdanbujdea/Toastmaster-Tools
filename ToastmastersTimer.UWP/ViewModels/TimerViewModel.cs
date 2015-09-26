@@ -1,22 +1,21 @@
-﻿using ToastmastersTimer.UWP.Mvvm;
-
-namespace ToastmastersTimer.UWP.ViewModels
+﻿namespace ToastmastersTimer.UWP.ViewModels
 {
-	public class TimerViewModel: ViewModelBase
+    using Windows.UI.Xaml;
+
+    using Mvvm;
+
+    public class TimerViewModel: ViewModelBase
     {
-		public TimerViewModel()
+	    public TimerViewModel()
 		{
 			
 		}
 
-
-        #region Timer
-
-        public void StartTimer()
+        public void SetTimer(object element, DataContextChangedEventArgs context)
         {
-
+            Timer = context.NewValue as ToastmastersTimerViewModel;
         }
 
-        #endregion
+        public ToastmastersTimerViewModel Timer { get; set; }
     }
 }

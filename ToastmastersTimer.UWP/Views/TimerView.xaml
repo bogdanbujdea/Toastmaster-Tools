@@ -13,13 +13,16 @@
         <viewModels:TimerViewModel></viewModels:TimerViewModel>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{x:Bind ViewModel.Timer.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid x:Name="TimerGrid" VerticalAlignment="Center">
-            <controls:ToastmastersTimer></controls:ToastmastersTimer>
+            <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}"></controls:ToastmastersTimer>
 
         </Grid>
     </Grid>

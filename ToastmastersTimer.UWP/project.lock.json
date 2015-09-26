@@ -1544,7 +1544,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -3192,7 +3192,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -4812,7 +4812,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -6465,7 +6465,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -8085,7 +8085,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -9738,7 +9738,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -11358,7 +11358,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Template10/1.0.0": {
+      "Template10/1.0.3": {
         "dependencies": {
           "Newtonsoft.Json": "[7.0.1, )"
         },
@@ -14747,27 +14747,24 @@
         "System.Xml.XmlSerializer.nuspec"
       ]
     },
-    "Template10/1.0.0": {
-      "sha512": "QB1/ayu5IyhJDY3cEP3yLnZSZCgXvU9UWBZEhiLv9IbaLGzFVTFPL9xjxsJQjXH/ES4cqSvbJ7NpoF1swsgmCg==",
+    "Template10/1.0.3": {
+      "sha512": "NA5nDymZ/Lg3yW9HQsZTfaeRtdGsfj4026du57xlrCxTa3wWhXB9okmlgGojMNV02qASNrs6WIraK1EBKo0EXw==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
         "_rels/.rels",
-        "build/Template10.targets",
         "build/uap10.0/Template10.targets",
         "lib/uap10.0/Microsoft.Xaml.Interactions.dll",
         "lib/uap10.0/Microsoft.Xaml.Interactivity.dll",
         "lib/uap10.0/Template10Library.dll",
         "lib/uap10.0/Template10Library.pri",
         "lib/uap10.0/Template10Library/Controls/HamburgerMenu.xaml",
-        "lib/uap10.0/Template10Library/Controls/HamburgerMenu.xbf",
         "lib/uap10.0/Template10Library/Controls/PageHeader.xaml",
-        "lib/uap10.0/Template10Library/Controls/PageHeader.xbf",
+        "lib/uap10.0/Template10Library/Controls/Resizer.xaml",
         "lib/uap10.0/Template10Library/Properties/Template10Library.rd.xml",
         "lib/uap10.0/Template10Library/Styles/Mdl2.xaml",
-        "lib/uap10.0/Template10Library/Styles/Mdl2.xbf",
         "lib/uap10.0/Template10Library/Template10Library.xr.xml",
-        "package/services/metadata/core-properties/c06338c54d8045d694a81099912177bb.psmdcp",
+        "package/services/metadata/core-properties/d0f8e141df9e4f288020ddf7483acb8f.psmdcp",
         "Template10.nuspec"
       ]
     }
@@ -14775,7 +14772,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
-      "Template10 >= 1.0.0"
+      "Template10 >= 1.0.3"
     ],
     "UAP,Version=v10.0": []
   }

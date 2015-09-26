@@ -13,12 +13,15 @@
     <UserControl.DataContext>
         <viewModels:ToastmastersTimerViewModel></viewModels:ToastmastersTimerViewModel>
     </UserControl.DataContext>
-    
-    <Grid Background="White">
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{x:Bind ViewModel.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
+        </Grid.Background>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="85*"></RowDefinition>
+                <RowDefinition Height="15*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid x:Name="TimerGrid" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -28,23 +31,24 @@
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="MinutesGrid">
                     <Viewbox>
-                        <TextBlock x:Name="MinutesText" Text="20" FontSize="50"></TextBlock>
+                        <TextBlock x:Name="MinutesText" Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" Foreground="White" FontSize="50"></TextBlock>
                     </Viewbox>
                 </Grid>
-                <Viewbox Grid.Column="1">
-                    <TextBlock Text=":" FontSize="150"></TextBlock>
+                <Viewbox Grid.Column="1" VerticalAlignment="Center" Stretch="Uniform">
+                    <TextBlock Text=":" Foreground="White" FontSize="50"></TextBlock>
                 </Viewbox>
                 <Grid x:Name="SecondsGrid" Grid.Column="2">
                     <Viewbox>
-                        <TextBlock x:Name="SecondsText" Text="20" FontSize="50"></TextBlock>
+                        <TextBlock x:Name="SecondsText" Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" Foreground="White" FontSize="50"></TextBlock>
                     </Viewbox>
                 </Grid>
             </Grid>
-            <StackPanel x:Name="ButtonsPanel" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 00 0 0" VerticalAlignment="Bottom">
-                <Button x:Name="StartTimer" Click="{x:Bind ViewModel.StartTimer}" HorizontalAlignment="Center" Content="Start" ></Button>
-                <Button x:Name="PauseTimer"  HorizontalAlignment="Center" Content="Pause"  Margin="15 0"></Button>
+            <StackPanel x:Name="ButtonsPanel" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 0" VerticalAlignment="Bottom">
+                <AppBarButton x:Name="StartTimer" Icon="Play" Content="Play" IsCompact="True" Background="White" Click="{x:Bind ViewModel.StartTimer}" ></AppBarButton>
+                <AppBarButton x:Name="PauseTimer" Icon="Pause" Content="Pause"  IsCompact="True" Background="White" Margin="20 0" Click="{x:Bind ViewModel.StartTimer}" ></AppBarButton>
+                <AppBarButton x:Name="StopTimer" Icon="Stop" Content="Stop" IsCompact="True" Background="White" Click="{x:Bind ViewModel.StartTimer}" ></AppBarButton>
+                <!--<Button x:Name="PauseTimer"  HorizontalAlignment="Center" Content="Pause" Background="White" Margin="15 0"></Button>-->
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>
