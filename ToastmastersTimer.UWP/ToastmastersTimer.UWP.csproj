@@ -96,6 +96,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TimePicker.xaml.cs">
+      <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,7 @@
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
+    <Compile Include="ViewModels\TimePickerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -146,6 +150,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\TimePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ToastmastersTimer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
