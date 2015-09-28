@@ -18,7 +18,6 @@
         private string _minutesText;
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
-        private Color _darkBackground = Color.FromArgb(255, 0, 65, 101);
 
         public ToastmastersTimerViewModel()
         {
@@ -30,6 +29,8 @@
             ResetTimer();
         }
 
+        #region Properties
+
         public bool TimerIsRunning
         {
             get { return _timerIsRunning; }
@@ -39,8 +40,6 @@
                 RaisePropertyChanged();
             }
         }
-
-        #region Properties
 
         public Color SelectedBackground
         {
@@ -78,18 +77,7 @@
 
         #region Timer
 
-        public Color DarkBackground
-        {
-            get
-            {
-                return _darkBackground;
-            }
-
-            set
-            {
-                _darkBackground = value;
-            }
-        }
+        public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 65, 101);
 
         private bool TimeIsBetweenYellowAndRed(TimeSpan timeSpan)
         {

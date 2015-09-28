@@ -31,7 +31,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="MinutesGrid">
                     <Viewbox>
-                        <TextBlock x:Name="MinutesText" Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" Foreground="White" FontSize="50"></TextBlock>
+                        <TextBlock x:Name="MinutesText" Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" Foreground="White" FontSize="50" HorizontalAlignment="Right"></TextBlock>
                     </Viewbox>
                 </Grid>
                 <Viewbox Grid.Column="1" VerticalAlignment="Center" Stretch="Uniform">
@@ -39,7 +39,7 @@
                 </Viewbox>
                 <Grid x:Name="SecondsGrid" Grid.Column="2">
                     <Viewbox>
-                        <TextBlock x:Name="SecondsText" Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" Foreground="White" FontSize="50"></TextBlock>
+                        <TextBlock x:Name="SecondsText" Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" Foreground="White" FontSize="50" HorizontalAlignment="Left"></TextBlock>
                     </Viewbox>
                 </Grid>
             </Grid>

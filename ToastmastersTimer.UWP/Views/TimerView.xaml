@@ -14,15 +14,40 @@
     </Page.DataContext>
 
     <Grid>
-        <Grid.Background>
-            <SolidColorBrush Color="{x:Bind ViewModel.Timer.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid x:Name="TimerGrid" VerticalAlignment="Center">
-            <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}"></controls:ToastmastersTimer>
+        <Grid x:Name="TimerGrid">
+            <Grid.Background>
+                <SolidColorBrush Color="{x:Bind ViewModel.Timer.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid>
+                <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}"></controls:ToastmastersTimer>
+            </Grid>
+            <Grid Grid.Row="1">
+                <HyperlinkButton Content="Choose speech" Click="{x:Bind ViewModel.ShowSpeechUI}" HorizontalAlignment="Center" Foreground="White"></HyperlinkButton>
+            </Grid>
+        </Grid>
+        <Grid Visibility="Collapsed" > <!--SpeechUIIsVisible-->            
+            <Grid.Background>
+                <SolidColorBrush Color="{x:Bind ViewModel.Timer.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
+            </Grid.Background>
+            <ComboBox x:Name="DefaultTimes" Grid.Row="0" HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate> 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" FontSize="18"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
         </Grid>
     </Grid>
