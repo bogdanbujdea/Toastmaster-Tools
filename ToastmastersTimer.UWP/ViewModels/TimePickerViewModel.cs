@@ -12,21 +12,23 @@ namespace ToastmastersTimer.UWP.ViewModels
         private List<string> _minutes;
         private List<string> _seconds;
 
-        public TimePickerViewModel()
+        public void Initialize()
         {
-            Minutes = new List<string>();
-            Seconds = new List<string>();
+            var minutes = new List<string>();
+            var seconds = new List<string>();
             foreach (var i in Enumerable.Range(0, 60))
             {
                 var number = i < 10 ? "0" + i : i.ToString();
-                Minutes.Add(number);
+                minutes.Add(number);
             }
-            Seconds.Add("00");
-            Seconds.Add("10");
-            Seconds.Add("20");
-            Seconds.Add("30");
-            Seconds.Add("40");
-            Seconds.Add("50");
+            seconds.Add("00");
+            seconds.Add("10");
+            seconds.Add("20");
+            seconds.Add("30");
+            seconds.Add("40");
+            seconds.Add("50");
+            Minutes = minutes;
+            Seconds = seconds;
         }
 
         public List<string> Minutes
@@ -50,7 +52,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         }
 
         public int SelectedSecondsIndex { get; set; }
-        public Time SelectedTime { get; set; }
+        public CardTime SelectedCardTime { get; set; }
 
         public bool IsInitialized => Minutes.Count > 0 && Seconds.Count > 0;
     }

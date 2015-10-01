@@ -6,10 +6,10 @@ namespace ToastmastersTimer.UWP.Models
 {
     public class Lesson: INotifyPropertyChanged
     {
-        private Time _greenCardTime;
+        private CardTime _greenCardTime;
         private string _name;
-        private Time _yellowCardTime;
-        private Time _redCardTime;
+        private CardTime _yellowCardTime;
+        private CardTime _redCardTime;
 
         public string Name
         {
@@ -22,7 +22,7 @@ namespace ToastmastersTimer.UWP.Models
             }
         }
 
-        public Time GreenCardTime
+        public CardTime GreenCardTime
         {
             get { return _greenCardTime; }
             set
@@ -33,7 +33,7 @@ namespace ToastmastersTimer.UWP.Models
             }
         }
 
-        public Time YellowCardTime
+        public CardTime YellowCardTime
         {
             get { return _yellowCardTime; }
             set
@@ -44,7 +44,7 @@ namespace ToastmastersTimer.UWP.Models
             }
         }
 
-        public Time RedCardTime
+        public CardTime RedCardTime
         {
             get { return _redCardTime; }
             set

@@ -1,13 +1,13 @@
 ﻿namespace ToastmastersTimer.UWP.Models
 {
-    public class Time
+    public class CardTime
     {
-        public Time()
+        public CardTime()
         {
             
         }
 
-        public Time(int minutes, int seconds)
+        public CardTime(int minutes, int seconds)
         {
             Minutes = minutes;
             Seconds = seconds;

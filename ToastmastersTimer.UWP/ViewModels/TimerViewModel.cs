@@ -8,67 +8,68 @@ namespace ToastmastersTimer.UWP.ViewModels
 
     using Mvvm;
 
-    public class TimerViewModel: ViewModelBase
+    public class TimerViewModel : ViewModelBase
     {
         private bool _speechUIIsVisible;
         private ObservableCollection<Lesson> _lessons;
         private Lesson _selectedLesson;
 
         public TimerViewModel()
-		{
-			Lessons = new ObservableCollection<Lesson>
-			{
-			    new Lesson
-			    {
-			        Name = "Ice Breaker",
-                    GreenCardTime = new Time(4, 0),
-                    YellowCardTime = new Time(5, 0),
-                    RedCardTime = new Time(6, 0)
-			    },
+        {
+            Lessons = new ObservableCollection<Lesson>
+            {
+                new Lesson
+                {
+                    Name = "Ice Breaker",
+                    GreenCardTime = new CardTime(4, 0),
+                    YellowCardTime = new CardTime(5, 0),
+                    RedCardTime = new CardTime(6, 0)
+                },
                 new Lesson
                 {
                     Name = "Standard Breaker",
-                    GreenCardTime = new Time(5, 0),
-                    YellowCardTime = new Time(6, 00),
-                    RedCardTime = new Time(7, 0)
+                    GreenCardTime = new CardTime(5, 0),
+                    YellowCardTime = new CardTime(6, 00),
+                    RedCardTime = new CardTime(7, 0)
                 },
                 new Lesson
                 {
                     Name = "Advanced Breaker",
-                    GreenCardTime = new Time(7, 0),
-                    YellowCardTime = new Time(8, 0),
-                    RedCardTime = new Time(9, 0)
+                    GreenCardTime = new CardTime(7, 0),
+                    YellowCardTime = new CardTime(8, 0),
+                    RedCardTime = new CardTime(9, 0)
                 },
                 new Lesson
                 {
                     Name = "Speech Evaluator",
-                    GreenCardTime = new Time(2, 0),
-                    YellowCardTime = new Time(2, 30),
-                    RedCardTime = new Time(3, 0)
+                    GreenCardTime = new CardTime(2, 0),
+                    YellowCardTime = new CardTime(2, 30),
+                    RedCardTime = new CardTime(3, 0)
                 },
                 new Lesson
                 {
                     Name = "AH Counter",
-                    GreenCardTime = new Time(2, 0),
-                    YellowCardTime = new Time(2, 30),
-                    RedCardTime = new Time(3, 0)
+                    GreenCardTime = new CardTime(2, 0),
+                    YellowCardTime = new CardTime(2, 30),
+                    RedCardTime = new CardTime(3, 0)
                 },
                 new Lesson
                 {
                     Name = "Gramatician",
-                    GreenCardTime = new Time(3, 0),
-                    YellowCardTime = new Time(3, 30),
-                    RedCardTime = new Time(4, 0)
+                    GreenCardTime = new CardTime(3, 0),
+                    YellowCardTime = new CardTime(3, 30),
+                    RedCardTime = new CardTime(4, 0)
                 },
                 new Lesson
                 {
                     Name = "Timer",
-                    GreenCardTime = new Time(2, 0),
-                    YellowCardTime = new Time(2, 30),
-                    RedCardTime = new Time(3, 0)
+                    GreenCardTime = new CardTime(2, 0),
+                    YellowCardTime = new CardTime(2, 30),
+                    RedCardTime = new CardTime(3, 0)
                 },
             };
-		}
+            SelectedLesson = Lessons[0];
+        }
 
         public void SetTimer(object element, DataContextChangedEventArgs context)
         {
@@ -78,6 +79,16 @@ namespace ToastmastersTimer.UWP.ViewModels
         public void ShowSpeechUI()
         {
             SpeechUIIsVisible = true;
+        }
+
+        public void SelectLesson()
+        {
+            SpeechUIIsVisible = false;
+
+            Timer.CurrentSpeech = new Speech
+            {
+                Lesson = SelectedLesson
+            };
         }
 
         public ObservableCollection<Lesson> Lessons
@@ -105,7 +116,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             get { return _speechUIIsVisible; }
             set
             {
-                _speechUIIsVisible = value; 
+                _speechUIIsVisible = value;
                 RaisePropertyChanged();
             }
         }

@@ -73,31 +73,20 @@
 
         public Speech CurrentSpeech { get; set; }
 
+        private TimeSpan GreenCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.GreenCardTime);
+
+        private TimeSpan YellowCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.YellowCardTime);
+
+        private TimeSpan RedCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.RedCardTime);
+
         #endregion
 
         #region Timer
 
         public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 65, 101);
 
-        private bool TimeIsBetweenYellowAndRed(TimeSpan timeSpan)
-        {
-            return timeSpan.TotalMilliseconds >= CurrentSpeech.MiddleTime.TotalMilliseconds &&
-                   timeSpan.TotalMilliseconds < CurrentSpeech.MaximumTime.TotalMilliseconds;
-        }
-
-        private bool TimeIsAfterRed(TimeSpan timeSpan)
-        {
-            return timeSpan.TotalMilliseconds >= CurrentSpeech.MaximumTime.TotalMilliseconds;
-        }
-
         public void StartTimer()
         {
-            CurrentSpeech = new Speech
-            {
-                MinimumTime = TimeSpan.FromSeconds(5),
-                MiddleTime = TimeSpan.FromSeconds(8),
-                MaximumTime = TimeSpan.FromSeconds(12),
-            };
             _dispatcherTimer.Start();
             _stopWatch.Start();
             TimerIsRunning = true;
@@ -161,8 +150,24 @@
 
         private bool TimeIsBetweenGreenAndYellow(TimeSpan timeSpan)
         {
-            return timeSpan.TotalMilliseconds >= CurrentSpeech.MinimumTime.TotalMilliseconds &&
-                   timeSpan.TotalMilliseconds < CurrentSpeech.MiddleTime.TotalMilliseconds;
+            return timeSpan.TotalMilliseconds >= GreenCardTimeSpan.TotalMilliseconds &&
+                   timeSpan.TotalMilliseconds < YellowCardTimeSpan.TotalMilliseconds;
+        }
+
+        private bool TimeIsBetweenYellowAndRed(TimeSpan timeSpan)
+        {
+            return timeSpan.TotalMilliseconds >= YellowCardTimeSpan.TotalMilliseconds &&
+                   timeSpan.TotalMilliseconds < RedCardTimeSpan.TotalMilliseconds;
+        }
+
+        private bool TimeIsAfterRed(TimeSpan timeSpan)
+        {
+            return timeSpan.TotalMilliseconds >= RedCardTimeSpan.TotalMilliseconds;
+        }
+
+        private TimeSpan GetTimeSpanFromCardTime(CardTime cardTime)
+        {
+            return new TimeSpan(0, cardTime.Minutes, cardTime.Seconds);
         }
 
         #endregion

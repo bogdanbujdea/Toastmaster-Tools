@@ -16,7 +16,7 @@
     <Grid x:Name="LayoutGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
-                
+
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="VisualStateNarrowTrigger" MinWindowHeight="500" MinWindowWidth="{StaticResource NarrowMinWidth}" />
@@ -37,21 +37,14 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="VisualStateNormalTrigger" MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters >
-
-                    </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateWide">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="VisualStateWideTrigger" MinWindowWidth="{StaticResource NormalMinWidth}" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters >
-
-                    </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
         <Grid.Background>
             <SolidColorBrush Color="{x:Bind ViewModel.Timer.SelectedBackground, Mode=OneWay}"></SolidColorBrush>
         </Grid.Background>
@@ -62,14 +55,14 @@
                     <RowDefinition Height="90*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Visibility="Collapsed">
+                <Grid Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}" >
                     <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}"></controls:ToastmastersTimer>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <HyperlinkButton Content="Choose speech" Click="{x:Bind ViewModel.ShowSpeechUI}" HorizontalAlignment="Center" Foreground="White"></HyperlinkButton>
+                    <HyperlinkButton Content="Choose speech" Click="ShowSpeechUI_" HorizontalAlignment="Center" Foreground="White" Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}"></HyperlinkButton>
                 </Grid>
             </Grid>
-            <Grid Visibility="Visible" Background="RoyalBlue">
+            <Grid Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}" >
                 <!--SpeechUIIsVisible-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*"></RowDefinition>
@@ -97,13 +90,13 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <controls:TimePicker SelectedTime="{x:Bind ViewModel.SelectedLesson.GreenCardTime, Mode=TwoWay}" HorizontalAlignment="Center"></controls:TimePicker>
-                    <controls:TimePicker Grid.Row="1" SelectedTime="{x:Bind ViewModel.SelectedLesson.YellowCardTime, Mode=TwoWay}" HorizontalAlignment="Center" ></controls:TimePicker>
-                    <controls:TimePicker Grid.Row="2" SelectedTime="{x:Bind ViewModel.SelectedLesson.RedCardTime, Mode=TwoWay}" HorizontalAlignment="Center" ></controls:TimePicker>
+                    <controls:TimePicker x:Name="GreenTimePicker" SelectedCardTime="{x:Bind ViewModel.SelectedLesson.GreenCardTime, Mode=TwoWay}" HorizontalAlignment="Center"></controls:TimePicker>
+                    <controls:TimePicker x:Name="YellowTimePicker" Grid.Row="1" SelectedCardTime="{x:Bind ViewModel.SelectedLesson.YellowCardTime, Mode=TwoWay}" HorizontalAlignment="Center" ></controls:TimePicker>
+                    <controls:TimePicker x:Name="RedTimePicker" Grid.Row="2" SelectedCardTime="{x:Bind ViewModel.SelectedLesson.RedCardTime, Mode=TwoWay}" HorizontalAlignment="Center" ></controls:TimePicker>
                 </Grid>
                 <Viewbox Grid.Row="2" Stretch="None">
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                        <Button Content="Ok" Foreground="White"></Button>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <Button Content="Ok" Foreground="White" Click="{x:Bind ViewModel.SelectLesson}"></Button>
                         <Button Content="Save" Foreground="White" Margin="20 0 0 0"></Button>
                     </StackPanel>
                 </Viewbox>

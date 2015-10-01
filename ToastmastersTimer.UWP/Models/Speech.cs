@@ -8,13 +8,12 @@
 
     public class Speech: INotifyPropertyChanged
     {
-        private TimeSpan _maximumTime;
-        private TimeSpan _middleTime;
-        private TimeSpan _minimumTime;
         private string _speakerName;
         private string _name;
         private bool _isCustom;
         private double _speechTimeInSeconds;
+
+        public Lesson Lesson { get; set; }
 
         public string Name
         {
@@ -49,38 +48,6 @@
             }
         }
 
-        public TimeSpan MinimumTime
-        {
-            get { return _minimumTime; }
-            set
-            {
-                if (value.Equals(_minimumTime)) return;
-                _minimumTime = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public TimeSpan MiddleTime
-        {
-            get { return _middleTime; }
-            set
-            {
-                if (value.Equals(_middleTime)) return;
-                _middleTime = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public TimeSpan MaximumTime
-        {
-            get { return _maximumTime; }
-            set
-            {
-                if (value.Equals(_maximumTime)) return;
-                _maximumTime = value;
-                OnPropertyChanged();
-            }
-        }
 
         public double SpeechTimeInSeconds
         {
