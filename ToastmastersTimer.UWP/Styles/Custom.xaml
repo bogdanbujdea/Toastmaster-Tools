@@ -5,6 +5,8 @@
 
     <x:Double x:Key="NarrowMinWidth">0</x:Double>
     <x:Double x:Key="NormalMinWidth">521</x:Double>
+    <x:Double x:Key="WideMinWidth">1200</x:Double>
+
     <converters:BooleanToVisiblityConverter x:Key="BooleanToVisiblityConverter"></converters:BooleanToVisiblityConverter>
     <converters:ReversedBooleanToVisiblityConverter x:Key="ReversedBooleanToVisiblityConverter"></converters:ReversedBooleanToVisiblityConverter>
     <ResourceDictionary.ThemeDictionaries>

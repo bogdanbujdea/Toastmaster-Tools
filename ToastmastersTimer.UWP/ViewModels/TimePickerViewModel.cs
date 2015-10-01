@@ -1,4 +1,6 @@
-﻿namespace ToastmastersTimer.UWP.ViewModels
+﻿using ToastmastersTimer.UWP.Models;
+
+namespace ToastmastersTimer.UWP.ViewModels
 {
     using System.Linq;
     using System.Collections.Generic;
@@ -18,8 +20,13 @@
             {
                 var number = i < 10 ? "0" + i : i.ToString();
                 Minutes.Add(number);
-                Seconds.Add(number);
             }
+            Seconds.Add("00");
+            Seconds.Add("10");
+            Seconds.Add("20");
+            Seconds.Add("30");
+            Seconds.Add("40");
+            Seconds.Add("50");
         }
 
         public List<string> Minutes
@@ -41,5 +48,10 @@
                 RaisePropertyChanged();
             }
         }
+
+        public int SelectedSecondsIndex { get; set; }
+        public Time SelectedTime { get; set; }
+
+        public bool IsInitialized => Minutes.Count > 0 && Seconds.Count > 0;
     }
 }

@@ -181,9 +181,9 @@
 
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <ComboBox x:Name="MinutesBox" Header="Minutes" ItemsSource="{x:Bind ViewModel.Minutes, Mode=OneWay}" Style="{StaticResource TimerComboTemplate}" HeaderTemplate="{StaticResource DataTemplate1}"></ComboBox>
+            <ComboBox x:Name="MinutesBox" SelectionChanged="MinutesChanged" ItemsSource="{x:Bind ViewModel.Minutes, Mode=OneWay}" Style="{StaticResource TimerComboTemplate}"></ComboBox>
             <TextBlock VerticalAlignment="Bottom" Margin="0 0 0 4" Foreground="White">:</TextBlock>
-            <ComboBox x:Name="SecondsBox" Header="Seconds" ItemsSource="{x:Bind ViewModel.Minutes, Mode=OneWay}" Style="{StaticResource TimerComboTemplate}" HeaderTemplate="{StaticResource DataTemplate1}"></ComboBox>
+            <ComboBox x:Name="SecondsBox" SelectionChanged="SecondsChanged" ItemsSource="{x:Bind ViewModel.Seconds, Mode=OneWay}" Style="{StaticResource TimerComboTemplate}"></ComboBox>
         </StackPanel>
     </Grid>
 </UserControl>
