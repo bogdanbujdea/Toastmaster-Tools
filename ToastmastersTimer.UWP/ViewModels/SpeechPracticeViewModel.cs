@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Media.SpeechRecognition;
 using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using ToastmastersTimer.UWP.Mvvm;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -13,9 +16,13 @@ namespace ToastmastersTimer.UWP.ViewModels
     {
         private string _speechText;
         private SpeechRecognizer _speechRecognizer;
+        private double _fontSize;
+        private string _speechResult;
+        private bool _isListening;
 
         public SpeechPracticeViewModel()
         {
+            FontSize = 32;
             SpeechText =
                 @"Let every nation know, whether it wishes us well or ill, that we shall pay any price, bear any
 burden, meet any hardship, support any friend, oppose any foe, to assure the survival and the
@@ -52,38 +59,32 @@ We dare not tempt them with weakness.For only when our arms are sufficient beyon
 can we be certain beyond doubt that they will never be employed.";
         }
 
-        public async Task FindByVoiceAsync()
+        public bool IsListening
         {
-            IsListening = true;
-            _speechRecognizer = new SpeechRecognizer();
-            var wordsFromJson = SpeechText.Split(' ');
-            _speechRecognizer.Constraints.Add(new SpeechRecognitionListConstraint(wordsFromJson, "keyword"));
-            await _speechRecognizer.CompileConstraintsAsync();
-            _speechRecognizer.ContinuousRecognitionSession.ResultGenerated +=
-                ContinuousRecognitionSession_ResultGenerated;
-            _speechRecognizer.HypothesisGenerated += SpeechRecognizerHypothesisGenerated;
-            await _speechRecognizer.ContinuousRecognitionSession.StartAsync();
+            get { return _isListening; }
+            set { _isListening = value; RaisePropertyChanged(); }
         }
 
-        public bool IsListening { get; set; }
-
-        private async void SpeechRecognizerHypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
+        private void SpeechRecognizerHypothesisGenerated(SpeechRecognizer sender, SpeechRecognitionHypothesisGeneratedEventArgs args)
         {
-            await
+            Debug.WriteLine(args.Hypothesis.Text);
+            /*await
                 Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.Normal,
                     () =>
                     {
-                    });
+                    });*/
         }
 
         private async void ContinuousRecognitionSession_ResultGenerated(SpeechContinuousRecognitionSession sender, SpeechContinuousRecognitionResultGeneratedEventArgs args)
         {
+            Debug.WriteLine(args.Result.Text);
             await
                   Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                       CoreDispatcherPriority.Normal, () =>
                       {
-                          ProcessCommands(args.Result);
+                            SpeechResult = args.Result.Text;
+                            ProcessCommands(args.Result);
                       });
         }
 
@@ -92,8 +93,42 @@ can we be certain beyond doubt that they will never be employed.";
             switch (result.Text)
             {
                 case "stop":
-                    StopVoiceRecognition();
+                    //StopVoiceRecognition();
                     break;
+                case "plus":
+                    FontSize += 2;
+                    break;
+                case "minus":
+                    FontSize -= 2;
+                    break;
+                case "next":
+                    GoToNext();
+                    break;
+                case "back":
+                    GoBack();
+                    break;
+            }
+        }
+
+        private void GoToNext()
+        {
+            var scroll = Scroll.VerticalOffset;
+            Scroll.ChangeView(Scroll.HorizontalOffset, scroll + 150, null, false);
+        }
+
+        private void GoBack()
+        {
+            var scroll = Scroll.VerticalOffset;
+            if (scroll - 150 < 0) return;
+            Scroll.ChangeView(Scroll.HorizontalOffset, scroll - 150, null, false);
+        }
+        public double FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                _fontSize = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -119,6 +154,55 @@ can we be certain beyond doubt that they will never be employed.";
                 _speechText = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public ScrollViewer Scroll { get; set; }
+
+        public string SpeechResult
+        {
+            get { return _speechResult; }
+            set
+            {
+                _speechResult = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public async Task StartListeningAsync()
+        {
+            IsListening = true;
+            _speechRecognizer = new SpeechRecognizer();
+            _speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        "plus"
+                        }, "plus"));
+            _speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        "minus"
+                        }, "minus"));
+            _speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        "next"
+                        }, "next"));
+            _speechRecognizer.Constraints.Add(
+                    new SpeechRecognitionListConstraint(
+                        new List<string>()
+                        {
+                        "back"
+                        }, "back"));
+            SpeechRecognitionCompilationResult compilationResult = await _speechRecognizer.CompileConstraintsAsync();
+            if (compilationResult.Status != SpeechRecognitionResultStatus.Success)
+                await new MessageDialog("Compilation failed").ShowAsync();
+            _speechRecognizer.ContinuousRecognitionSession.ResultGenerated +=
+                ContinuousRecognitionSession_ResultGenerated;
+            _speechRecognizer.HypothesisGenerated += SpeechRecognizerHypothesisGenerated;
+            await _speechRecognizer.ContinuousRecognitionSession.StartAsync();
         }
     }
 }
