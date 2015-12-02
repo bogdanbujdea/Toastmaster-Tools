@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ToastmastersTimer.UWP.Views.HomeView"
+    x:Class="ToastmastersTimer.UWP.Views.SpeechPracticeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ToastmastersTimer.UWP.Views"
@@ -7,15 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
     mc:Ignorable="d">
-
     <Page.DataContext>
-        <viewModels:HomeViewModel></viewModels:HomeViewModel>
+        <viewModels:SpeechPracticeViewModel></viewModels:SpeechPracticeViewModel>
     </Page.DataContext>
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-       <StackPanel VerticalAlignment="Center">
-            <Button Content="Timer" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToTimerView}" Margin="0 0 0 30"></Button>
-            <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>
-        </StackPanel>
+        <Grid x:Name="SpeechGrid">
+            <ScrollViewer>
+                <TextBox Text="{Binding SpeechText, Mode=OneWay}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="32"></TextBox>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

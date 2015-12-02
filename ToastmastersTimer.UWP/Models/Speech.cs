@@ -1,6 +1,5 @@
 ﻿namespace ToastmastersTimer.UWP.Models
 {
-    using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
@@ -47,7 +46,6 @@
                 OnPropertyChanged();
             }
         }
-
 
         public double SpeechTimeInSeconds
         {

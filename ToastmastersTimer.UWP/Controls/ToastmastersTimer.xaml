@@ -46,7 +46,7 @@
             <StackPanel x:Name="ButtonsPanel" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 0" VerticalAlignment="Bottom">
                 <Grid>
                     <AppBarButton x:Name="PauseTimer" Icon="Pause" Content="Pause"  IsCompact="True" Background="White" Click="{x:Bind ViewModel.PauseTimer}" Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}"></AppBarButton>
-                    <AppBarButton x:Name="StartTimer" Icon="Play" Content="Play" IsCompact="True" Background="White" Click="{x:Bind ViewModel.StartTimer}" Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}"></AppBarButton>
+                    <AppBarButton x:Name="StartTimer" Icon="Play" Content="Play" IsCompact="True" Background="White" IsEnabled="{Binding CurrentSpeech, Converter={StaticResource NullToBooleanConverter}}" Click="{x:Bind ViewModel.StartTimer}" Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}"></AppBarButton>
                 </Grid>
                 <AppBarButton x:Name="StopTimer" Icon="Stop" Content="Stop" IsCompact="True" Margin="20 0 0 0" Background="White" Click="{x:Bind ViewModel.StopTimer}" ></AppBarButton>
                 <!--<Button x:Name="PauseTimer"  HorizontalAlignment="Center" Content="Pause" Background="White" Margin="15 0"></Button>-->

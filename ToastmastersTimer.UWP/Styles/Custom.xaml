@@ -9,6 +9,7 @@
 
     <converters:BooleanToVisiblityConverter x:Key="BooleanToVisiblityConverter"></converters:BooleanToVisiblityConverter>
     <converters:ReversedBooleanToVisiblityConverter x:Key="ReversedBooleanToVisiblityConverter"></converters:ReversedBooleanToVisiblityConverter>
+    <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"></converters:NullToBooleanConverter>
     <ResourceDictionary.ThemeDictionaries>
 
         <!--  RequestedTheme=Dark  -->

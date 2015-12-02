@@ -7,16 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
     xmlns:controls="using:ToastmastersTimer.UWP.Controls"
+    xmlns:converters="using:Template10.Converters"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <viewModels:TimerViewModel></viewModels:TimerViewModel>
     </Page.DataContext>
-
     <Grid x:Name="LayoutGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
-
                 <VisualState x:Name="VisualStateNarrow">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="VisualStateNarrowTrigger" MinWindowHeight="500" MinWindowWidth="{StaticResource NarrowMinWidth}" />

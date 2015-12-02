@@ -103,6 +103,7 @@
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Models\Speech.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\CardTime.cs" />
     <Compile Include="Models\Lesson.cs" />
+    <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
@@ -122,6 +124,9 @@
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpeechPracticeView.xaml.cs">
+      <DependentUpon>SpeechPracticeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
@@ -169,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpeechPracticeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

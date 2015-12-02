@@ -1,18 +1,18 @@
-﻿using ToastmastersTimer.UWP.Mvvm;
-using ToastmastersTimer.UWP.Views;
-
-namespace ToastmastersTimer.UWP.ViewModels
+﻿namespace ToastmastersTimer.UWP.ViewModels
 {
-    public class HomeViewModel: ViewModelBase
-    {
-	    public HomeViewModel()
-	    {
-		    
-	    }
+    using Mvvm;
+    using Views;
 
-	    public void GoToTimerView()
-	    {
-		    NavigationService.Navigate(typeof (TimerView));
-	    }
+    public class HomeViewModel : ViewModelBase
+    {
+        public void GoToTimerView()
+        {
+            NavigationService.Navigate(typeof(TimerView));
+        }
+
+        public void GoToSpeechPractice()
+        {
+            NavigationService.Navigate(typeof(SpeechPracticeView));
+        }
     }
 }

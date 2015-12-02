@@ -18,6 +18,7 @@
         private string _minutesText;
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
+        private Speech _currentSpeech;
 
         public ToastmastersTimerViewModel()
         {
@@ -71,7 +72,15 @@
             }
         }
 
-        public Speech CurrentSpeech { get; set; }
+        public Speech CurrentSpeech
+        {
+            get { return _currentSpeech; }
+            set
+            {
+                _currentSpeech = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private TimeSpan GreenCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.GreenCardTime);
 
