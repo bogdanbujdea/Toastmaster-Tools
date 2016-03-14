@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToastmastersTimer.UWP.Services.SettingsServices
+﻿namespace ToastmastersTimer.UWP.Services.SettingsServices
 {
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-SettingsService
     public class SettingsService : ISettingsService
@@ -36,6 +30,15 @@ namespace ToastmastersTimer.UWP.Services.SettingsServices
                     Template10.Common.BootStrapper.Current.UpdateShellBackButton();
                     Template10.Common.BootStrapper.Current.NavigationService.Refresh();
                 });
+            }
+        }
+
+        public bool VibrationIsEnabled
+        {
+            get { return _helper.Read(nameof(VibrationIsEnabled), true); }
+            set
+            {
+                _helper.Write(nameof(VibrationIsEnabled), value);
             }
         }
     }

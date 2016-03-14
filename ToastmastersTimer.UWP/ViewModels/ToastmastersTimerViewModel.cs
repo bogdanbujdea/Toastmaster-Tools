@@ -1,4 +1,7 @@
-﻿namespace ToastmastersTimer.UWP.ViewModels
+﻿using Windows.Phone.Devices.Notification;
+using ToastmastersTimer.UWP.Services.SettingsServices;
+
+namespace ToastmastersTimer.UWP.ViewModels
 {
     using System;
     using System.Diagnostics;
@@ -20,6 +23,12 @@
         private Color _selectedBackground;
         private Speech _currentSpeech;
 
+        private Color GreenTimeBackground { get; }
+
+        private Color YellowTimeBackground { get; }
+
+        private Color RedTimeBackground { get; }
+
         public ToastmastersTimerViewModel()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
@@ -27,6 +36,9 @@
                 SelectedBackground = DarkBackground;
                 return;
             }
+            GreenTimeBackground = Colors.ForestGreen;
+            YellowTimeBackground = Color.FromArgb(255, 242, 223, 116);
+            RedTimeBackground = Color.FromArgb(255, 205, 32, 44);
             ResetTimer();
         }
 
@@ -47,8 +59,29 @@
             get { return _selectedBackground; }
             set
             {
+                if (_selectedBackground == value)
+                {
+                    Vibrate();
+                    return;
+                }
                 _selectedBackground = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        private void Vibrate()
+        {
+            try
+            {
+                if (SettingsService.Instance.VibrationIsEnabled)
+                {
+                    VibrationDevice v = VibrationDevice.GetDefault();
+                    v.Vibrate(TimeSpan.FromMilliseconds(500));
+                }
+            }
+            catch (Exception exception)
+            {
+                
             }
         }
 
@@ -150,11 +183,13 @@
         private void UpdateBackground(TimeSpan timeSpan)
         {
             if (TimeIsBetweenGreenAndYellow(timeSpan))
-                SelectedBackground = Colors.ForestGreen;
+                SelectedBackground = GreenTimeBackground;
             else if (TimeIsBetweenYellowAndRed(timeSpan))
-                SelectedBackground = Color.FromArgb(255, 242, 223, 116);
+            {
+                SelectedBackground = YellowTimeBackground;
+            }
             else if (TimeIsAfterRed(timeSpan))
-                SelectedBackground = Color.FromArgb(255, 205, 32, 44);
+                SelectedBackground = RedTimeBackground;
         }
 
         private bool TimeIsBetweenGreenAndYellow(TimeSpan timeSpan)

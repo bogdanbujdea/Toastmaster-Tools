@@ -12,10 +12,11 @@
         <viewModels:HomeViewModel></viewModels:HomeViewModel>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#004165">
        <StackPanel VerticalAlignment="Center">
-            <Button Content="Timer" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToTimerView}" Margin="0 0 0 30"></Button>
-            <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>
+            <Button Content="Timer" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToTimerView}" Margin="0 0 0 30"></Button>
+            <Button Content="Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSettings}"></Button>
+           <!-- <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>-->
         </StackPanel>
     </Grid>
 </Page>

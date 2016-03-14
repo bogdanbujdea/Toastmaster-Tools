@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="ToastmastersTimer.UWP.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToastmastersTimer.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
+    mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <viewModels:SettingsViewModel></viewModels:SettingsViewModel>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <DataTemplate x:Key="SettingsHeaderTemplate" >
+            <TextBlock Text="{Binding}" FontSize="20" Foreground="White"></TextBlock>
+        </DataTemplate>            
+    </Page.Resources>
+    <Grid Background="#004165">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Settings" FontSize="40" Foreground="White"></TextBlock>
+            <ToggleSwitch Grid.Row="1" OnContent="On" OffContent="Off" Header="Vibration" IsOn="{Binding VibrationIsEnabled, Mode=TwoWay}" VerticalAlignment="Top" HeaderTemplate="{StaticResource SettingsHeaderTemplate}" Foreground="White"></ToggleSwitch>
+        </Grid>
+    </Grid>
+</Page>

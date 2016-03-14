@@ -14,5 +14,10 @@
         {
             NavigationService.Navigate(typeof(SpeechPracticeView));
         }
+
+        public void GoToSettings()
+        {
+            NavigationService.Navigate(typeof(SettingsView));
+        }
     }
 }
