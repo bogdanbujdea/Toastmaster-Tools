@@ -2,21 +2,24 @@
 using Windows.UI.Xaml.Controls;
 using ToastmastersTimer.UWP.ViewModels;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace ToastmastersTimer.UWP.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class HomeView : Page
+    public sealed partial class HomeView
     {
         public HomeView()
         {
             this.InitializeComponent();
 
             Window = Template10.Common.WindowWrapper.Current();
+            Loaded += ViewLoaded;
         }
+
+        private void ViewLoaded(object sender, RoutedEventArgs e)
+        {
+            if (Window == null)
+                Window = Template10.Common.WindowWrapper.Current();
+        }
+
         private static Template10.Common.WindowWrapper Window { get; set; }
 
         public HomeViewModel ViewModel => this.DataContext as HomeViewModel;

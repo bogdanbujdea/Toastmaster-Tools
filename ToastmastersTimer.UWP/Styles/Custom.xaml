@@ -36,8 +36,6 @@
                     so that Dark and Light themes can be defined with ease of a single property NavButtonCheckedOverlayBackground.
                     The [+ Black @ 0.4 opacity] for Dark just complicates matters when it comes to doing for Light.
                 -->
-                <Setter Property="NavButtonCheckedOverlayBackground" Value="#FF7D1F22" />
-                <Setter Property="NavButtonHoverOverlayBackground" Value="#FF434343" />
             </Style>
 
             <Style TargetType="controls:PageHeader">
@@ -45,8 +43,6 @@
                 <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
                 <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />
                 <!--  style  -->
-                <Setter Property="HeaderBackground" Value="Gainsboro" />
-                <Setter Property="HeaderForeground" Value="#FF2B2B2B" />
             </Style>
 
         </ResourceDictionary>
@@ -77,8 +73,6 @@
                 <Setter Property="SecondarySeparator" Value="Gray" />
 
                 <!--  PowderBlue colorfor Light theme picked as a demo; there may be a nicer Light color ;-)  -->
-                <Setter Property="NavButtonCheckedOverlayBackground" Value="PowderBlue" />
-                <Setter Property="NavButtonHoverOverlayBackground" Value="#FFCCE3F5" />
 
             </Style>
 
@@ -87,9 +81,6 @@
                 <Setter Property="VisualStateNarrowMinWidth" Value="{StaticResource NarrowMinWidth}" />
                 <Setter Property="VisualStateNormalMinWidth" Value="{StaticResource NormalMinWidth}" />
                 <!--  style  -->
-                <Setter Property="HeaderBackground" Value="WhiteSmoke" /> 
-                <!--  cf. Gainsboro for Dark  -->
-                <Setter Property="HeaderForeground" Value="#FF2B2B2B" />
             </Style>
 
         </ResourceDictionary>
