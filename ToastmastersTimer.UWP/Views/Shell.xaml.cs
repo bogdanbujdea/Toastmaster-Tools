@@ -13,20 +13,8 @@ namespace ToastmastersTimer.UWP.Views
         public Shell(NavigationService navigationService)
         {
             Instance = this;
-            this.InitializeComponent();
+            InitializeComponent();
             Window = Template10.Common.WindowWrapper.Current();
-            MyHamburgerMenu.NavigationService = navigationService;
-        }
-
-        public static void SetBusyIndicator(bool busy, string text = null)
-        {
-            Window.Dispatcher.Dispatch(() =>
-            {
-                Instance.BusyIndicator.Visibility = (busy)
-               ? Visibility.Visible : Visibility.Collapsed;
-                Instance.BusyRing.IsActive = busy;
-                Instance.BusyText.Text = text ?? string.Empty;
-            });
         }
     }
 }

@@ -10,28 +10,6 @@
 
     <Grid>
 
-        <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
-
-            <Controls:HamburgerMenu.PrimaryButtons>
-                <Controls:NavigationButtonInfo PageType="views:MainPage" ClearHistory="True">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Home" Width="48" Height="48" />
-                        <TextBlock Text="Home" VerticalAlignment="Center" Margin="12,0,0,0" />
-                    </StackPanel>
-                </Controls:NavigationButtonInfo>
-            </Controls:HamburgerMenu.PrimaryButtons>
-
-            <Controls:HamburgerMenu.SecondaryButtons>
-                <Controls:NavigationButtonInfo PageType="views:SettingsPage">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Symbol="Setting" Width="48" Height="48" />
-                        <TextBlock Text="Settings" VerticalAlignment="Center" Margin="12,0,0,0" />
-                    </StackPanel>
-                </Controls:NavigationButtonInfo>
-            </Controls:HamburgerMenu.SecondaryButtons>
-
-        </Controls:HamburgerMenu>
-
         <Grid x:Name="BusyIndicator" Visibility="Collapsed" IsHitTestVisible="True">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity=".5" />
