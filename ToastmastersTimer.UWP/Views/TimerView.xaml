@@ -49,7 +49,6 @@
         </Grid.Background>
         <Grid x:Name="ContentGrid">
             <Grid x:Name="TimerGrid">
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="90*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
@@ -58,7 +57,7 @@
                     <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}"></controls:ToastmastersTimer>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <HyperlinkButton Content="Choose speech" Click="ShowSpeechUI_" HorizontalAlignment="Center" Foreground="White" Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}"></HyperlinkButton>
+                    <HyperlinkButton Content="Choose speech type" Click="ShowSpeechUI_" HorizontalAlignment="Center" Foreground="White" Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}"></HyperlinkButton>
                 </Grid>
             </Grid>
             <Grid Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}" >

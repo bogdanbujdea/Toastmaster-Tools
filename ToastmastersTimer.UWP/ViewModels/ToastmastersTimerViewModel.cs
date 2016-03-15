@@ -23,7 +23,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
-        private TimerState CurrentState;
+        private TimerState CurrentState { get; set; }
 
         private Color GreenTimeBackground { get; }
 
@@ -126,7 +126,7 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         #region Timer
 
-        public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 65, 101);
+        public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 63, 97);
 
         public void StartTimer()
         {
@@ -243,7 +243,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         #endregion
     }
 
-    internal enum TimerState
+    public enum TimerState
     {
         None,
         Green,

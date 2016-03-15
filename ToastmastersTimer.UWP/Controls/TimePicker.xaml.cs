@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using ToastmastersTimer.UWP.Models;
+﻿using ToastmastersTimer.UWP.Models;
 
 namespace ToastmastersTimer.UWP.Controls
 {
