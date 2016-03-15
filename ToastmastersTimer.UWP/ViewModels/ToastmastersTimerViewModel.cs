@@ -1,4 +1,5 @@
-﻿using Windows.Phone.Devices.Notification;
+﻿using System.Threading.Tasks;
+using Windows.Phone.Devices.Notification;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -22,6 +23,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
+        private TimerState CurrentState;
 
         private Color GreenTimeBackground { get; }
 
@@ -61,7 +63,6 @@ namespace ToastmastersTimer.UWP.ViewModels
             {
                 if (_selectedBackground == value)
                 {
-                    Vibrate();
                     return;
                 }
                 _selectedBackground = value;
@@ -79,9 +80,9 @@ namespace ToastmastersTimer.UWP.ViewModels
                     v.Vibrate(TimeSpan.FromMilliseconds(500));
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                
+
             }
         }
 
@@ -170,6 +171,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
             _dispatcherTimer.Tick += TimerCallback;
             TimerIsRunning = false;
+            CurrentState = TimerState.None;
         }
 
         private void TimerCallback(object sender, object e)
@@ -183,13 +185,37 @@ namespace ToastmastersTimer.UWP.ViewModels
         private void UpdateBackground(TimeSpan timeSpan)
         {
             if (TimeIsBetweenGreenAndYellow(timeSpan))
-                SelectedBackground = GreenTimeBackground;
+                SwitchToGreen();
             else if (TimeIsBetweenYellowAndRed(timeSpan))
             {
-                SelectedBackground = YellowTimeBackground;
+                SwitchToYellow();
             }
             else if (TimeIsAfterRed(timeSpan))
-                SelectedBackground = RedTimeBackground;
+                SwitchToRed();
+        }
+
+        private void SwitchToRed()
+        {
+            if (CurrentState == TimerState.Yellow)
+                Vibrate();
+            CurrentState = TimerState.Red;
+            SelectedBackground = RedTimeBackground;
+        }
+
+        private void SwitchToYellow()
+        {
+            if (CurrentState == TimerState.Green)
+                Vibrate();
+            CurrentState = TimerState.Yellow;
+            SelectedBackground = YellowTimeBackground;
+        }
+
+        private void SwitchToGreen()
+        {
+            if (CurrentState == TimerState.None)
+                Vibrate();
+            CurrentState = TimerState.Green;
+            SelectedBackground = GreenTimeBackground;
         }
 
         private bool TimeIsBetweenGreenAndYellow(TimeSpan timeSpan)
@@ -215,5 +241,13 @@ namespace ToastmastersTimer.UWP.ViewModels
         }
 
         #endregion
+    }
+
+    internal enum TimerState
+    {
+        None,
+        Green,
+        Yellow,
+        Red
     }
 }
