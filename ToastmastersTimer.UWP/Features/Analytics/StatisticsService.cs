@@ -73,7 +73,8 @@ namespace ToastmastersTimer.UWP.Features.Analytics
 
     public enum EventAction
     {
-        Timer
+        Timer,
+        Settings
     }
 
     public enum EventCategory

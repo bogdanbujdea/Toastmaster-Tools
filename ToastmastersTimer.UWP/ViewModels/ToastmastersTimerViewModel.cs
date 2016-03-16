@@ -138,6 +138,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             _dispatcherTimer.Start();
             _stopWatch.Start();
             TimerIsRunning = true;
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "start_" + _currentSpeech.Lesson.Name);
         }
 
         public void PauseTimer()
@@ -154,10 +155,12 @@ namespace ToastmastersTimer.UWP.ViewModels
                 _stopWatch.Start();
                 TimerIsRunning = true;
             }
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "pause_" + _currentSpeech.Lesson.Name);
         }
 
         public void StopTimer()
         {
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "stop_" + _currentSpeech.Lesson.Name);
             ResetTimer();
         }
 
