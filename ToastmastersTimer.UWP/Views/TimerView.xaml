@@ -8,11 +8,9 @@
     xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
     xmlns:controls="using:ToastmastersTimer.UWP.Controls"
     xmlns:converters="using:Template10.Converters"
+    DataContext="{Binding Source={StaticResource Locator}, Path=TimerViewModel}"
     mc:Ignorable="d">
 
-    <Page.DataContext>
-        <viewModels:TimerViewModel></viewModels:TimerViewModel>
-    </Page.DataContext>
     <Grid x:Name="LayoutGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">

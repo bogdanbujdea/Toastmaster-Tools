@@ -25,10 +25,8 @@ namespace ToastmastersTimer.UWP.Features.Analytics
             EventCategories = new Dictionary<EventCategory, string>();
             EventActions = new Dictionary<EventAction, string>();
             EventCategories[EventCategory.UserEvent] = "user_event";
-            EventCategories[EventCategory.Timer] = "record";
-            EventActions[EventAction.StartTimer] = "start_timer";
-            EventActions[EventAction.StopTimer] = "stop_timer";
-            EventActions[EventAction.PauseTimer] = "pause_timer";
+            EventCategories[EventCategory.AppEvent] = "app_event";
+            EventActions[EventAction.Timer] = "Timer";
         }
 
         public Dictionary<EventCategory, string> EventCategories { get; set; }
@@ -75,14 +73,12 @@ namespace ToastmastersTimer.UWP.Features.Analytics
 
     public enum EventAction
     {
-        StartTimer,
-        StopTimer,
-        PauseTimer
+        Timer
     }
 
     public enum EventCategory
     {
         UserEvent,
-        Timer
+        AppEvent
     }
 }

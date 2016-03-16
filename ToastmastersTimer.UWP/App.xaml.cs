@@ -21,7 +21,7 @@ namespace ToastmastersTimer.UWP
             InitializeComponent();
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
-            SplashFactory = (e) => new Splash(e);
+            SplashFactory = (e) => new Splash(e);            
         }
 
         // runs even if restored from state

@@ -2,6 +2,7 @@
   "dependencies": {
     "GoogleAnalyticsSDK": "1.3.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "MvvmLight": "5.2.0",
     "Template10": "1.1.8"
   },
   "frameworks": {

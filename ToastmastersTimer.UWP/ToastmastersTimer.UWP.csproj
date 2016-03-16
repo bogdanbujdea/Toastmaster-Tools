@@ -94,9 +94,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="analytics.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="project.json" />
     <None Include="ToastmastersTimer.UWP_StoreKey.pfx" />
   </ItemGroup>
@@ -131,6 +128,7 @@
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +154,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <None Include="analytics.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
