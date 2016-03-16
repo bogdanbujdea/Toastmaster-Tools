@@ -11,6 +11,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<IStatisticsService, StatisticsService>();
+            SimpleIoc.Default.Register<ToastmastersTimerViewModel>();
             SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<HomeViewModel>();        
         }
