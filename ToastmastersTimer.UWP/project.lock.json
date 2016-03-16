@@ -3,6 +3,16 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -1620,6 +1630,16 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -3327,6 +3347,16 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -5006,6 +5036,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -6718,6 +6758,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -8397,6 +8447,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -10109,6 +10169,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
+      "GoogleAnalyticsSDK/1.3.0": {
+        "compile": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/GoogleAnalytics.Core.winmd": {},
+          "lib/uap10.0/GoogleAnalytics.winmd": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -11789,6 +11859,59 @@
     }
   },
   "libraries": {
+    "GoogleAnalyticsSDK/1.3.0": {
+      "sha512": "U2bDcDQxfYj4Rfs/+IIKnQ0WOUhEmaHlHdpxpf1t7hcygcRGvd355SuBROcAYeTuQ1GQNposGobUGDEWUJul0g==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "content/uap10.0/analytics.xml",
+        "content/uap10.0/analytics.xsd",
+        "content/windows8/analytics.xml",
+        "content/windows8/analytics.xsd",
+        "content/windows81/analytics.xml",
+        "content/windows81/analytics.xsd",
+        "content/windowsphone8/analytics.xml",
+        "content/windowsphone8/analytics.xsd",
+        "content/wp71/analytics.xml",
+        "content/wp71/analytics.xsd",
+        "content/wpa81/analytics.xml",
+        "content/wpa81/analytics.xsd",
+        "GoogleAnalyticsSDK.nuspec",
+        "lib/portable-net40+win8+wp8+sl5/GoogleAnalytics.Core.dll",
+        "lib/portable-net40+win8+wp8+sl5/GoogleAnalytics.Core.pdb",
+        "lib/portable-net45+win8+wp8/GoogleAnalytics.Core.dll",
+        "lib/portable-net45+win8+wp8/GoogleAnalytics.Core.pdb",
+        "lib/portable-sl4+wp71+win8/GoogleAnalytics.Core.dll",
+        "lib/portable-sl4+wp71+win8/GoogleAnalytics.Core.pdb",
+        "lib/portable-win81+wpa81/GoogleAnalytics.Core.winmd",
+        "lib/uap10.0/GoogleAnalytics.Core.pdb",
+        "lib/uap10.0/GoogleAnalytics.Core.winmd",
+        "lib/uap10.0/GoogleAnalytics.pdb",
+        "lib/uap10.0/GoogleAnalytics.winmd",
+        "lib/windows8/GoogleAnalytics.Core.pdb",
+        "lib/windows8/GoogleAnalytics.Core.winmd",
+        "lib/windows8/GoogleAnalytics.pdb",
+        "lib/windows8/GoogleAnalytics.winmd",
+        "lib/windows81/GoogleAnalytics.Core.pdb",
+        "lib/windows81/GoogleAnalytics.Core.winmd",
+        "lib/windows81/GoogleAnalytics.pdb",
+        "lib/windows81/GoogleAnalytics.winmd",
+        "lib/windowsphone8/GoogleAnalytics.Core.dll",
+        "lib/windowsphone8/GoogleAnalytics.Core.pdb",
+        "lib/windowsphone8/GoogleAnalytics.dll",
+        "lib/windowsphone8/GoogleAnalytics.pdb",
+        "lib/wp71/GoogleAnalytics.Core.dll",
+        "lib/wp71/GoogleAnalytics.Core.pdb",
+        "lib/wp71/GoogleAnalytics.dll",
+        "lib/wp71/GoogleAnalytics.pdb",
+        "lib/wpa81/GoogleAnalytics.Core.pdb",
+        "lib/wpa81/GoogleAnalytics.Core.winmd",
+        "lib/wpa81/GoogleAnalytics.pdb",
+        "lib/wpa81/GoogleAnalytics.winmd",
+        "package/services/metadata/core-properties/0ea9a1266aa24b22abc1b2eeae4ee2d8.psmdcp"
+      ]
+    },
     "Microsoft.CSharp/4.0.0": {
       "sha512": "oWqeKUxHXdK6dL2CFjgMcaBISbkk+AqEg+yvJHE4DElNzS4QaTsCflgkkqZwVlWby1Dg9zo9n+iCAMFefFdJ/A==",
       "type": "Package",
@@ -15334,6 +15457,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "GoogleAnalyticsSDK >= 1.3.0",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "Template10 >= 1.1.8"
     ],

@@ -94,6 +94,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="analytics.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="project.json" />
     <None Include="ToastmastersTimer.UWP_StoreKey.pfx" />
   </ItemGroup>
@@ -107,6 +110,8 @@
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\Analytics\IStatisticsService.cs" />
+    <Compile Include="Features\Analytics\StatisticsService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
@@ -151,6 +156,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
