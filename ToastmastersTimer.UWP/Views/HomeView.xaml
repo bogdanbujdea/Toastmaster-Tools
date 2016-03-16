@@ -8,16 +8,15 @@
     DataContext="{Binding Source={StaticResource Locator}, Path=HomeViewModel}"
     mc:Ignorable="d">
 
-
     <Grid Background="#EEEEEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Background="#003F61">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="../Assets/Square310x310Logo.scale-100.png" Height="70" VerticalAlignment="Center" Margin="20 0 0 0" HorizontalAlignment="Left"></Image>
-                <TextBlock Text="Toastmasters" FontSize="30" Foreground="White" Margin="18" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="../Assets/Square310x310Logo.scale-100.png" Height="70" VerticalAlignment="Center" Margin="0 0 0 0" HorizontalAlignment="Left"></Image>
+                <TextBlock Text="Toastmasters" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
         </Grid>
        <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20">
