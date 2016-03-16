@@ -6,12 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
+    DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}"
     mc:Ignorable="d">
     
-    <Page.DataContext>
-        <viewModels:SettingsViewModel></viewModels:SettingsViewModel>
-    </Page.DataContext>
-
     <Page.Resources>
         <DataTemplate x:Key="SettingsHeaderTemplate" >
             <TextBlock Text="{Binding}" FontSize="20" Foreground="White"></TextBlock>

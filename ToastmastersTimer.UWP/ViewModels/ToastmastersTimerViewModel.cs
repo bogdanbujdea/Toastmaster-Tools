@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Windows.Phone.Devices.Notification;
+using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -16,6 +17,7 @@ namespace ToastmastersTimer.UWP.ViewModels
 
     public class ToastmastersTimerViewModel : ViewModelBase
     {
+        private readonly IStatisticsService _statisticsService;
         private bool _timerIsRunning;
         Stopwatch _stopWatch;
         private string _secondsText;
@@ -23,6 +25,8 @@ namespace ToastmastersTimer.UWP.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
+        
+
         private TimerState CurrentState { get; set; }
 
         private Color GreenTimeBackground { get; }
@@ -31,8 +35,9 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         private Color RedTimeBackground { get; }
 
-        public ToastmastersTimerViewModel()
+        public ToastmastersTimerViewModel(IStatisticsService statisticsService)
         {
+            _statisticsService = statisticsService;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 SelectedBackground = DarkBackground;
@@ -133,6 +138,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             _dispatcherTimer.Start();
             _stopWatch.Start();
             TimerIsRunning = true;
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "start_" + _currentSpeech.Lesson.Name);
         }
 
         public void PauseTimer()
@@ -149,10 +155,12 @@ namespace ToastmastersTimer.UWP.ViewModels
                 _stopWatch.Start();
                 TimerIsRunning = true;
             }
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "pause_" + _currentSpeech.Lesson.Name);
         }
 
         public void StopTimer()
         {
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "stop_" + _currentSpeech.Lesson.Name);
             ResetTimer();
         }
 

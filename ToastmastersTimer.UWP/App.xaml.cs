@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
 using ToastmastersTimer.UWP.Views;
 
 namespace ToastmastersTimer.UWP
@@ -22,7 +21,7 @@ namespace ToastmastersTimer.UWP
             InitializeComponent();
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
-            SplashFactory = (e) => new Views.Splash(e);
+            SplashFactory = (e) => new Splash(e);            
         }
 
         // runs even if restored from state

@@ -107,6 +107,8 @@
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\Analytics\IStatisticsService.cs" />
+    <Compile Include="Features\Analytics\StatisticsService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <None Include="analytics.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
