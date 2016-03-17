@@ -1,4 +1,5 @@
-﻿using ToastmastersTimer.UWP.ViewModels;
+﻿using Microsoft.Practices.ServiceLocation;
+using ToastmastersTimer.UWP.ViewModels;
 
 namespace ToastmastersTimer.UWP.Controls
 {
@@ -9,6 +10,6 @@ namespace ToastmastersTimer.UWP.Controls
             InitializeComponent();
         }
 
-        public ToastmastersTimerViewModel ViewModel => DataContext as ToastmastersTimerViewModel;
+        public ToastmastersTimerViewModel ViewModel => ServiceLocator.Current.GetInstance<ToastmastersTimerViewModel>();
     }
 }

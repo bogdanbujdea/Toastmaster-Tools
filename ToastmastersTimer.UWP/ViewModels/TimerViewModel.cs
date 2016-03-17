@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
+using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Models;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -9,11 +13,24 @@ namespace ToastmastersTimer.UWP.ViewModels
 
     public class TimerViewModel : ViewModelBase
     {
+        private readonly IStatisticsService _statisticsService;
         private bool _speechUIIsVisible;
         private ObservableCollection<Lesson> _lessons;
         private Lesson _selectedLesson;
 
-        public TimerViewModel()
+        public TimerViewModel(IStatisticsService statisticsService)
+        {
+            _statisticsService = statisticsService;
+            InitializeLessons();
+            SelectedLesson = Lessons[0];
+        }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            _statisticsService.RegisterPage("TimerView");
+        }        
+
+        private void InitializeLessons()
         {
             Lessons = new ObservableCollection<Lesson>
             {
@@ -67,7 +84,6 @@ namespace ToastmastersTimer.UWP.ViewModels
                     RedCardTime = new CardTime(3, 0)
                 },
             };
-            SelectedLesson = Lessons[0];
         }
 
         public void SetTimer(object element, DataContextChangedEventArgs context)

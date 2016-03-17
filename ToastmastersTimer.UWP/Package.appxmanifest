@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="19960BogdanB.ToastmasterTools" Publisher="CN=4E87F883-6FEA-4B8F-9088-5E5336A782BD" Version="1.0.0.0" />
+  <Identity Name="19960BogdanB.ToastmasterTools" Publisher="CN=4E87F883-6FEA-4B8F-9088-5E5336A782BD" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="90a7735b-b200-4231-8a50-b285f20ba6c3" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Toastmaster Tools</DisplayName>
@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ToastmastersTimer.UWP.App">
+    <Application Id="AppEvent" Executable="$targetnametoken$.exe" EntryPoint="ToastmastersTimer.UWP.AppEvent">
       <uap:VisualElements DisplayName="Toastmaster Tools" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="ToastmastersTimer.UWP" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" ShortName="Toastmasters">
           <uap:ShowNameOnTiles>
@@ -27,4 +27,7 @@
       </uap:VisualElements>
     </Application>
   </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
 </Package>
