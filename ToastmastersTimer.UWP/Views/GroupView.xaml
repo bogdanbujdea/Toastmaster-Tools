@@ -5,6 +5,7 @@
     xmlns:local="using:ToastmastersTimer.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource Locator}, Path=GroupViewModel}"
     mc:Ignorable="d">
 
     <Grid Background="#EEEEEE">
@@ -17,6 +18,38 @@
                 <Image Source="../Assets/Square310x310Logo.scale-100.png" Height="70" VerticalAlignment="Center" Margin="0 0 0 0" HorizontalAlignment="Left"></Image>
                 <TextBlock Text="Toastmasters" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
+        </Grid>
+        <Grid x:Name="ContentGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+          <!--  <Grid Width="{Binding ElementName=MembersList, Path=ActualWidth, Mode=TwoWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"></ColumnDefinition>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" FontSize="20" TextAlignment="DetectFromContent"></TextBlock>
+                <TextBlock Text="Function" FontSize="20" TextAlignment="DetectFromContent" Grid.Column="1"></TextBlock>
+            </Grid>-->
+            <ListView Grid.Row="1" x:Name="MembersList" FontSize="20" ItemsSource="{Binding Members, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="{Binding ElementName=MembersList, Path=ActualWidth, Mode=TwoWay}" Margin="0 5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="40*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold" TextAlignment="DetectFromContent"></TextBlock>
+                            <TextBlock Text="{Binding Function}" Foreground="Gray" TextAlignment="DetectFromContent" Grid.Row="1"></TextBlock>
+                            <StackPanel Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Top">
+                                <AppBarButton Label="Edit" Icon="Edit" IsCompact="true"></AppBarButton>
+                                <AppBarButton Label="Delete" Icon="Delete" IsCompact="True"></AppBarButton>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </Page>
