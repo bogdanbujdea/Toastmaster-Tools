@@ -18,6 +18,7 @@ namespace ToastmastersTimer.UWP.ViewModels
     public class ToastmastersTimerViewModel : ViewModelBase
     {
         private readonly IStatisticsService _statisticsService;
+        private readonly IAppSettings _appSettings;
         private bool _timerIsRunning;
         Stopwatch _stopWatch;
         private string _secondsText;
@@ -35,9 +36,10 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         private Color RedTimeBackground { get; }
 
-        public ToastmastersTimerViewModel(IStatisticsService statisticsService)
+        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
         {
             _statisticsService = statisticsService;
+            _appSettings = appSettings;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 SelectedBackground = DarkBackground;
@@ -79,7 +81,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         {
             try
             {
-                if (SettingsService.Instance.VibrationIsEnabled)
+                if (_appSettings.Get<bool>(StorageKey.VibrationEnabled))
                 {
                     VibrationDevice v = VibrationDevice.GetDefault();
                     v.Vibrate(TimeSpan.FromMilliseconds(500));

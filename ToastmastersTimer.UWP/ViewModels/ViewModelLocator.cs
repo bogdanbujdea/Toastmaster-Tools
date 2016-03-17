@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using ToastmastersTimer.UWP.Features.Analytics;
+using ToastmastersTimer.UWP.Features.Feedback;
+using ToastmastersTimer.UWP.Features.UserDialogs;
+using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
 {
@@ -11,6 +14,9 @@ namespace ToastmastersTimer.UWP.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<IStatisticsService, StatisticsService>();
+            SimpleIoc.Default.Register<IAppSettings, AppSettings>();
+            SimpleIoc.Default.Register<IDialogService, DialogService>();
+            SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
             SimpleIoc.Default.Register<ToastmastersTimerViewModel>();
             SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
