@@ -20,8 +20,12 @@
             </StackPanel>
         </Grid>
        <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20">
-            <Button Content="Timer" HorizontalAlignment="Center" Height="60" Width="200" Background="#003F61" FontSize="30" Foreground="White" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToTimerView}" Margin="0 0 0 30" Style="{StaticResource ToastmastersButtonStyle}"></Button>
-            <Button Content="Settings" HorizontalAlignment="Center" Height="60" Width="200" Background="#003F61" FontSize="30" Foreground="White" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSettings}" Style="{StaticResource ToastmastersButtonStyle}"></Button>
+            <Button Content="Timer" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
+                    Click="{x:Bind ViewModel.GoToTimerView}"  Style="{StaticResource ToastmastersButtonStyle}"></Button>
+            <Button Content="Settings" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
+                    Click="{x:Bind ViewModel.GoToSettings}" Style="{StaticResource ToastmastersButtonStyle}" Margin="0 30"></Button>
+            <Button Content="Manage Group" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
+                    Click="{x:Bind ViewModel.ManageGroup}" Style="{StaticResource ToastmastersButtonStyle}"></Button>
            <!-- <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>-->
         </StackPanel>
     </Grid>

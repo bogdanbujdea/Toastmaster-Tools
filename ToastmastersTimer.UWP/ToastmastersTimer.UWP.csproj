@@ -124,6 +124,7 @@
     <Compile Include="Services\SettingsServices\AppSettings.cs" />
     <Compile Include="Services\SettingsServices\IAppSettings.cs" />
     <Compile Include="Services\SettingsServices\StorageKey.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\CardTime.cs" />
     <Compile Include="Models\Lesson.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\GroupView.xaml.cs">
+      <DependentUpon>GroupView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -206,6 +210,10 @@
     <Page Include="Styles\Custom.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GroupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
       <SubType>Designer</SubType>

@@ -27,14 +27,19 @@ namespace ToastmastersTimer.UWP.ViewModels
             await _feedbackCollector.CheckForFeedback();
         }
 
-        public void GoToSpeechPractice()
-        {
-            NavigationService.Navigate(typeof(SpeechPracticeView));
-        }
-
         public void GoToSettings()
         {
             NavigationService.Navigate(typeof(SettingsView));
+        }
+
+        public void ManageGroup()
+        {
+            NavigationService.Navigate(typeof(GroupView));
+        }
+
+        public void GoToSpeechPractice()
+        {
+            NavigationService.Navigate(typeof(SpeechPracticeView));
         }
     }
 }
