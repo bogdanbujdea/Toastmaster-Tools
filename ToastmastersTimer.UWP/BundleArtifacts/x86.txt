@@ -1,2 +1,2 @@
-MainPackage=C:\Users\bogdan.bujdea\Documents\Visual Studio 2015\Projects\ToastmastersTimer\ToastmastersTimer.UWP\bin\x86\Release\ToastmastersTimer.UWP_1.0.0.0_x86.appx
-SymbolPackage=C:\Users\bogdan.bujdea\Documents\Visual Studio 2015\Projects\ToastmastersTimer\ToastmastersTimer.UWP\AppPackages\ToastmastersTimer.UWP_1.0.0.0_Test\ToastmastersTimer.UWP_1.0.0.0_x86.appxsym
+MainPackage=C:\Users\bogda\Documents\Visual Studio 2015\Projects\Universal\ToastmastersTimer\ToastmastersTimer.UWP\bin\x86\Release\ToastmastersTimer.UWP_1.1.1.0_x86.appx
+SymbolPackage=C:\Users\bogda\Documents\Visual Studio 2015\Projects\Universal\ToastmastersTimer\ToastmastersTimer.UWP\AppPackages\ToastmastersTimer.UWP_1.1.1.0_Test\ToastmastersTimer.UWP_1.1.1.0_x86.appxsym

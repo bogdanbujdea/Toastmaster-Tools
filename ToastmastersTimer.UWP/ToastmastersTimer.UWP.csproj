@@ -20,7 +20,7 @@
     <PackageCertificateKeyFile>ToastmastersTimer.UWP_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>8140363BDA539574771CA58F2A91846CE460D01F</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Auto</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
