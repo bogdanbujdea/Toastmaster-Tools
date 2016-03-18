@@ -35,14 +35,14 @@
             <ListView Grid.Row="1" x:Name="MembersList" FontSize="20" ItemsSource="{Binding Members, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="{Binding ElementName=MembersList, Path=ActualWidth, Mode=TwoWay}" Margin="0 5">
+                        <Grid Margin="0 5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="60*"></RowDefinition>
                                 <RowDefinition Height="40*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold" TextAlignment="DetectFromContent"></TextBlock>
                             <TextBlock Text="{Binding Function}" Foreground="Gray" TextAlignment="DetectFromContent" Grid.Row="1"></TextBlock>
-                            <StackPanel Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Top">
+                            <StackPanel Grid.RowSpan="2" Grid.Row="0" Visibility="Collapsed" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Top">
                                 <AppBarButton Label="Edit" Icon="Edit" IsCompact="true"></AppBarButton>
                                 <AppBarButton Label="Delete" Icon="Delete" IsCompact="True"></AppBarButton>
                             </StackPanel>
