@@ -109,6 +109,11 @@
     </Compile>
     <Compile Include="Features\Analytics\IStatisticsService.cs" />
     <Compile Include="Features\Analytics\StatisticsService.cs" />
+    <Compile Include="Features\Authentication\AuthenticationReport.cs" />
+    <Compile Include="Features\Authentication\AuthenticationService.cs" />
+    <Compile Include="Features\Authentication\IAuthenticationService.cs" />
+    <Compile Include="Features\Authentication\UserData.cs" />
+    <Compile Include="Features\Authentication\WebError.cs" />
     <Compile Include="Features\Feedback\FeedbackCollector.cs" />
     <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
     <Compile Include="Features\UserDialogs\DialogService.cs" />
@@ -128,6 +133,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\CardTime.cs" />
     <Compile Include="Models\Lesson.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
@@ -139,6 +145,9 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -216,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

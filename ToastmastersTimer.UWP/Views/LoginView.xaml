@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="ToastmastersTimer.UWP.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToastmastersTimer.UWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource Locator}, Path=LoginViewModel}"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel VerticalAlignment="Center">
+            <TextBox Header="Username" Text="{x:Bind LoginViewModel.Username, Mode=TwoWay}"></TextBox>
+            <TextBox Header="Password" Text="{x:Bind LoginViewModel.Password, Mode=TwoWay}"></TextBox>
+            <Button Content="Login" Click="{x:Bind LoginViewModel.Login}"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

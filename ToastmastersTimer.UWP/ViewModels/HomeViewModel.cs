@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using ToastmastersTimer.UWP.Features.Feedback;
+using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
 {
@@ -11,10 +12,13 @@ namespace ToastmastersTimer.UWP.ViewModels
     public class HomeViewModel : ViewModelBase
     {
         private readonly IFeedbackCollector _feedbackCollector;
+        private readonly IAppSettings _appSettings;
+        private string _userDisplayName;
 
-        public HomeViewModel(IFeedbackCollector feedbackCollector)
+        public HomeViewModel(IFeedbackCollector feedbackCollector, IAppSettings appSettings)
         {
             _feedbackCollector = feedbackCollector;
+            _appSettings = appSettings;
         }
 
         public void GoToTimerView()
@@ -25,6 +29,14 @@ namespace ToastmastersTimer.UWP.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             await _feedbackCollector.CheckForFeedback();
+            if (IsLoggedIn())
+                UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
+        }
+
+        private bool IsLoggedIn()
+        {
+            var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
+            return string.IsNullOrWhiteSpace(sessionId) == false;
         }
 
         public void GoToSettings()
@@ -34,12 +46,22 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public void ManageGroup()
         {
-            NavigationService.Navigate(typeof(GroupView));
+            NavigationService.Navigate(typeof(LoginView));
         }
 
         public void GoToSpeechPractice()
         {
             NavigationService.Navigate(typeof(SpeechPracticeView));
+        }
+
+        public string UserDisplayName
+        {
+            get { return _userDisplayName; }
+            set
+            {
+                _userDisplayName = value;
+                RaisePropertyChanged();
+            }
         }
     }
 }
