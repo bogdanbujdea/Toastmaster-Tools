@@ -1,41 +1,56 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Xml;
-using Windows.Storage.Streams;
+using Windows.Web;
 using Windows.Web.Http;
+using ToastmastersTimer.UWP.Features.Communication;
 
 namespace ToastmastersTimer.UWP.Features.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly IWebClient _webClient;
+
+        public AuthenticationService(IWebClient webClient)
+        {
+            _webClient = webClient;
+        }
+
         public async Task<AuthenticationReport> Login(string username, string password)
         {
             var report = new AuthenticationReport();
-            var message = await ExecuteLoginRequest(username, password);
-            var content = await message.Content.ReadAsStringAsync();
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(content);
-            var invalidCredentials = doc.DocumentElement.GetElementsByTagName("InvalidCredentialsFault").Count > 0;
-            if (invalidCredentials)
+            try
             {
-                report.Error = WebError.InvalidCredentials;
+                var message = await ExecuteLoginRequest(username, password);
+                var content = await message.Content.ReadAsStringAsync();
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(content);
+                var invalidCredentials = doc.DocumentElement.GetElementsByTagName("InvalidCredentialsFault").Count > 0;
+                if (invalidCredentials)
+                {
+                    report.Error = WebError.InvalidCredentials;
+                    return report;
+                }
+                var userData = GetUserDataFromXml(doc);
+                report = new AuthenticationReport(true) { UserData = userData };
+            }
+            catch (Exception exception)
+            {
+                var webErrorStatus = Windows.Web.WebError.GetStatus(exception.HResult);
+                if (webErrorStatus == WebErrorStatus.HostNameNotResolved)
+                    report.ErrorMessage = "Please check your internet connection and try again";
+                else report.ErrorMessage = "Unknown error" + webErrorStatus + ". Please try again!";
                 return report;
             }
-            var userData = GetUserDataFromXml(doc);
-            var authenticationReport = new AuthenticationReport(true) { UserData = userData };
-            return authenticationReport;
+            return report;
         }
 
-        private static async Task<HttpResponseMessage> ExecuteLoginRequest(string username, string password)
+        private async Task<HttpResponseMessage> ExecuteLoginRequest(string username, string password)
         {
-            HttpClient client = new HttpClient();
             var xml =
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><FullStartupRequest xmlns=\"http://tempuri.org/\"><username>" +
                 username + "</username><password>" + password + "</password></FullStartupRequest></s:Body></s:Envelope>";
-            var httpStringContent = new HttpStringContent(xml, UnicodeEncoding.Utf8, "text/xml");
-            client.DefaultRequestHeaders.Add("SOAPAction", "http://tempuri.org/ILoginWebService/FullStartupRequest");
-            var message = await
-                client.PostAsync(new Uri("https://mapi.toastmasters.org/LoginWebService.svc"), httpStringContent);
+            var message = await _webClient.ExecuteSOAPRequest("https://mapi.toastmasters.org/LoginWebService.svc", xml, "http://tempuri.org/ILoginWebService/FullStartupRequest");
             return message;
         }
 
