@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmastersTimer.UWP.Features.Authentication;
 using ToastmastersTimer.UWP.Features.UserDialogs;
@@ -14,6 +17,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private readonly IDialogService _dialogService;
         private string _username;
         private string _password;
+        private bool _rememberMe;
 
         public LoginViewModel(IAuthenticationService authenticationService, IAppSettings appSettings, IDialogService dialogService)
         {
@@ -42,9 +46,51 @@ namespace ToastmastersTimer.UWP.ViewModels
             }
         }
 
+        public bool RememberMe
+        {
+            get { return _rememberMe; }
+            set
+            {
+                _rememberMe = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
+            var expiration = _appSettings.Get<DateTime>(StorageKey.SessionExpiration);
+            if (string.IsNullOrWhiteSpace(sessionId) == false)
+            {
+                if (expiration > DateTime.Now)
+                    NavigationService.Navigate(typeof(HomeView));
+                else
+                {
+                    var username = _appSettings.Get<string>(StorageKey.Username);
+                    var password = _appSettings.Get<string>(StorageKey.Password);
+                    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                        return;
+                    RememberMe = true;
+                    Username = username;
+                    Password = password;
+                    await Login();
+                }
+            }
+        }
+
+        public void ContinueWithoutLogin()
+        {
+            NavigationService.Navigate(typeof(HomeView));
+        }
+
         public async Task Login()
         {
-            var authenticationReport = await _authenticationService.Login(Username, Password);
+            var authenticationReport = await AuthenticateUser(Username, Password);
+            await HandleAuthenticationResult(authenticationReport);
+        }
+
+        private async Task HandleAuthenticationResult(AuthenticationReport authenticationReport)
+        {
             if (authenticationReport.Successful)
             {
                 var userData = authenticationReport.UserData;
@@ -53,6 +99,12 @@ namespace ToastmastersTimer.UWP.ViewModels
                 _appSettings.Set(StorageKey.City, userData.City);
                 _appSettings.Set(StorageKey.UserStatus, userData.Status);
                 _appSettings.Set(StorageKey.Country, userData.Country);
+                _appSettings.Set(StorageKey.SessionExpiration, userData.Expiration);
+                if (RememberMe)
+                {
+                    _appSettings.Set(StorageKey.Username, Username);
+                    _appSettings.Set(StorageKey.Password, Password);
+                }
                 NavigationService.Navigate(typeof(HomeView));
             }
             else
@@ -66,14 +118,12 @@ namespace ToastmastersTimer.UWP.ViewModels
                         break;
                 }
             }
-            /* HttpClient client = new HttpClient();
-            var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><FullStartupRequest xmlns=\"http://tempuri.org/\"><username>bujdeabogdan@gmail.com</username><password>115852</password></FullStartupRequest></s:Body></s:Envelope>";
-            var httpStringContent = new HttpStringContent(xml, UnicodeEncoding.Utf8, "text/xml");
-            client.DefaultRequestHeaders.Add("SOAPAction", "http://tempuri.org/ILoginWebService/FullStartupRequest");
-            var message = await
-                client.PostAsync(new Uri("https://mapi.toastmasters.org/LoginWebService.svc"), httpStringContent);
-            var content = await message.Content.ReadAsStringAsync();
-            Debug.WriteLine(content);*/
+        }
+
+        private async Task<AuthenticationReport> AuthenticateUser(string username, string password)
+        {
+            var authenticationReport = await _authenticationService.Login(username, password);
+            return authenticationReport;
         }
     }
 }

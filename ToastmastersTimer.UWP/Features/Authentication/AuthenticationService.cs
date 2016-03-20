@@ -60,8 +60,9 @@ namespace ToastmastersTimer.UWP.Features.Authentication
             var country = doc.DocumentElement.GetElementsByTagName("b:Country").Item(0).InnerText;
             var status = doc.DocumentElement.GetElementsByTagName("b:MembershipStatus").Item(0).InnerText;
             var sessionId = doc.DocumentElement.GetElementsByTagName("b:ID").Item(0).InnerText;
+            var expiration = doc.DocumentElement.GetElementsByTagName("b:Expiration").Item(0).InnerText;
             var displayName = doc.DocumentElement.GetElementsByTagName("b:DisplayName").Item(0).InnerText;
-            var userData = new UserData(displayName, city, country, status, sessionId);
+            var userData = new UserData(displayName, city, country, status, sessionId, expiration);
             return userData;
         }
     }

@@ -28,7 +28,6 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            await _feedbackCollector.CheckForFeedback();
             if (IsLoggedIn())
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
         }
@@ -44,7 +43,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             NavigationService.Navigate(typeof(SettingsView));
         }
 
-        public void ManageGroup()
+        public void Login()
         {
             NavigationService.Navigate(typeof(LoginView));
         }

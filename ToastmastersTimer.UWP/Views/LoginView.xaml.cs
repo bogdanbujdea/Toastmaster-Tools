@@ -9,6 +9,6 @@ namespace ToastmastersTimer.UWP.Views
             InitializeComponent();
         }
 
-        public LoginViewModel LoginViewModel => DataContext as LoginViewModel;
+        public LoginViewModel ViewModel => DataContext as LoginViewModel;
     }
 }

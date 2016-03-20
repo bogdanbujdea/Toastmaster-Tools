@@ -8,6 +8,9 @@
         UserDisplayName,
         City,
         UserStatus,
-        Country
+        Country,
+        Username,
+        Password,
+        SessionExpiration
     }
 }

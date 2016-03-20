@@ -8,11 +8,43 @@
     DataContext="{Binding Source={StaticResource Locator}, Path=LoginViewModel}"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel VerticalAlignment="Center">
-            <TextBox Header="Username" Text="{x:Bind LoginViewModel.Username, Mode=TwoWay}"></TextBox>
-            <TextBox Header="Password" Text="{x:Bind LoginViewModel.Password, Mode=TwoWay}"></TextBox>
-            <Button Content="Login" Click="{x:Bind LoginViewModel.Login}"></Button>
-        </StackPanel>
+    <Grid Background="#EEEEEE">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="VisualStateWideTrigger" MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LoginPanel.Width" Value="300"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid x:Name="LoginGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+                <ColumnDefinition Width="60*"></ColumnDefinition>
+                <ColumnDefinition Width="20*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Background="#003F61" Grid.ColumnSpan="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="../Assets/logo_transparent.png" Height="60" VerticalAlignment="Center" Margin="0 0 20 0" HorizontalAlignment="Left"></Image>
+                    <TextBlock Text="Login" FontSize="50" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <StackPanel x:Name="LoginPanel" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" PlaceholderText="Username" InputScope="EmailSmtpAddress"></TextBox>
+                <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" PlaceholderText="Password" Margin="0 10"></PasswordBox>
+                <CheckBox Content="Remember me" IsChecked="{Binding RememberMe}"></CheckBox>
+                <Button Content="Login" Click="{x:Bind ViewModel.Login}" Width="{Binding ElementName=LoginPanel, Path=ActualWidth}" Background="#003F61" Foreground="White" HorizontalAlignment="Center" Margin="0 10 0 10"></Button>
+                <HyperlinkButton Content="Continue without an account" Click="{x:Bind ViewModel.ContinueWithoutLogin}" HorizontalAlignment="Center"></HyperlinkButton>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

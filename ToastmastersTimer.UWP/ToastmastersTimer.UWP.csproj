@@ -179,6 +179,8 @@
     <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\logo_dark.png" />
+    <Content Include="Assets\logo_transparent.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square310x310Logo.scale-100.png" />
     <Content Include="Assets\Square310x310Logo.scale-125.png" />
