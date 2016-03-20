@@ -15,17 +15,21 @@
         </Grid.RowDefinitions>
         <Grid Background="#003F61">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Image Source="../Assets/Square310x310Logo.scale-100.png" Height="70" VerticalAlignment="Center" Margin="0 0 0 0" HorizontalAlignment="Left"></Image>
-                <TextBlock Text="Toastmasters" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <Image Source="../Assets/logo_transparent.png" Height="40" VerticalAlignment="Center" Margin="0 0 0 0" HorizontalAlignment="Left"></Image>
+                <TextBlock Text="Toastmaster Tools" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
         </Grid>
-       <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
+            <HyperlinkButton Content="{x:Bind ViewModel.UserDisplayName}" Margin="20 5" FontSize="20" Foreground="Black"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 20">
             <Button Content="Timer" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
                     Click="{x:Bind ViewModel.GoToTimerView}"  Style="{StaticResource ToastmastersButtonStyle}"></Button>
             <Button Content="Settings" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
                     Click="{x:Bind ViewModel.GoToSettings}" Style="{StaticResource ToastmastersButtonStyle}" Margin="0 30"></Button>
-            <Button Content="Manage Group" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
-                    Click="{x:Bind ViewModel.ManageGroup}" Style="{StaticResource ToastmastersButtonStyle}"></Button>
+            <Button Content="Login" HorizontalAlignment="Center" Height="60" Width="250" Background="#003F61" FontSize="30" Foreground="White"
+                    Click="{x:Bind ViewModel.Login}" Style="{StaticResource ToastmastersButtonStyle}"></Button>
            <!-- <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>-->
         </StackPanel>
     </Grid>

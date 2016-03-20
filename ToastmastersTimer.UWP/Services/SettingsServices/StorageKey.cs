@@ -3,6 +3,14 @@
     public enum StorageKey
     {
         VibrationEnabled,
-        SessionCount
+        SessionCount,
+        SessionId,
+        UserDisplayName,
+        City,
+        UserStatus,
+        Country,
+        Username,
+        Password,
+        SessionExpiration
     }
 }
