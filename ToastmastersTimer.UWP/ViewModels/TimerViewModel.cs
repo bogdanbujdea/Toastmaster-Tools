@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using ToastmastersTimer.UWP.Features.Analytics;
+using ToastmastersTimer.UWP.Features.Members;
+using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Models;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -14,21 +16,30 @@ namespace ToastmastersTimer.UWP.ViewModels
     public class TimerViewModel : ViewModelBase
     {
         private readonly IStatisticsService _statisticsService;
+        private readonly IMembersRepository _membersRepository;
+        private readonly IDialogService _dialogService;
         private bool _speechUIIsVisible;
         private ObservableCollection<Lesson> _lessons;
         private Lesson _selectedLesson;
+        private ObservableCollection<Member> _members;
 
-        public TimerViewModel(IStatisticsService statisticsService)
+        public TimerViewModel(IStatisticsService statisticsService, IMembersRepository membersRepository, IDialogService dialogService)
         {
             _statisticsService = statisticsService;
+            _membersRepository = membersRepository;
+            _dialogService = dialogService;
             InitializeLessons();
             SelectedLesson = Lessons[0];
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            var report = await _membersRepository.RefreshClubMembers();
+            if (report.Successful)
+                Members = new ObservableCollection<Member>(report.Members);
+            else await _dialogService.AskQuestion(report.ErrorMessage);
             _statisticsService.RegisterPage("TimerView");
-        }        
+        }
 
         private void InitializeLessons()
         {
@@ -86,10 +97,9 @@ namespace ToastmastersTimer.UWP.ViewModels
             };
         }
 
-        public async void SetTimer(object element, DataContextChangedEventArgs context)
+        public void SetTimer(object element, DataContextChangedEventArgs context)
         {
             Timer = context.NewValue as ToastmastersTimerViewModel;
-            await Timer.Initialize();
         }
 
         public void ShowSpeechUI()
@@ -106,6 +116,17 @@ namespace ToastmastersTimer.UWP.ViewModels
                 Lesson = SelectedLesson
             };
         }
+
+        public ObservableCollection<Member> Members
+        {
+            get { return _members; }
+            set
+            {
+                _members = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<Lesson> Lessons
         {

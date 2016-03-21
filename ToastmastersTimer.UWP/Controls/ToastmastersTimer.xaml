@@ -21,24 +21,7 @@
                 <RowDefinition Height="15*" />
             </Grid.RowDefinitions>
             <Grid x:Name="TimerGrid" Grid.Row="0" VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="60"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="LessonName"
-                           Grid.Row="0"
-                           HorizontalAlignment="Center"
-                           FontSize="20"
-                           Foreground="White"
-                           Text="{x:Bind ViewModel.CurrentSpeech.Lesson.Name, Mode=OneWay}" />
-                <ComboBox x:Name="MembersList" Grid.Row="1" Height="60" PlaceholderText="Choose a speaker" Margin="20 0" ItemsSource="{x:Bind ViewModel.Members, Mode=OneWay}" Width="{Binding ElementName=TimerGrid, Path=ActualWidth}" Style="{StaticResource MembersComboBoxStyle}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontSize="18" Margin="5"></TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+               
                 <Grid x:Name="TimeGrid" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
