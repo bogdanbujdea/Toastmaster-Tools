@@ -4,6 +4,7 @@ using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Features.Authentication;
 using ToastmastersTimer.UWP.Features.Communication;
 using ToastmastersTimer.UWP.Features.Feedback;
+using ToastmastersTimer.UWP.Features.Members;
 using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
@@ -15,6 +16,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<IMembersRepository, MembersRepository>();
             SimpleIoc.Default.Register<IWebClient, WebClient>();
             SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
             SimpleIoc.Default.Register<IStatisticsService, StatisticsService>();

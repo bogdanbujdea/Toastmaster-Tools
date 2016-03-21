@@ -4,16 +4,20 @@ using System.Xml;
 using Windows.Web;
 using Windows.Web.Http;
 using ToastmastersTimer.UWP.Features.Communication;
+using ToastmastersTimer.UWP.Models.Reports;
+using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.Features.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IWebClient _webClient;
+        private readonly IAppSettings _appSettings;
 
-        public AuthenticationService(IWebClient webClient)
+        public AuthenticationService(IWebClient webClient, IAppSettings appSettings)
         {
             _webClient = webClient;
+            _appSettings = appSettings;
         }
 
         public async Task<AuthenticationReport> Login(string username, string password)
@@ -43,6 +47,13 @@ namespace ToastmastersTimer.UWP.Features.Authentication
                 return report;
             }
             return report;
+        }
+
+        public async Task<AuthenticationReport> LoginWithStoredCredentials()
+        {
+            var username = _appSettings.Get<string>(StorageKey.Username);
+            var password = _appSettings.Get<string>(StorageKey.Password);
+            return await Login(username, password);
         }
 
         private async Task<HttpResponseMessage> ExecuteLoginRequest(string username, string password)

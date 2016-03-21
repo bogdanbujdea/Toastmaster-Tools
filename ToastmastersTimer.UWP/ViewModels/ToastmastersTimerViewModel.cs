@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.Phone.Devices.Notification;
 using ToastmastersTimer.UWP.Features.Analytics;
+using ToastmastersTimer.UWP.Features.Members;
+using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -17,6 +20,8 @@ namespace ToastmastersTimer.UWP.ViewModels
 
     public class ToastmastersTimerViewModel : ViewModelBase
     {
+        private readonly IMembersRepository _membersRepository;
+        private readonly IDialogService _dialogService;
         private readonly IStatisticsService _statisticsService;
         private readonly IAppSettings _appSettings;
         private bool _timerIsRunning;
@@ -26,7 +31,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
-        
+        private ObservableCollection<Member> _members;
 
         private TimerState CurrentState { get; set; }
 
@@ -36,10 +41,12 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         private Color RedTimeBackground { get; }
 
-        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
+        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings, IMembersRepository membersRepository, IDialogService dialogService)
         {
             _statisticsService = statisticsService;
             _appSettings = appSettings;
+            _membersRepository = membersRepository;
+            _dialogService = dialogService;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 SelectedBackground = DarkBackground;
@@ -49,9 +56,25 @@ namespace ToastmastersTimer.UWP.ViewModels
             YellowTimeBackground = Color.FromArgb(255, 242, 223, 116);
             RedTimeBackground = Color.FromArgb(255, 205, 32, 44);
             ResetTimer();
+            Members = new ObservableCollection<Member>
+            {
+                new Member("abc"),
+                new Member("def"),
+                new Member("ghi"),
+            };
         }
 
         #region Properties
+
+        public ObservableCollection<Member> Members
+        {
+            get { return _members; }
+            set
+            {
+                _members = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public bool TimerIsRunning
         {
@@ -251,13 +274,13 @@ namespace ToastmastersTimer.UWP.ViewModels
         }
 
         #endregion
-    }
 
-    public enum TimerState
-    {
-        None,
-        Green,
-        Yellow,
-        Red
+        public async Task Initialize()
+        {
+            var report = await _membersRepository.RefreshClubMembers();
+            if (report.Successful)
+                Members = new ObservableCollection<Member>(report.Members);
+            else await _dialogService.AskQuestion(report.ErrorMessage);
+        }
     }
 }

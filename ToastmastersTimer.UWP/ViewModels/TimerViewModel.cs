@@ -86,9 +86,10 @@ namespace ToastmastersTimer.UWP.ViewModels
             };
         }
 
-        public void SetTimer(object element, DataContextChangedEventArgs context)
+        public async void SetTimer(object element, DataContextChangedEventArgs context)
         {
             Timer = context.NewValue as ToastmastersTimerViewModel;
+            await Timer.Initialize();
         }
 
         public void ShowSpeechUI()

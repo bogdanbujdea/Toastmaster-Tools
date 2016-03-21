@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmastersTimer.UWP.Features.Authentication;
 using ToastmastersTimer.UWP.Features.UserDialogs;
+using ToastmastersTimer.UWP.Models.Reports;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 using ToastmastersTimer.UWP.Views;
 

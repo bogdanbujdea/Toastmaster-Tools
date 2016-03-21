@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight;
+using Template10.Mvvm;
 
 namespace ToastmastersTimer.UWP.ViewModels
 {
@@ -37,12 +37,5 @@ namespace ToastmastersTimer.UWP.ViewModels
                 RaisePropertyChanged();
             }
         }
-    }
-
-    public class Member
-    {
-        public string Name { get; set; }
-
-        public string Function { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace ToastmastersTimer.UWP.Views
         
         public TimerViewModel ViewModel => DataContext as TimerViewModel;
 
-        private void ShowSpeechUI_(object sender, RoutedEventArgs e)
+        private void ShowSpeechUI(object sender, RoutedEventArgs e)
         {
             DefaultTimes.SelectedIndex = 0;
             ViewModel.SelectedLesson = ViewModel.Lessons[0];

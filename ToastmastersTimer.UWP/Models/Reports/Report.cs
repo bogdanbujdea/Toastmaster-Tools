@@ -1,13 +1,15 @@
-﻿namespace ToastmastersTimer.UWP.Features.Authentication
+﻿using ToastmastersTimer.UWP.Features.Authentication;
+
+namespace ToastmastersTimer.UWP.Models.Reports
 {
-    public class AuthenticationReport
+    public class Report
     {
         public bool Successful { get; }
         public UserData UserData { get; set; }
         public WebError Error { get; set; }
         public string ErrorMessage { get; set; }
 
-        public AuthenticationReport(bool successful = false)
+        protected Report(bool successful = false)
         {
             Successful = successful;
         }
