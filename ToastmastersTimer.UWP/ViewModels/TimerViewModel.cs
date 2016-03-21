@@ -6,6 +6,7 @@ using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Features.Members;
 using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Models;
+using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
 {
@@ -18,26 +19,31 @@ namespace ToastmastersTimer.UWP.ViewModels
         private readonly IStatisticsService _statisticsService;
         private readonly IMembersRepository _membersRepository;
         private readonly IDialogService _dialogService;
+        private readonly IAppSettings _appSettings;
         private bool _speechUIIsVisible;
         private ObservableCollection<Lesson> _lessons;
         private Lesson _selectedLesson;
         private ObservableCollection<Member> _members;
 
-        public TimerViewModel(IStatisticsService statisticsService, IMembersRepository membersRepository, IDialogService dialogService)
+        public TimerViewModel(IStatisticsService statisticsService, IMembersRepository membersRepository, IDialogService dialogService, IAppSettings appSettings)
         {
             _statisticsService = statisticsService;
             _membersRepository = membersRepository;
             _dialogService = dialogService;
+            _appSettings = appSettings;
             InitializeLessons();
             SelectedLesson = Lessons[0];
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            var report = await _membersRepository.RefreshClubMembers();
-            if (report.Successful)
-                Members = new ObservableCollection<Member>(report.Members);
-            else await _dialogService.AskQuestion(report.ErrorMessage);
+            if (IsLoggedIn)
+            {
+                var report = await _membersRepository.RefreshClubMembers();
+                if (report.Successful)
+                    Members = new ObservableCollection<Member>(report.Members);
+                else await _dialogService.AskQuestion(report.ErrorMessage);
+            }
             _statisticsService.RegisterPage("TimerView");
         }
 
@@ -115,6 +121,15 @@ namespace ToastmastersTimer.UWP.ViewModels
             {
                 Lesson = SelectedLesson
             };
+        }
+
+        public bool IsLoggedIn
+        {
+            get
+            {
+                var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
+                return string.IsNullOrWhiteSpace(sessionId) == false;
+            }
         }
 
         public ObservableCollection<Member> Members

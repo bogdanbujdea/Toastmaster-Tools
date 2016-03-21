@@ -69,6 +69,7 @@
                     <ComboBox x:Name="MembersList"
                               Grid.Row="1"
                               Height="60"
+                              Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}"
                               HorizontalAlignment="Center"
                               ItemsSource="{x:Bind ViewModel.Members, Mode=OneWay}"
                               PlaceholderText="Choose a speaker"

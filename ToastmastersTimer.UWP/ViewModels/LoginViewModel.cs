@@ -61,19 +61,22 @@ namespace ToastmastersTimer.UWP.ViewModels
         {
             var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
             var expiration = _appSettings.Get<DateTime>(StorageKey.SessionExpiration);
+            var username = _appSettings.Get<string>(StorageKey.Username);
+            var password = _appSettings.Get<string>(StorageKey.Password);
+            Username = username;
+            Password = password;
+            RememberMe = true;
             if (string.IsNullOrWhiteSpace(sessionId) == false)
             {
                 if (expiration > DateTime.Now)
                     NavigationService.Navigate(typeof(HomeView));
                 else
                 {
-                    var username = _appSettings.Get<string>(StorageKey.Username);
-                    var password = _appSettings.Get<string>(StorageKey.Password);
+
                     if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                         return;
                     RememberMe = true;
-                    Username = username;
-                    Password = password;
+
                     await Login();
                 }
             }

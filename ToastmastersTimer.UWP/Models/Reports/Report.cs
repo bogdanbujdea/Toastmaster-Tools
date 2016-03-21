@@ -12,6 +12,7 @@ namespace ToastmastersTimer.UWP.Models.Reports
         protected Report(bool successful = false)
         {
             Successful = successful;
+            ErrorMessage = "Unknown error. Please try again!";
         }
     }
 }

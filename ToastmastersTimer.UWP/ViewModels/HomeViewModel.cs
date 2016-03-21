@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using ToastmastersTimer.UWP.Features.Feedback;
@@ -28,14 +29,21 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (IsLoggedIn())
+            if (IsLoggedIn)
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
         }
 
-        private bool IsLoggedIn()
+        public bool IsLoggedIn
         {
-            var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
-            return string.IsNullOrWhiteSpace(sessionId) == false;
+            get
+            {
+                var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
+                return string.IsNullOrWhiteSpace(sessionId) == false;
+            }
+            set
+            {
+                RaisePropertyChanged();
+            }
         }
 
         public void GoToSettings()
@@ -48,6 +56,18 @@ namespace ToastmastersTimer.UWP.ViewModels
             NavigationService.Navigate(typeof(LoginView));
         }
 
+        public void Logout()
+        {
+            _appSettings.Remove(StorageKey.SessionId);
+            _appSettings.Remove(StorageKey.SessionExpiration);
+            _appSettings.Remove(StorageKey.UserDisplayName);
+            _appSettings.Remove(StorageKey.Country);
+            _appSettings.Remove(StorageKey.City);
+            _appSettings.Remove(StorageKey.UserStatus);
+            UserDisplayName = string.Empty;
+            IsLoggedIn = false;
+        }
+
         public void GoToSpeechPractice()
         {
             NavigationService.Navigate(typeof(SpeechPracticeView));
@@ -58,6 +78,8 @@ namespace ToastmastersTimer.UWP.ViewModels
             get { return _userDisplayName; }
             set
             {
+                if (_userDisplayName == value)
+                    return;
                 _userDisplayName = value;
                 RaisePropertyChanged();
             }
