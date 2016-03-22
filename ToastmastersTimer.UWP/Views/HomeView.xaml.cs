@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Core;
 using Template10.Common;
-using ToastmastersTimer.UWP.ViewModels;
+using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmastersTimer.UWP.Views
 {

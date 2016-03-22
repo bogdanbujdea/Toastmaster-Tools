@@ -1,4 +1,4 @@
-﻿using ToastmastersTimer.UWP.ViewModels;
+﻿using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmastersTimer.UWP.Views
 {

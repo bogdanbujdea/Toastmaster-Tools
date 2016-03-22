@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using GalaSoft.MvvmLight.Ioc;
-using ToastmastersTimer.UWP.Features.Feedback;
 using ToastmastersTimer.UWP.Views;
+using ToastmasterTools.Core.Features.Feedback;
 
 namespace ToastmastersTimer.UWP
 {

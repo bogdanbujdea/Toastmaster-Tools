@@ -5,7 +5,7 @@
     xmlns:local="using:ToastmastersTimer.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
+    xmlns:viewModels="using:ToastmasterTools.Core.ViewModels"
     mc:Ignorable="d">
     <Page.DataContext>
         <viewModels:SpeechPracticeViewModel></viewModels:SpeechPracticeViewModel>

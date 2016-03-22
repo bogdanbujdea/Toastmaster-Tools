@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
-using ToastmastersTimer.UWP.ViewModels;
+using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmastersTimer.UWP.Views
 {

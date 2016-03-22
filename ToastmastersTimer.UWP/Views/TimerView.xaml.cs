@@ -1,9 +1,8 @@
 ﻿using Windows.UI.Xaml;
+using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmastersTimer.UWP.Views
 {
-    using ViewModels;
-
     public sealed partial class TimerView
     {
         public TimerView()

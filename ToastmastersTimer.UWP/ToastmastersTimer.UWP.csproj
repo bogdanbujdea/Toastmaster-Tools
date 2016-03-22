@@ -101,53 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimePicker.xaml.cs">
-      <DependentUpon>TimePicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ToastmastersTimer.xaml.cs">
-      <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Analytics\IStatisticsService.cs" />
-    <Compile Include="Features\Analytics\StatisticsService.cs" />
-    <Compile Include="Models\Reports\AuthenticationReport.cs" />
-    <Compile Include="Features\Authentication\AuthenticationService.cs" />
-    <Compile Include="Features\Authentication\IAuthenticationService.cs" />
-    <Compile Include="Models\Reports\Report.cs" />
-    <Compile Include="Features\Authentication\UserData.cs" />
-    <Compile Include="Features\Authentication\WebError.cs" />
-    <Compile Include="Features\Communication\IWebClient.cs" />
-    <Compile Include="Features\Communication\WebClient.cs" />
-    <Compile Include="Features\Feedback\FeedbackCollector.cs" />
-    <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
-    <Compile Include="Features\Members\IMembersRepository.cs" />
-    <Compile Include="Features\Members\MembersRepository.cs" />
-    <Compile Include="Models\Reports\MembersReport.cs" />
-    <Compile Include="Features\UserDialogs\DialogService.cs" />
-    <Compile Include="Features\UserDialogs\IDialogService.cs" />
-    <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
-    <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
-    <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
-    <Compile Include="Helpers\ExtensionMethods.cs" />
-    <Compile Include="Models\Speech.cs" />
-    <Compile Include="Mvvm\ViewModelBase.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\SettingsServices\AppSettings.cs" />
-    <Compile Include="Services\SettingsServices\IAppSettings.cs" />
-    <Compile Include="Services\SettingsServices\StorageKey.cs" />
-    <Compile Include="ViewModels\GroupViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="Models\CardTime.cs" />
-    <Compile Include="Models\Lesson.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Member.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
-    <Compile Include="ViewModels\TimerState.cs" />
-    <Compile Include="ViewModels\TimerViewModel.cs" />
-    <Compile Include="ViewModels\TimePickerViewModel.cs" />
-    <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
     </Compile>
@@ -218,15 +172,8 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\TimePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ToastmastersTimer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Custom.xaml">
+    <Page Include="..\ToastmasterTools.Core\Styles\Custom.xaml">
+      <Link>Styles\Custom.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -270,6 +217,12 @@
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ToastmasterTools.Core\ToastmasterTools.Core.csproj">
+      <Project>{78ca72f7-a41d-48c0-92ca-ae69ba1d4dda}</Project>
+      <Name>ToastmasterTools.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
