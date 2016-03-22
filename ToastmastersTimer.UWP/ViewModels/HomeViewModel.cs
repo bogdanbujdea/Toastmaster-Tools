@@ -15,6 +15,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private readonly IFeedbackCollector _feedbackCollector;
         private readonly IAppSettings _appSettings;
         private string _userDisplayName;
+        private bool _isLoggedIn;
 
         public HomeViewModel(IFeedbackCollector feedbackCollector, IAppSettings appSettings)
         {
@@ -29,19 +30,18 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
+            IsLoggedIn = string.IsNullOrWhiteSpace(sessionId) == false;
             if (IsLoggedIn)
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
         }
 
         public bool IsLoggedIn
         {
-            get
-            {
-                var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
-                return string.IsNullOrWhiteSpace(sessionId) == false;
-            }
+            get { return _isLoggedIn; }
             set
             {
+                _isLoggedIn = value; 
                 RaisePropertyChanged();
             }
         }
