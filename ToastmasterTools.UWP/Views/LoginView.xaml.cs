@@ -1,6 +1,6 @@
 ﻿using ToastmasterTools.Core.ViewModels;
 
-namespace ToastmastersTimer.UWP.Views
+namespace ToastmasterTools.UWP.Views
 {
     public sealed partial class LoginView
     {

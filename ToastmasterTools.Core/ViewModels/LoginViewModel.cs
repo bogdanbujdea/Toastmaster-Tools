@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
-using ToastmastersTimer.UWP.Views;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models.Reports;
 using ToastmasterTools.Core.Services.SettingsServices;
+using ToastmasterTools.UWP.Views;
 
 namespace ToastmasterTools.Core.ViewModels
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ToastmastersTimer.UWP.Annotations;
+using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Models
 {

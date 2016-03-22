@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using GalaSoft.MvvmLight.Ioc;
-using ToastmastersTimer.UWP.Views;
+using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Feedback;
 
-namespace ToastmastersTimer.UWP
+namespace ToastmasterTools.UWP
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-Bootstrapper

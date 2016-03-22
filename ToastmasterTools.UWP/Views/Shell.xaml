@@ -1,9 +1,9 @@
 ﻿<Page xmlns:Controls="using:Template10.Controls" 
-    x:Class="ToastmastersTimer.UWP.Views.Shell"
+    x:Class="ToastmasterTools.UWP.Views.Shell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ToastmastersTimer.UWP.Views"
-      xmlns:views="using:ToastmastersTimer.UWP.Views"
+    xmlns:local="using:ToastmasterTools.UWP.Views"
+      xmlns:views="using:ToastmasterTools.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" x:Name="ThisPage">

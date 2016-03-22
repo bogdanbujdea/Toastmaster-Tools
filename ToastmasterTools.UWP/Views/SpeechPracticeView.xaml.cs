@@ -3,7 +3,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ToastmasterTools.Core.ViewModels;
 
-namespace ToastmastersTimer.UWP.Views
+namespace ToastmasterTools.UWP.Views
 {
     public sealed partial class SpeechPracticeView
     {

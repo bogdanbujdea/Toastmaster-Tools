@@ -2,7 +2,7 @@
 using Template10.Common;
 using ToastmasterTools.Core.ViewModels;
 
-namespace ToastmastersTimer.UWP.Views
+namespace ToastmasterTools.UWP.Views
 {
     public sealed partial class HomeView
     {

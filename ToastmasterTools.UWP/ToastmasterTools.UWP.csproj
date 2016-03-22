@@ -7,8 +7,8 @@
     <ProjectGuid>{4CFBB7F2-4B5F-4D26-8077-4B4F02E9940D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ToastmastersTimer.UWP</RootNamespace>
-    <AssemblyName>ToastmastersTimer.UWP</AssemblyName>
+    <RootNamespace>ToastmasterTools.UWP</RootNamespace>
+    <AssemblyName>ToastmasterTools.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -17,7 +17,7 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>ToastmastersTimer.UWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>ToastmasterTools.UWP_StoreKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>8140363BDA539574771CA58F2A91846CE460D01F</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
@@ -95,7 +95,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <None Include="ToastmastersTimer.UWP_StoreKey.pfx" />
+    <None Include="ToastmasterTools.UWP_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ToastmastersTimer.UWP.Views;
+using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
