@@ -1,28 +1,21 @@
 ﻿using System;
-using Windows.Foundation.Collections;
-using Windows.Storage;
 
 namespace ToastmastersTimer.UWP.Services.SettingsServices
 {
-    public class AppSettings
+    public class AppSettings : IAppSettings
     {
-        public static AppSettings Instance { get; private set; }
+        readonly Template10.Services.SettingsService.SettingsHelper _helper;
 
-        static AppSettings()
+        public AppSettings()
         {
-            Instance = Instance ?? new AppSettings();
-
-        }
-
-        private AppSettings()
-        {
+            _helper = new Template10.Services.SettingsService.SettingsHelper();
         }
 
         public T Get<T>(StorageKey key)
         {
             try
             {
-                return (T)SettingsSet[key.ToString()];
+                return _helper.Read(key.ToString(), default(T));
             }
             catch (Exception)
             {
@@ -32,22 +25,12 @@ namespace ToastmastersTimer.UWP.Services.SettingsServices
 
         public void Set<T>(StorageKey key, T value)
         {
-            SettingsSet[key.ToString()] = value;
+            _helper.Write(key.ToString(), value);
         }
 
         public void Remove(StorageKey key)
         {
-            SettingsSet[key.ToString()] = null;
+            _helper.Remove(key.ToString());
         }
-
-        private static IPropertySet SettingsSet
-        {
-            get { return ApplicationData.Current.LocalSettings.Values; }
-        }
-    }
-
-    public enum StorageKey
-    {
-        VibrationEnabled
     }
 }

@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.Phone.Devices.Notification;
 using ToastmastersTimer.UWP.Features.Analytics;
+using ToastmastersTimer.UWP.Features.Members;
+using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -18,6 +21,7 @@ namespace ToastmastersTimer.UWP.ViewModels
     public class ToastmastersTimerViewModel : ViewModelBase
     {
         private readonly IStatisticsService _statisticsService;
+        private readonly IAppSettings _appSettings;
         private bool _timerIsRunning;
         Stopwatch _stopWatch;
         private string _secondsText;
@@ -25,7 +29,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
-        
+        private ObservableCollection<Member> _members;
 
         private TimerState CurrentState { get; set; }
 
@@ -35,9 +39,10 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         private Color RedTimeBackground { get; }
 
-        public ToastmastersTimerViewModel(IStatisticsService statisticsService)
+        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
         {
             _statisticsService = statisticsService;
+            _appSettings = appSettings;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 SelectedBackground = DarkBackground;
@@ -51,6 +56,7 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         #region Properties
 
+       
         public bool TimerIsRunning
         {
             get { return _timerIsRunning; }
@@ -79,7 +85,7 @@ namespace ToastmastersTimer.UWP.ViewModels
         {
             try
             {
-                if (SettingsService.Instance.VibrationIsEnabled)
+                if (_appSettings.Get<bool>(StorageKey.VibrationEnabled))
                 {
                     VibrationDevice v = VibrationDevice.GetDefault();
                     v.Vibrate(TimeSpan.FromMilliseconds(500));
@@ -249,13 +255,5 @@ namespace ToastmastersTimer.UWP.ViewModels
         }
 
         #endregion
-    }
-
-    public enum TimerState
-    {
-        None,
-        Green,
-        Yellow,
-        Red
     }
 }

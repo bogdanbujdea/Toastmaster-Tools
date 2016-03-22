@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="using:ToastmastersTimer.UWP.ViewModels"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=ToastmastersTimerViewModel}"
+             
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
@@ -18,44 +20,39 @@
                 <RowDefinition Height="85*" />
                 <RowDefinition Height="15*" />
             </Grid.RowDefinitions>
-            <Grid x:Name="TimerGrid" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="15" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="LessonName"
-                           Grid.ColumnSpan="3"
-                           Margin="0 20"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           FontSize="20"
-                           Foreground="White"
-                           Text="{x:Bind ViewModel.CurrentSpeech.Lesson.Name, Mode=OneWay}" />
-                <Viewbox Grid.Column="1"
+            <Grid x:Name="TimerGrid" Grid.Row="0" VerticalAlignment="Top">
+               
+                <Grid x:Name="TimeGrid" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Grid.Column="1"
                          VerticalAlignment="Center"
                          Stretch="Uniform">
-                    <TextBlock FontSize="50"
+                        <TextBlock FontSize="50"
                                Foreground="White"
                                Text=":" />
-                </Viewbox>
-                <Grid x:Name="SecondsGrid" Grid.Column="2">
-                    <Viewbox>
-                        <TextBlock x:Name="SecondsText"
+                    </Viewbox>
+                    <Grid x:Name="SecondsGrid" Grid.Column="2">
+                        <Viewbox>
+                            <TextBlock x:Name="SecondsText"
                                    HorizontalAlignment="Left"
                                    FontSize="50"
                                    Foreground="White"
                                    Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" />
-                    </Viewbox>
-                </Grid>
-                <Grid x:Name="MinutesGrid" Grid.Row="0">
-                    <Viewbox>
-                        <TextBlock x:Name="MinutesText"
+                        </Viewbox>
+                    </Grid>
+                    <Grid x:Name="MinutesGrid" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock x:Name="MinutesText"
                                    HorizontalAlignment="Right"
                                    FontSize="50"
                                    Foreground="White"
                                    Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" />
-                    </Viewbox>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
             </Grid>
             <StackPanel x:Name="ButtonsPanel"
@@ -91,6 +88,7 @@
                               IsCompact="True" />
                 <!--<Button x:Name="PauseTimer"  HorizontalAlignment="Center" Content="Pause" Background="White" Margin="15 0"></Button>-->
             </StackPanel>
+
         </Grid>
     </Grid>
 </UserControl>

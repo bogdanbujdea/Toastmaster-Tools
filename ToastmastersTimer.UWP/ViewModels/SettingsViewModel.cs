@@ -9,10 +9,12 @@ namespace ToastmastersTimer.UWP.ViewModels
     public class SettingsViewModel: ViewModelBase
     {
         private readonly IStatisticsService _statisticsService;
+        private readonly IAppSettings _appSettings;
 
-        public SettingsViewModel(IStatisticsService statisticsService)
+        public SettingsViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
         {
             _statisticsService = statisticsService;
+            _appSettings = appSettings;
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -22,10 +24,10 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public bool VibrationIsEnabled
         {
-            get { return SettingsService.Instance.VibrationIsEnabled; }
+            get { return _appSettings.Get<bool>(StorageKey.VibrationEnabled); }
             set
             {
-                SettingsService.Instance.VibrationIsEnabled = value;
+                _appSettings.Set(StorageKey.VibrationEnabled, value);
                 _statisticsService.RegisterEvent(EventCategory.AppEvent, EventAction.Settings, value.ToString());
                 RaisePropertyChanged();
             }

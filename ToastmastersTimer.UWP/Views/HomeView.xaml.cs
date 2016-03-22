@@ -1,4 +1,6 @@
-﻿using ToastmastersTimer.UWP.ViewModels;
+﻿using Windows.UI.Core;
+using Template10.Common;
+using ToastmastersTimer.UWP.ViewModels;
 
 namespace ToastmastersTimer.UWP.Views
 {
@@ -8,10 +10,26 @@ namespace ToastmastersTimer.UWP.Views
         {
             InitializeComponent();
 
-            Window = Template10.Common.WindowWrapper.Current();
+            Window = WindowWrapper.Current();
+            CoreWindow.GetForCurrentThread().VisibilityChanged += OnVisibilityChanged;
         }
 
-        private static Template10.Common.WindowWrapper Window { get; set; }
+        private void OnVisibilityChanged(CoreWindow sender, VisibilityChangedEventArgs args)
+        {
+            if (args.Visible == false)
+                SystemNavigationManager.GetForCurrentView().BackRequested -= BackButtonPressed;
+            else
+            {
+                SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonPressed;
+            }
+        }
+
+        private void BackButtonPressed(object sender, BackRequestedEventArgs e)
+        {
+            BootStrapper.Current.Exit();
+        }
+
+        private static WindowWrapper Window { get; set; }
 
         public HomeViewModel ViewModel => this.DataContext as HomeViewModel;
     }

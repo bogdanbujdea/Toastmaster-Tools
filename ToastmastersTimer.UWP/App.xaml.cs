@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using GalaSoft.MvvmLight.Ioc;
+using ToastmastersTimer.UWP.Features.Feedback;
 using ToastmastersTimer.UWP.Views;
 
 namespace ToastmastersTimer.UWP
@@ -21,7 +23,7 @@ namespace ToastmastersTimer.UWP
             InitializeComponent();
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
-            SplashFactory = (e) => new Splash(e);            
+            SplashFactory = e => new Splash(e);            
         }
 
         // runs even if restored from state
@@ -38,7 +40,9 @@ namespace ToastmastersTimer.UWP
         // runs only when not restored from state
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            NavigationService.Navigate(typeof (HomeView));
+            var feedbackCollector = SimpleIoc.Default.GetInstance<IFeedbackCollector>();
+            await feedbackCollector.CheckForFeedback();
+            NavigationService.Navigate(typeof (LoginView));
         }
     }
 }
