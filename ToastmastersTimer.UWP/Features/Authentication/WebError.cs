@@ -2,6 +2,7 @@
 {
     public enum WebError
     {
+        Unknown,
         InvalidCredentials
     }
 }

@@ -43,7 +43,7 @@ namespace ToastmastersTimer.UWP.Features.Authentication
                 var webErrorStatus = Windows.Web.WebError.GetStatus(exception.HResult);
                 if (webErrorStatus == WebErrorStatus.HostNameNotResolved)
                     report.ErrorMessage = "Please check your internet connection and try again";
-                else report.ErrorMessage = "Unknown error" + webErrorStatus + ". Please try again!";
+                else report.ErrorMessage = "Unknown error. Please try again!";
                 return report;
             }
             return report;

@@ -120,6 +120,9 @@ namespace ToastmastersTimer.UWP.ViewModels
                             _dialogService.ShowMessageDialog(
                                 "The credentials are invalid. Please check your username and password.");
                         break;
+                    case WebError.Unknown:
+                        await _dialogService.ShowMessageDialog(authenticationReport.ErrorMessage);
+                        break;
                 }
             }
         }
