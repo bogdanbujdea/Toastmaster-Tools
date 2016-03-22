@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
+using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Features.Authentication;
 using ToastmastersTimer.UWP.Features.UserDialogs;
 using ToastmastersTimer.UWP.Models.Reports;
@@ -16,15 +17,17 @@ namespace ToastmastersTimer.UWP.ViewModels
         private readonly IAuthenticationService _authenticationService;
         private readonly IAppSettings _appSettings;
         private readonly IDialogService _dialogService;
+        private readonly IStatisticsService _statisticsService;
         private string _username;
         private string _password;
         private bool _rememberMe;
 
-        public LoginViewModel(IAuthenticationService authenticationService, IAppSettings appSettings, IDialogService dialogService)
+        public LoginViewModel(IAuthenticationService authenticationService, IAppSettings appSettings, IDialogService dialogService, IStatisticsService statisticsService)
         {
             _authenticationService = authenticationService;
             _appSettings = appSettings;
             _dialogService = dialogService;
+            _statisticsService = statisticsService;
         }
 
         public string Username
@@ -59,6 +62,7 @@ namespace ToastmastersTimer.UWP.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            _statisticsService.RegisterPage("LoginView");
             var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
             var expiration = _appSettings.Get<DateTime>(StorageKey.SessionExpiration);
             var username = _appSettings.Get<string>(StorageKey.Username);
@@ -110,6 +114,7 @@ namespace ToastmastersTimer.UWP.ViewModels
                     _appSettings.Set(StorageKey.Password, Password);
                 }
                 NavigationService.Navigate(typeof(HomeView));
+                _statisticsService.RegisterEvent(EventCategory.UserEvent, "logged in", userData.DisplayName);
             }
             else
             {

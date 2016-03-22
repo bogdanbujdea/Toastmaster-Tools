@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ToastmastersTimer.UWP.Features.Feedback;
+using ToastmastersTimer.UWP.Features.Analytics;
 using ToastmastersTimer.UWP.Services.SettingsServices;
 
 namespace ToastmastersTimer.UWP.ViewModels
@@ -12,14 +11,14 @@ namespace ToastmastersTimer.UWP.ViewModels
 
     public class HomeViewModel : ViewModelBase
     {
-        private readonly IFeedbackCollector _feedbackCollector;
+        private readonly IStatisticsService _statisticsService;
         private readonly IAppSettings _appSettings;
         private string _userDisplayName;
         private bool _isLoggedIn;
 
-        public HomeViewModel(IFeedbackCollector feedbackCollector, IAppSettings appSettings)
+        public HomeViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
         {
-            _feedbackCollector = feedbackCollector;
+            _statisticsService = statisticsService;
             _appSettings = appSettings;
         }
 
@@ -34,7 +33,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             IsLoggedIn = string.IsNullOrWhiteSpace(sessionId) == false;
             if (IsLoggedIn)
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
-        }
+        }        
 
         public bool IsLoggedIn
         {
@@ -64,6 +63,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             _appSettings.Remove(StorageKey.Country);
             _appSettings.Remove(StorageKey.City);
             _appSettings.Remove(StorageKey.UserStatus);
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, "logged out", UserDisplayName);
             UserDisplayName = string.Empty;
             IsLoggedIn = false;
         }
