@@ -23,6 +23,7 @@ namespace ToastmastersTimer.UWP.ViewModels
             SimpleIoc.Default.Register<IAppSettings, AppSettings>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
+            SimpleIoc.Default.Register<ProfileViewModel>();        
             SimpleIoc.Default.Register<LoginViewModel>();        
             SimpleIoc.Default.Register<GroupViewModel>();        
             SimpleIoc.Default.Register<ToastmastersTimerViewModel>();
@@ -37,5 +38,6 @@ namespace ToastmastersTimer.UWP.ViewModels
         public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
         public GroupViewModel GroupViewModel => ServiceLocator.Current.GetInstance<GroupViewModel>();
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
+        public ProfileViewModel ProfileViewModel => ServiceLocator.Current.GetInstance<ProfileViewModel>();
     }
 }
