@@ -13,10 +13,6 @@
             <AppBarButton Name="Show" Icon="Add" Label="Add counter"/>
         </CommandBar>
     </Page.BottomAppBar>
-    <Page.Resources>
-        <system:Double x:Key="CounterWidth" >200</system:Double>
-        <system:Double x:Key="CounterHeight" >200</system:Double>
-    </Page.Resources>
     <Grid Background="#EEEEEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -37,7 +33,7 @@
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <GridView x:Name="CounterGrid" ItemsSource="{x:Bind ViewModel.Counters}">
+            <GridView x:Name="CounterGrid" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <controls:Counter></controls:Counter>
