@@ -1,17 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Template10.Mvvm;
+using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
 {
-    public class AHCounterViewModel: ViewModelBase
+    public class AHCounterViewModel : RoleViewModel
     {
         private readonly IStatisticsService _statisticsService;
 
-        public AHCounterViewModel(IStatisticsService statisticsService)
+        public AHCounterViewModel(IStatisticsService statisticsService, IAppSettings appSettings, IMemberSelector memberSelector) : base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
             Counters = new ObservableCollection<Counter>
@@ -31,7 +32,7 @@ namespace ToastmasterTools.Core.ViewModels
         {
             if (Counters.Any(c => c.Name == CounterName))
                 return;
-            var counter = new Counter {Name = CounterName};
+            var counter = new Counter { Name = CounterName };
             Counters.Add(counter);
         }
 
@@ -43,7 +44,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public async Task SaveSession()
         {
-            
+
         }
     }
 }

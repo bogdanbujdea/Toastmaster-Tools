@@ -12,7 +12,7 @@ namespace ToastmasterTools.UnitTests
         [TestInitialize]
         public void SetupTests()
         {
-            _viewModel = new AHCounterViewModel(null);
+            _viewModel = new AHCounterViewModel(null, null, null);
         }
 
         [TestMethod]

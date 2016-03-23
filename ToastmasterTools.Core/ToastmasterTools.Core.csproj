@@ -110,8 +110,13 @@
     <Compile Include="Controls\CounterControl.xaml.cs">
       <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IMemberSelector.cs" />
+    <Compile Include="Controls\MemberSelector.cs" />
     <Compile Include="Controls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToastmasterPicker.xaml.cs">
+      <DependentUpon>ToastmasterPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
@@ -154,6 +159,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Member.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
@@ -171,6 +177,10 @@
     <Page Include="Controls\TimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ToastmasterPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToastmastersTimer.xaml">
       <Generator>MSBuild:Compile</Generator>

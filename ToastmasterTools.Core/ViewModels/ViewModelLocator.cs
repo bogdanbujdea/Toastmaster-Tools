@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
@@ -23,6 +24,7 @@ namespace ToastmasterTools.Core.ViewModels
             SimpleIoc.Default.Register<IAppSettings, AppSettings>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
+            SimpleIoc.Default.Register<IMemberSelector, MemberSelector>();
             SimpleIoc.Default.Register<AHCounterViewModel>();        
             SimpleIoc.Default.Register<LoginViewModel>();        
             SimpleIoc.Default.Register<GroupViewModel>();        

@@ -3,46 +3,34 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
-using ToastmasterTools.Core.Features.Members;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models;
-using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
 {
-    public class TimerViewModel : ViewModelBase
+    public class TimerViewModel : RoleViewModel
     {
         private readonly IStatisticsService _statisticsService;
-        private readonly IMembersRepository _membersRepository;
         private readonly IDialogService _dialogService;
-        private readonly IAppSettings _appSettings;
         private bool _speechUIIsVisible;
         private ObservableCollection<Lesson> _lessons;
         private Lesson _selectedLesson;
-        private ObservableCollection<Member> _members;
 
-        public TimerViewModel(IStatisticsService statisticsService, IMembersRepository membersRepository, IDialogService dialogService, IAppSettings appSettings)
+        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector): base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
-            _membersRepository = membersRepository;
             _dialogService = dialogService;
-            _appSettings = appSettings;
             InitializeLessons();
             SelectedLesson = Lessons[0];
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (IsLoggedIn)
-            {
-                var report = await _membersRepository.RefreshClubMembers();
-                if (report.Successful)
-                    Members = new ObservableCollection<Member>(report.Members);
-                else await _dialogService.AskQuestion(report.ErrorMessage);
-            }
             _statisticsService.RegisterPage("TimerView");
+            await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         private void InitializeLessons()
@@ -120,26 +108,6 @@ namespace ToastmasterTools.Core.ViewModels
                 Lesson = SelectedLesson
             };
         }
-
-        public bool IsLoggedIn
-        {
-            get
-            {
-                var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
-                return string.IsNullOrWhiteSpace(sessionId) == false;
-            }
-        }
-
-        public ObservableCollection<Member> Members
-        {
-            get { return _members; }
-            set
-            {
-                _members = value;
-                RaisePropertyChanged();
-            }
-        }
-
 
         public ObservableCollection<Lesson> Lessons
         {

@@ -54,8 +54,17 @@
                            Text="AH Counter" />
             </StackPanel>
         </Grid>
-        <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <GridView x:Name="CounterGrid" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
+        <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <controls:ToastmasterPicker Grid.Row="0"
+                                                VerticalAlignment="Center"
+                                                Foreground="{StaticResource AppDefaultColor}"
+                                                DataContext="{x:Bind ViewModel.MemberSelector}"
+                                                Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
+            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <controls:CounterControl></controls:CounterControl>

@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Core;
+using Windows.UI.Xaml.Navigation;
 using Template10.Common;
 using ToastmasterTools.Core.ViewModels;
 
@@ -22,6 +23,12 @@ namespace ToastmasterTools.UWP.Views
             {
                 SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonPressed;
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackButtonPressed;
         }
 
         private void BackButtonPressed(object sender, BackRequestedEventArgs e)
