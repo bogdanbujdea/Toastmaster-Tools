@@ -145,6 +145,8 @@
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Features\AHCounter\AHCounter.cs" />
+    <Compile Include="Features\AHCounter\Mistake.cs" />
     <Compile Include="Features\Analytics\IStatisticsService.cs" />
     <Compile Include="Features\Analytics\StatisticsService.cs" />
     <Compile Include="Features\Authentication\AuthenticationService.cs" />

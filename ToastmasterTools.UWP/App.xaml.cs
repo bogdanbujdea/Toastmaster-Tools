@@ -5,6 +5,7 @@ using Windows.ApplicationModel.Activation;
 using GalaSoft.MvvmLight.Ioc;
 using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Feedback;
+using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmasterTools.UWP
 {
@@ -29,7 +30,12 @@ namespace ToastmasterTools.UWP
         // runs even if restored from state
         public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            return Task.FromResult<object>(null);
+            var keys = PageKeys<Pages>();
+            keys.Add(Pages.Home, typeof(HomeView));
+            keys.Add(Pages.Settings, typeof(SettingsView));
+            keys.Add(Pages.Timer, typeof(TimerView));
+            keys.Add(Pages.Login, typeof(LoginView));
+            return Task.CompletedTask;
         }
 
         public override async Task OnSuspendingAsync(object s, SuspendingEventArgs e, bool prelaunchActivated)

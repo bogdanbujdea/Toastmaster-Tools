@@ -23,7 +23,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void GoToTimerView()
         {
-            NavigationService.Navigate(typeof(TimerView));
+            NavigationService.Navigate(Pages.Timer);            
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -46,12 +46,12 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void GoToSettings()
         {
-            NavigationService.Navigate(typeof(SettingsView));
+            NavigationService.Navigate(Pages.Settings);            
         }
 
         public void Login()
         {
-            NavigationService.Navigate(typeof(LoginView));
+            NavigationService.Navigate(Pages.Login);
         }
 
         public void Logout()
@@ -83,5 +83,13 @@ namespace ToastmasterTools.Core.ViewModels
                 RaisePropertyChanged();
             }
         }
+    }
+
+    public enum Pages
+    {
+        Home,
+        Timer,
+        Settings,
+        Login
     }
 }

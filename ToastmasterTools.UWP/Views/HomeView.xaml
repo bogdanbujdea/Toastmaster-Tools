@@ -49,6 +49,16 @@
                     Style="{StaticResource ToastmastersButtonStyle}" />
             <Button Width="250"
                     Height="60"
+                    HorizontalAlignment="Center"
+                    Background="#003F61"
+                    Click="{x:Bind ViewModel.GoToTimerView}"
+                    Content="AH Counter"
+                    Margin="0 30 0 0"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource ToastmastersButtonStyle}" />
+            <Button Width="250"
+                    Height="60"
                     Margin="0 30"
                     HorizontalAlignment="Center"
                     Background="#003F61"

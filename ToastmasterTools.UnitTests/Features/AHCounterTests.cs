@@ -1,55 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using ToastmasterTools.Core.Features.AHCounter;
 
 namespace ToastmasterTools.UnitTests.Features
 {
     [TestClass]
     public class AHCounterTests
     {
-        private Dictionary<Mistake, int> _mistakes;
+        private readonly AHCounter _ahCounter;
+
+        public AHCounterTests()
+        {
+            _ahCounter = new AHCounter();
+        }
 
         [TestInitialize]
         public void InitializeTests()
         {
-            _mistakes = new Dictionary<Mistake, int>();
-            foreach (var name in Enum.GetValues(typeof (Mistake)))
-            {
-                _mistakes[(Mistake) name] = 0;
-            }
+           
         }
 
         [TestMethod]
         public void addingMistake_shouldIncreaseCounter()
         {
-            AddMistake(Mistake.AH).Should().Be(1);
-            AddMistake(Mistake.AH).Should().Be(2);
+            _ahCounter.AddMistake(Mistake.AH).Should().Be(1);
+            _ahCounter.AddMistake(Mistake.AH).Should().Be(2);
         }
 
         [TestMethod]
         public void addingAhMistakes_shouldIncreaseAhCounter()
         {
-            AddMistake(Mistake.AH);
-            AddMistake(Mistake.AH).Should().Be(2);
+            _ahCounter.AddMistake(Mistake.AH);
+            _ahCounter.AddMistake(Mistake.AH).Should().Be(2);
         }
 
         [TestMethod]
         public void addingPauseMistakes_shouldIncreasePauseCounter()
         {
-            AddMistake(Mistake.Pause);
-            AddMistake(Mistake.Pause).Should().Be(2);
+            _ahCounter.AddMistake(Mistake.Pause);
+            _ahCounter.AddMistake(Mistake.Pause).Should().Be(2);
         }
 
-        private int AddMistake(Mistake mistake)
+        [TestMethod]
+        public void reset_shouldSetCountersToZero()
         {
-            return ++_mistakes[mistake];
+            _ahCounter.AddMistake(Mistake.AH);
+            _ahCounter.Reset();
+            _ahCounter.Mistakes[Mistake.AH].Should().Be(0);
         }
-    }
-
-    public enum Mistake
-    {
-        AH,
-        Pause
     }
 }
