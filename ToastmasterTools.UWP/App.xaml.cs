@@ -36,6 +36,7 @@ namespace ToastmasterTools.UWP
             keys.Add(Pages.Settings, typeof(SettingsView));
             keys.Add(Pages.Timer, typeof(TimerView));
             keys.Add(Pages.Login, typeof(LoginView));
+            keys.Add(Pages.AhCounter, typeof(AHCounterView));
             return Task.CompletedTask;
         }
 

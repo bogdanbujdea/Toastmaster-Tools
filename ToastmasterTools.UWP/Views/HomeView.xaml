@@ -51,7 +51,7 @@
                     Height="60"
                     HorizontalAlignment="Center"
                     Background="#003F61"
-                    Click="{x:Bind ViewModel.GoToTimerView}"
+                    Click="{x:Bind ViewModel.GoToAhCounter}"
                     Content="AH Counter"
                     Margin="0 30 0 0"
                     FontSize="30"

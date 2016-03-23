@@ -107,37 +107,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ToastmasterTools.UWP\Views\GroupView.xaml.cs">
-      <Link>Views\GroupView.xaml.cs</Link>
-      <DependentUpon>GroupView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\HomeView.xaml.cs">
-      <Link>Views\HomeView.xaml.cs</Link>
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\LoginView.xaml.cs">
-      <Link>Views\LoginView.xaml.cs</Link>
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml.cs">
-      <Link>Views\SettingsView.xaml.cs</Link>
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\Shell.xaml.cs">
-      <Link>Views\Shell.xaml.cs</Link>
-      <DependentUpon>Shell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml.cs">
-      <Link>Views\SpeechPracticeView.xaml.cs</Link>
-      <DependentUpon>SpeechPracticeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\Splash.xaml.cs">
-      <Link>Views\Splash.xaml.cs</Link>
-      <DependentUpon>Splash.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\TimerView.xaml.cs">
-      <Link>Views\TimerView.xaml.cs</Link>
-      <DependentUpon>TimerView.xaml</DependentUpon>
+    <Compile Include="Controls\Counter.xaml.cs">
+      <DependentUpon>Counter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
@@ -177,6 +148,7 @@
     <Compile Include="Services\SettingsServices\AppSettings.cs" />
     <Compile Include="Services\SettingsServices\IAppSettings.cs" />
     <Compile Include="Services\SettingsServices\StorageKey.cs" />
+    <Compile Include="ViewModels\AHCounterViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -191,45 +163,9 @@
     <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\ToastmasterTools.UWP\Views\GroupView.xaml">
-      <Link>Views\GroupView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\Counter.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\HomeView.xaml">
-      <Link>Views\HomeView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\LoginView.xaml">
-      <Link>Views\LoginView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml">
-      <Link>Views\SettingsView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\Shell.xaml">
-      <Link>Views\Shell.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml">
-      <Link>Views\SpeechPracticeView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\Splash.xaml">
-      <Link>Views\Splash.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\TimerView.xaml">
-      <Link>Views\TimerView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\TimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>

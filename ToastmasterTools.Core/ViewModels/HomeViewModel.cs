@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
@@ -49,6 +48,11 @@ namespace ToastmasterTools.Core.ViewModels
             NavigationService.Navigate(Pages.Settings);            
         }
 
+        public void GoToAhCounter()
+        {
+            NavigationService.Navigate(Pages.AhCounter);            
+        }
+
         public void Login()
         {
             NavigationService.Navigate(Pages.Login);
@@ -69,7 +73,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void GoToSpeechPractice()
         {
-            NavigationService.Navigate(typeof(SpeechPracticeView));
+            //NavigationService.Navigate(typeof(SpeechPracticeView));
         }
 
         public string UserDisplayName
@@ -90,6 +94,7 @@ namespace ToastmasterTools.Core.ViewModels
         Home,
         Timer,
         Settings,
-        Login
+        Login,
+        AhCounter
     }
 }

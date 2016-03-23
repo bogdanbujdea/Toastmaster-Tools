@@ -8,7 +8,6 @@ using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models.Reports;
 using ToastmasterTools.Core.Services.SettingsServices;
-using ToastmasterTools.UWP.Views;
 
 namespace ToastmasterTools.Core.ViewModels
 {
@@ -73,7 +72,7 @@ namespace ToastmasterTools.Core.ViewModels
             if (string.IsNullOrWhiteSpace(sessionId) == false)
             {
                 if (expiration > DateTime.Now)
-                    NavigationService.Navigate(typeof(HomeView));
+                    NavigationService.Navigate(Pages.Home);
                 else
                 {
 
@@ -88,7 +87,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void ContinueWithoutLogin()
         {
-            NavigationService.Navigate(typeof(HomeView));
+            NavigationService.Navigate(Pages.Home);
         }
 
         public async Task Login()
@@ -113,7 +112,7 @@ namespace ToastmasterTools.Core.ViewModels
                     _appSettings.Set(StorageKey.Username, Username);
                     _appSettings.Set(StorageKey.Password, Password);
                 }
-                NavigationService.Navigate(typeof(HomeView));
+                NavigationService.Navigate(Pages.Home);
                 _statisticsService.RegisterEvent(EventCategory.UserEvent, "logged in", userData.DisplayName);
             }
             else
