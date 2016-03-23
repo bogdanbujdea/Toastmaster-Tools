@@ -1,0 +1,18 @@
+﻿<common:BootStrapper 
+    x:Class="ToastmasterTools.UWP.App" 
+    xmlns:common="using:Template10.Common" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="using:ToastmasterTools.Core.ViewModels"
+    RequestedTheme="Light">
+    
+    <common:BootStrapper.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Custom.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <viewModels:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+    </common:BootStrapper.Resources>
+
+</common:BootStrapper>

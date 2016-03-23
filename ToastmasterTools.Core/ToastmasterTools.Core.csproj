@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78CA72F7-A41D-48C0-92CA-AE69BA1D4DDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ToastmasterTools.Core</RootNamespace>
+    <AssemblyName>ToastmasterTools.Core</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ToastmasterTools.UWP\Views\GroupView.xaml.cs">
+      <Link>Views\GroupView.xaml.cs</Link>
+      <DependentUpon>GroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\HomeView.xaml.cs">
+      <Link>Views\HomeView.xaml.cs</Link>
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\LoginView.xaml.cs">
+      <Link>Views\LoginView.xaml.cs</Link>
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml.cs">
+      <Link>Views\SettingsView.xaml.cs</Link>
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\Shell.xaml.cs">
+      <Link>Views\Shell.xaml.cs</Link>
+      <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml.cs">
+      <Link>Views\SpeechPracticeView.xaml.cs</Link>
+      <DependentUpon>SpeechPracticeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\Splash.xaml.cs">
+      <Link>Views\Splash.xaml.cs</Link>
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\ToastmasterTools.UWP\Views\TimerView.xaml.cs">
+      <Link>Views\TimerView.xaml.cs</Link>
+      <DependentUpon>TimerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimePicker.xaml.cs">
+      <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToastmastersTimer.xaml.cs">
+      <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\AHCounter\AHCounter.cs" />
+    <Compile Include="Features\AHCounter\Mistake.cs" />
+    <Compile Include="Features\Analytics\IStatisticsService.cs" />
+    <Compile Include="Features\Analytics\StatisticsService.cs" />
+    <Compile Include="Features\Authentication\AuthenticationService.cs" />
+    <Compile Include="Features\Authentication\IAuthenticationService.cs" />
+    <Compile Include="Features\Authentication\UserData.cs" />
+    <Compile Include="Features\Authentication\WebError.cs" />
+    <Compile Include="Features\Communication\IWebClient.cs" />
+    <Compile Include="Features\Communication\WebClient.cs" />
+    <Compile Include="Features\Feedback\FeedbackCollector.cs" />
+    <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
+    <Compile Include="Features\Members\IMembersRepository.cs" />
+    <Compile Include="Features\Members\MembersRepository.cs" />
+    <Compile Include="Features\UserDialogs\DialogService.cs" />
+    <Compile Include="Features\UserDialogs\IDialogService.cs" />
+    <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Models\CardTime.cs" />
+    <Compile Include="Models\Lesson.cs" />
+    <Compile Include="Models\Reports\AuthenticationReport.cs" />
+    <Compile Include="Models\Reports\MembersReport.cs" />
+    <Compile Include="Models\Reports\Report.cs" />
+    <Compile Include="Models\Speech.cs" />
+    <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SettingsServices\AppSettings.cs" />
+    <Compile Include="Services\SettingsServices\IAppSettings.cs" />
+    <Compile Include="Services\SettingsServices\StorageKey.cs" />
+    <Compile Include="ViewModels\GroupViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Member.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
+    <Compile Include="ViewModels\TimePickerViewModel.cs" />
+    <Compile Include="ViewModels\TimerState.cs" />
+    <Compile Include="ViewModels\TimerViewModel.cs" />
+    <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\ToastmasterTools.UWP\Views\GroupView.xaml">
+      <Link>Views\GroupView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\HomeView.xaml">
+      <Link>Views\HomeView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\LoginView.xaml">
+      <Link>Views\LoginView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml">
+      <Link>Views\SettingsView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\Shell.xaml">
+      <Link>Views\Shell.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml">
+      <Link>Views\SpeechPracticeView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\Splash.xaml">
+      <Link>Views\Splash.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\ToastmasterTools.UWP\Views\TimerView.xaml">
+      <Link>Views\TimerView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ToastmastersTimer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Custom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
