@@ -5,15 +5,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     DataContext="{Binding Source={StaticResource Locator}, Path=AHCounterViewModel}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="using:System"
     xmlns:controls="using:ToastmasterTools.Core.Controls"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="CounterContainerStyle" TargetType="GridViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,4,4"/>
+            <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <ListViewItemPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
-            <AppBarButton Name="Show" Icon="Add" Label="Add counter"/>
+            <AppBarButton Name="Show" Icon="Add" Label="Add counter" Click="{x:Bind ViewModel.AddCounter}"/>
+            <AppBarButton Name="Save" Icon="Save" Label="Add counter" Click="{x:Bind ViewModel.SaveSession}"/>
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="#EEEEEE">
+    <Grid Background="{StaticResource AppBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -33,10 +55,10 @@
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <GridView x:Name="CounterGrid" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <GridView x:Name="CounterGrid" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:Counter></controls:Counter>
+                        <controls:CounterControl></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>

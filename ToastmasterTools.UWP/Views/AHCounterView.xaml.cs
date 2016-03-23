@@ -9,6 +9,6 @@ namespace ToastmasterTools.UWP.Views
             InitializeComponent();
         }
 
-        public AHCounterViewModel ViewModel => DataContext as AHCounterViewModel;
+        public AHCounterViewModel ViewModel => DataContext as AHCounterViewModel;        
     }
 }

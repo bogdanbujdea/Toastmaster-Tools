@@ -75,7 +75,6 @@ namespace ToastmasterTools.Core.ViewModels
                     NavigationService.Navigate(Pages.Home);
                 else
                 {
-
                     if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                         return;
                     RememberMe = true;

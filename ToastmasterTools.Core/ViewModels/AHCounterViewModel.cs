@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Template10.Mvvm;
+using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.Core.Features.Analytics;
 
 namespace ToastmasterTools.Core.ViewModels
@@ -38,11 +40,10 @@ namespace ToastmasterTools.Core.ViewModels
             var foundCounter = Counters.FirstOrDefault(c => c.Name == counterName);
             Counters.Remove(foundCounter);
         }
-    }
 
-    public class Counter
-    {
-        public int Count { get; set; }
-        public string Name { get; set; }
+        public async Task SaveSession()
+        {
+            
+        }
     }
 }

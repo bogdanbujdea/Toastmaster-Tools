@@ -107,8 +107,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Counter.xaml.cs">
-      <DependentUpon>Counter.xaml</DependentUpon>
+    <Compile Include="Controls\CounterControl.xaml.cs">
+      <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
@@ -149,6 +149,7 @@
     <Compile Include="Services\SettingsServices\IAppSettings.cs" />
     <Compile Include="Services\SettingsServices\StorageKey.cs" />
     <Compile Include="ViewModels\AHCounterViewModel.cs" />
+    <Compile Include="Features\AHCounter\Counter.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -163,7 +164,7 @@
     <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\Counter.xaml">
+    <Page Include="Controls\CounterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
