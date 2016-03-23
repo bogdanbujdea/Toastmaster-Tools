@@ -24,13 +24,14 @@ namespace ToastmasterTools.UWP
             InitializeComponent();
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
-            SplashFactory = e => new Splash(e);            
+            SplashFactory = e => new Splash(e);
         }
 
         // runs even if restored from state
         public override Task OnInitializeAsync(IActivatedEventArgs args)
         {
             var keys = PageKeys<Pages>();
+            keys.Clear();
             keys.Add(Pages.Home, typeof(HomeView));
             keys.Add(Pages.Settings, typeof(SettingsView));
             keys.Add(Pages.Timer, typeof(TimerView));
@@ -48,7 +49,7 @@ namespace ToastmasterTools.UWP
         {
             var feedbackCollector = SimpleIoc.Default.GetInstance<IFeedbackCollector>();
             await feedbackCollector.CheckForFeedback();
-            NavigationService.Navigate(typeof (LoginView));
+            NavigationService.Navigate(Pages.Login);
         }
     }
 }
