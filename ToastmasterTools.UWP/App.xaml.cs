@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Data.Entity;
 using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Feedback;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmasterTools.UWP
@@ -25,6 +27,10 @@ namespace ToastmasterTools.UWP
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
             SplashFactory = e => new Splash(e);
+            using (var db = new ToastmasterContext())
+            {
+                db.Database.Migrate();
+            }
         }
 
         // runs even if restored from state

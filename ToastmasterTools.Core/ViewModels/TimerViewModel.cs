@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Services.SettingsServices;
@@ -16,82 +20,55 @@ namespace ToastmasterTools.Core.ViewModels
         private readonly IStatisticsService _statisticsService;
         private readonly IDialogService _dialogService;
         private bool _speechUIIsVisible;
-        private ObservableCollection<Lesson> _lessons;
-        private Lesson _selectedLesson;
+        private ObservableCollection<SpeechType> _lessons;
+        private SpeechType _selectedSpeechType;
 
-        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector): base(appSettings, memberSelector)
+        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector) : base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
-            InitializeLessons();
-            SelectedLesson = Lessons[0];
+            SelectedSpeechType = new SpeechType {GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime()};
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             _statisticsService.RegisterPage("TimerView");
+            await InitializeLessons();
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
-        private void InitializeLessons()
+        private async Task InitializeLessons()
         {
-            Lessons = new ObservableCollection<Lesson>
+            using (var context = new ToastmasterContext())
             {
-                new Lesson
-                {
-                    Name = "Ice Breaker",
-                    GreenCardTime = new CardTime(4, 0),
-                    YellowCardTime = new CardTime(5, 0),
-                    RedCardTime = new CardTime(6, 0)
-                },
-                new Lesson
-                {
-                    Name = "Standard Breaker",
-                    GreenCardTime = new CardTime(5, 0),
-                    YellowCardTime = new CardTime(6, 00),
-                    RedCardTime = new CardTime(7, 0)
-                },
-                new Lesson
-                {
-                    Name = "Advanced Breaker",
-                    GreenCardTime = new CardTime(7, 0),
-                    YellowCardTime = new CardTime(8, 0),
-                    RedCardTime = new CardTime(9, 0)
-                },
-                new Lesson
-                {
-                    Name = "Speech Evaluator",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-                new Lesson
-                {
-                    Name = "AH Counter",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-                new Lesson
-                {
-                    Name = "Gramatician",
-                    GreenCardTime = new CardTime(3, 0),
-                    YellowCardTime = new CardTime(3, 30),
-                    RedCardTime = new CardTime(4, 0)
-                },
-                new Lesson
-                {
-                    Name = "Timer",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-            };
+                var lessons = await context.SpeechTypes.ToListAsync();
+                Lessons = new ObservableCollection<SpeechType>(lessons);
+                SelectedSpeechType = Lessons[0];
+                SelectLesson();
+            }
         }
 
         public void SetTimer(object element, DataContextChangedEventArgs context)
         {
             Timer = context.NewValue as ToastmastersTimerViewModel;
+            Timer.SpeechStopped += SaveSpeech;
+        }
+
+        private async void SaveSpeech(object sender, Speech speech)
+        {
+            var saveSpeech = await _dialogService.AskQuestion("Do you want to save this speech?");
+            if (saveSpeech)
+            {
+                speech.Date = DateTime.Now;
+                speech.Speaker = SelectedMember;
+                speech.SpeechType = SelectedSpeechType;
+                using (var context = new ToastmasterContext())
+                {
+                    var allSpeeches = await context.Speeches.ToListAsync();
+                    context.Speeches.Add(speech);
+                    await context.SaveChangesAsync();
+                }
+            }
         }
 
         public void ShowSpeechUI()
@@ -105,11 +82,11 @@ namespace ToastmasterTools.Core.ViewModels
 
             Timer.CurrentSpeech = new Speech
             {
-                Lesson = SelectedLesson
+                SpeechType = SelectedSpeechType
             };
         }
 
-        public ObservableCollection<Lesson> Lessons
+        public ObservableCollection<SpeechType> Lessons
         {
             get { return _lessons; }
             set
@@ -119,12 +96,12 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
-        public Lesson SelectedLesson
+        public SpeechType SelectedSpeechType
         {
-            get { return _selectedLesson; }
+            get { return _selectedSpeechType; }
             set
             {
-                _selectedLesson = value;
+                _selectedSpeechType = value;
                 RaisePropertyChanged();
             }
         }

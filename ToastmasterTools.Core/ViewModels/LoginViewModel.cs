@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Authentication;
+using ToastmasterTools.Core.Features.Members;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models.Reports;
 using ToastmasterTools.Core.Services.SettingsServices;
@@ -17,16 +18,18 @@ namespace ToastmasterTools.Core.ViewModels
         private readonly IAppSettings _appSettings;
         private readonly IDialogService _dialogService;
         private readonly IStatisticsService _statisticsService;
+        private readonly IMembersRepository _membersRepository;
         private string _username;
         private string _password;
         private bool _rememberMe;
 
-        public LoginViewModel(IAuthenticationService authenticationService, IAppSettings appSettings, IDialogService dialogService, IStatisticsService statisticsService)
+        public LoginViewModel(IAuthenticationService authenticationService, IAppSettings appSettings, IDialogService dialogService, IStatisticsService statisticsService, IMembersRepository membersRepository)
         {
             _authenticationService = authenticationService;
             _appSettings = appSettings;
             _dialogService = dialogService;
             _statisticsService = statisticsService;
+            _membersRepository = membersRepository;
         }
 
         public string Username
@@ -111,6 +114,7 @@ namespace ToastmasterTools.Core.ViewModels
                     _appSettings.Set(StorageKey.Username, Username);
                     _appSettings.Set(StorageKey.Password, Password);
                 }
+                await _membersRepository.RefreshClubMembers();
                 NavigationService.Navigate(Pages.Home);
                 _statisticsService.RegisterEvent(EventCategory.UserEvent, "logged in", userData.DisplayName);
             }

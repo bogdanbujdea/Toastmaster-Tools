@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using ToastmasterTools.Core.Features.Members;
-using ToastmasterTools.Core.ViewModels;
+using ToastmasterTools.Core.Models;
 using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Controls

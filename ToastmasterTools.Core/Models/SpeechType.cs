@@ -4,12 +4,14 @@ using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Models
 {
-    public class Lesson: INotifyPropertyChanged
+    public class SpeechType: INotifyPropertyChanged, ILesson
     {
         private CardTime _greenCardTime;
         private string _name;
         private CardTime _yellowCardTime;
         private CardTime _redCardTime;
+
+        public int SpeechTypeId { get; set; }
 
         public string Name
         {
@@ -54,7 +56,6 @@ namespace ToastmasterTools.Core.Models
                 OnPropertyChanged();
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

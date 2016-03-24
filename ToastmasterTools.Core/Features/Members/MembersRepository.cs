@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.Web.Http;
+using Microsoft.Data.Entity;
 using Newtonsoft.Json;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
+using ToastmasterTools.Core.Features.Storage;
+using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Models.Reports;
 using ToastmasterTools.Core.Services.SettingsServices;
-using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmasterTools.Core.Features.Members
 {
@@ -50,20 +52,45 @@ namespace ToastmasterTools.Core.Features.Members
             foreach (var memberNode in nodeList)
             {
                 var node = memberNode.ChildNodes.FirstOrDefault(c => c.NodeName == "Name");
-                members.Add(new Member(node.InnerText));
+                members.Add(new Member { Name = node.InnerText });
             }
-            var storageFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("members.txt", CreationCollisionOption.OpenIfExists);
-            await FileIO.WriteTextAsync(storageFile, JsonConvert.SerializeObject(members));
+            await SaveMembers(members);
             membersReport = new MembersReport(true, members);
             return membersReport;
         }
 
+        private static async Task SaveMembers(List<Member> members)
+        {
+            var newMembers = new List<Member>();
+            using (var context = new ToastmasterContext())
+            {
+                foreach (var member in members)
+                {
+                    var foundMember = await context.Members.FirstOrDefaultAsync(m => m.Name == member.Name);
+                    if (foundMember != null)
+                    {
+                        context.Members.Add(member);
+                        newMembers.Add(member);
+                    }
+                }
+                if (newMembers.Count > 0)
+                    await context.SaveChangesAsync();
+            }
+        }
+
         public async Task<MembersReport> RetrieveClubMembers()
         {
-            var storageFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("members.txt", CreationCollisionOption.OpenIfExists);
-            var json = await FileIO.ReadTextAsync(storageFile);
-            var members = JsonConvert.DeserializeObject<List<Member>>(json);
-            var membersReport = new MembersReport(true, members);
+            MembersReport membersReport;
+            using (var context = new ToastmasterContext())
+            {
+                var members = await context.Members.ToListAsync();
+                if (members == null || members.Count == 0)
+                    membersReport = await RefreshClubMembers();
+                else
+                {
+                    membersReport = new MembersReport(true, new List<Member>());
+                }
+            }
             return membersReport;
         }
 

@@ -7,6 +7,8 @@
             
         }
 
+        public int CardTimeId { get; set; }
+
         public CardTime(int minutes, int seconds)
         {
             Minutes = minutes;

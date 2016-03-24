@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
 
@@ -31,6 +32,10 @@ namespace ToastmasterTools.Core.ViewModels
             IsLoggedIn = string.IsNullOrWhiteSpace(sessionId) == false;
             if (IsLoggedIn)
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
+            using (var context = new ToastmasterContext())
+            {
+                await context.Seed();
+            }
         }        
 
         public bool IsLoggedIn

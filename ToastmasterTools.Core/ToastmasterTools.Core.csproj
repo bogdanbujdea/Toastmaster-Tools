@@ -135,14 +135,34 @@
     <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
     <Compile Include="Features\Members\IMembersRepository.cs" />
     <Compile Include="Features\Members\MembersRepository.cs" />
+    <Compile Include="Features\Storage\ToastmasterContext.cs" />
     <Compile Include="Features\UserDialogs\DialogService.cs" />
     <Compile Include="Features\UserDialogs\IDialogService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Migrations\20160324111750_MyFirstMigration.cs" />
+    <Compile Include="Migrations\20160324111750_MyFirstMigration.designer.cs">
+      <DependentUpon>20160324111750_MyFirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20160324112610_RenameMigration2.2.0.cs" />
+    <Compile Include="Migrations\20160324112610_RenameMigration2.2.0.designer.cs">
+      <DependentUpon>20160324112610_RenameMigration2.2.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20160324112727_RenameMigration2.2.1.cs" />
+    <Compile Include="Migrations\20160324112727_RenameMigration2.2.1.designer.cs">
+      <DependentUpon>20160324112727_RenameMigration2.2.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20160324131334_UniqueNameKey2.2.2.cs" />
+    <Compile Include="Migrations\20160324131334_UniqueNameKey2.2.2.designer.cs">
+      <DependentUpon>20160324131334_UniqueNameKey2.2.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ToastmasterContextModelSnapshot.cs" />
     <Compile Include="Models\CardTime.cs" />
-    <Compile Include="Models\Lesson.cs" />
+    <Compile Include="Models\ILesson.cs" />
+    <Compile Include="Models\ISpeech.cs" />
+    <Compile Include="Models\SpeechType.cs" />
     <Compile Include="Models\Reports\AuthenticationReport.cs" />
     <Compile Include="Models\Reports\MembersReport.cs" />
     <Compile Include="Models\Reports\Report.cs" />
@@ -158,12 +178,12 @@
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Member.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
-    <Compile Include="ViewModels\TimerState.cs" />
+    <Compile Include="Models\TimerState.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -195,6 +215,11 @@
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework.Core">
+      <HintPath>..\..\..\..\..\.nuget\packages\EntityFramework.Core\7.0.0-rc1-final\lib\netcore50\EntityFramework.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

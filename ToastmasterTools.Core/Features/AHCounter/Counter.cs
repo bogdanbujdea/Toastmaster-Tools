@@ -9,6 +9,8 @@ namespace ToastmasterTools.Core.Features.AHCounter
         private int _count;
         private string _name;
 
+        public int CounterId { get; set; }
+
         public int Count
         {
             get { return _count; }

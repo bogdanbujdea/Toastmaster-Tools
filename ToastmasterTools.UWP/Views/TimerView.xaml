@@ -62,7 +62,7 @@
                     <HyperlinkButton x:Name="LessonName"
                                      HorizontalAlignment="Center"
                                      Click="ShowSpeechUI"
-                                     Content="{x:Bind ViewModel.Timer.CurrentSpeech.Lesson.Name, Mode=OneWay}"
+                                     Content="{x:Bind ViewModel.Timer.CurrentSpeech.SpeechType.Name, Mode=OneWay}"
                                      FontSize="18"
                                      Foreground="White"
                                      Padding="0" />
@@ -88,7 +88,7 @@
                           Margin="0 20 0 0"
                           HorizontalAlignment="Center"
                           ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}"
-                          SelectedItem="{Binding SelectedLesson,
+                          SelectedItem="{Binding SelectedSpeechType,
                                                  Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -112,15 +112,15 @@
                     </Grid.RowDefinitions>
                     <controls:TimePicker x:Name="GreenTimePicker"
                                          HorizontalAlignment="Center"
-                                         SelectedCardTime="{x:Bind ViewModel.SelectedLesson.GreenCardTime, Mode=TwoWay}" />
+                                         SelectedCardTime="{x:Bind ViewModel.SelectedSpeechType.GreenCardTime, Mode=TwoWay}" />
                     <controls:TimePicker x:Name="YellowTimePicker"
                                          Grid.Row="1"
                                          HorizontalAlignment="Center"
-                                         SelectedCardTime="{x:Bind ViewModel.SelectedLesson.YellowCardTime, Mode=TwoWay}" />
+                                         SelectedCardTime="{x:Bind ViewModel.SelectedSpeechType.YellowCardTime, Mode=TwoWay}" />
                     <controls:TimePicker x:Name="RedTimePicker"
                                          Grid.Row="2"
                                          HorizontalAlignment="Center"
-                                         SelectedCardTime="{x:Bind ViewModel.SelectedLesson.RedCardTime, Mode=TwoWay}" />
+                                         SelectedCardTime="{x:Bind ViewModel.SelectedSpeechType.RedCardTime, Mode=TwoWay}" />
                 </Grid>
                 <Viewbox Grid.Row="2" Stretch="None">
                     <StackPanel Margin="0 20 0 0"

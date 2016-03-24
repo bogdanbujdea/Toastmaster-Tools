@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Template10.Mvvm;
+using ToastmasterTools.Core.Models;
 
 namespace ToastmasterTools.Core.ViewModels
 {

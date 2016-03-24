@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmasterTools.Core.Controls;
+using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
