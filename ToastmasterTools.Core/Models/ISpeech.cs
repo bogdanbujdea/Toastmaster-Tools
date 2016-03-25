@@ -9,9 +9,9 @@ namespace ToastmasterTools.Core.Models
     {
         SpeechType SpeechType { get; set; }
         bool IsCustom { get; set; }
-        Member Speaker{ get; set; }
+        Speaker Speaker{ get; set; }
         DateTime Date { get; set; }
-        List<Counter> Counters { get; set; }
+        ICollection<Counter> Counters { get; set; }
         string Notes { get; set; }
         double SpeechTimeInSeconds { get; set; }
         event PropertyChangedEventHandler PropertyChanged;

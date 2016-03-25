@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Features.AHCounter;
@@ -11,41 +9,39 @@ namespace ToastmasterTools.Core.Features.Storage
 {
     public class ToastmasterContext : DbContext
     {
-        public DbSet<Member> Members { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
 
         public DbSet<Speech> Speeches { get; set; }
-
         public DbSet<SpeechType> SpeechTypes { get; set; }
 
         public DbSet<Counter> Counters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=Toastmasters.db");
+            optionsBuilder.UseSqlite("Filename=ToastmasterTools.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SpeechType>()
-                .HasIndex(s => s.Name)
-                .IsUnique();
+            modelBuilder.Entity<Speaker>()
+                .HasMany(s => s.Speeches);
+
         }
 
         public async Task Seed()
         {
             try
             {
-                await AddDefaultLessons();
-                await SaveChangesAsync();
+                AddDefaultLessons();
             }
             catch (Exception exception)
             {
             }
         }
 
-        private async Task AddDefaultLessons()
+        private void AddDefaultLessons()
         {
-            var listOfLessons = new List<SpeechType>
+            ListOfLessons = new List<SpeechType>
             {
                 new SpeechType
                 {
@@ -103,9 +99,8 @@ namespace ToastmasterTools.Core.Features.Storage
                     RedCardTime = new CardTime(3, 0)
                 },
             };
-            var existingSpeeches = await SpeechTypes.ToListAsync();
-            var newSpeeches = listOfLessons.Where(l => existingSpeeches.Any(e => e.Name == l.Name) == false);
-            SpeechTypes.AddRange(newSpeeches);
         }
+
+        public static List<SpeechType> ListOfLessons { get; set; }
     }
 }

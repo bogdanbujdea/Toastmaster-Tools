@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmasterTools.Core.Models.Reports
 {
     public class MembersReport: Report
     {
-        public List<Member> Members { get; }
+        public List<Speaker> Members { get; }
 
-        public MembersReport(bool successful, List<Member> members): base(successful)
+        public MembersReport(bool successful, List<Speaker> members): base(successful)
         {
             Members = members;
         }

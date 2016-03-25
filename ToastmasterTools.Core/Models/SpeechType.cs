@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using ToastmasterTools.UWP.Annotations;
 
@@ -11,6 +13,7 @@ namespace ToastmasterTools.Core.Models
         private CardTime _yellowCardTime;
         private CardTime _redCardTime;
 
+        [Key]
         public int SpeechTypeId { get; set; }
 
         public string Name
@@ -24,6 +27,7 @@ namespace ToastmasterTools.Core.Models
             }
         }
 
+        [NotMapped]
         public CardTime GreenCardTime
         {
             get { return _greenCardTime; }
@@ -35,6 +39,7 @@ namespace ToastmasterTools.Core.Models
             }
         }
 
+        [NotMapped]
         public CardTime YellowCardTime
         {
             get { return _yellowCardTime; }
@@ -46,6 +51,7 @@ namespace ToastmasterTools.Core.Models
             }
         }
 
+        [NotMapped]
         public CardTime RedCardTime
         {
             get { return _redCardTime; }

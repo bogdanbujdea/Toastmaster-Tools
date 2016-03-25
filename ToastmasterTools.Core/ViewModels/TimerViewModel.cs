@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
@@ -27,25 +26,27 @@ namespace ToastmasterTools.Core.ViewModels
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
-            SelectedSpeechType = new SpeechType {GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime()};
+            SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             _statisticsService.RegisterPage("TimerView");
-            await InitializeLessons();
+            InitializeLessons();
             await base.OnNavigatedToAsync(parameter, mode, state);
         }
 
-        private async Task InitializeLessons()
+        private void InitializeLessons()
         {
-            using (var context = new ToastmasterContext())
-            {
-                var lessons = await context.SpeechTypes.ToListAsync();
-                Lessons = new ObservableCollection<SpeechType>(lessons);
-                SelectedSpeechType = Lessons[0];
-                SelectLesson();
-            }
+
+            Lessons = new ObservableCollection<SpeechType>(ToastmasterContext.ListOfLessons);
+            InitializeWithDefaults();
+        }
+
+        private void InitializeWithDefaults()
+        {
+            SelectedSpeechType = Lessons[0];
+            SelectLesson();
         }
 
         public void SetTimer(object element, DataContextChangedEventArgs context)
@@ -60,15 +61,21 @@ namespace ToastmasterTools.Core.ViewModels
             if (saveSpeech)
             {
                 speech.Date = DateTime.Now;
-                speech.Speaker = SelectedMember;
+                speech.Speaker = SelectedSpeaker;
                 speech.SpeechType = SelectedSpeechType;
                 using (var context = new ToastmasterContext())
                 {
-                    var allSpeeches = await context.Speeches.ToListAsync();
+                    var allSpeeches = await context.Speeches.Include(s => s.Speaker).Include(s => s.SpeechType).ToListAsync();
+                    var speakers = await context.Speakers.ToListAsync();
+                    var speaker = context.Speakers.FirstOrDefaultAsync(s => s.Name == speech.Speaker.Name);
+                    speech.SpeakerId = speaker.Id;
+                    context.Entry(speech).State = EntityState.Added;
                     context.Speeches.Add(speech);
                     await context.SaveChangesAsync();
                 }
             }
+            InitializeWithDefaults();
+            Timer.Reset();
         }
 
         public void ShowSpeechUI()
@@ -82,7 +89,8 @@ namespace ToastmasterTools.Core.ViewModels
 
             Timer.CurrentSpeech = new Speech
             {
-                SpeechType = SelectedSpeechType
+                SpeechType = SelectedSpeechType,
+                Date = DateTime.Now
             };
         }
 

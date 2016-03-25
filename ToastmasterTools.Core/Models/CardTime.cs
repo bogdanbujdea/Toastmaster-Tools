@@ -15,6 +15,8 @@
             Seconds = seconds;
         }
 
+        public int SpeechTypeId { get; set; }
+
         public int Minutes { get; set; }
 
         public int Seconds { get; set; }

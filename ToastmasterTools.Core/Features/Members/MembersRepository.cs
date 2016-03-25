@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
-using Windows.Storage;
 using Windows.Web.Http;
 using Microsoft.Data.Entity;
-using Newtonsoft.Json;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
 using ToastmasterTools.Core.Features.Storage;
@@ -47,34 +45,35 @@ namespace ToastmasterTools.Core.Features.Members
             }
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            var members = new List<Member>();
+            var members = new List<Speaker>();
             var nodeList = doc.GetElementsByTagName("b:MemberIdentification");
             foreach (var memberNode in nodeList)
             {
                 var node = memberNode.ChildNodes.FirstOrDefault(c => c.NodeName == "Name");
-                members.Add(new Member { Name = node.InnerText });
+                members.Add(new Speaker { Name = node.InnerText });
             }
             await SaveMembers(members);
             membersReport = new MembersReport(true, members);
             return membersReport;
         }
 
-        private static async Task SaveMembers(List<Member> members)
+        private static async Task SaveMembers(List<Speaker> members)
         {
-            var newMembers = new List<Member>();
+            var newMembers = new List<Speaker>();
             using (var context = new ToastmasterContext())
             {
                 foreach (var member in members)
                 {
-                    var foundMember = await context.Members.FirstOrDefaultAsync(m => m.Name == member.Name);
-                    if (foundMember != null)
+                    var foundMember = await context.Speakers.FirstOrDefaultAsync(m => m.Name == member.Name);
+                    if (foundMember == null)
                     {
-                        context.Members.Add(member);
+                        context.Speakers.Add(member);
                         newMembers.Add(member);
                     }
                 }
                 if (newMembers.Count > 0)
                     await context.SaveChangesAsync();
+                var allMembers = await context.Speakers.ToListAsync();
             }
         }
 
@@ -83,12 +82,12 @@ namespace ToastmasterTools.Core.Features.Members
             MembersReport membersReport;
             using (var context = new ToastmasterContext())
             {
-                var members = await context.Members.ToListAsync();
+                var members = await context.Speakers.ToListAsync();
                 if (members == null || members.Count == 0)
                     membersReport = await RefreshClubMembers();
                 else
                 {
-                    membersReport = new MembersReport(true, new List<Member>());
+                    membersReport = new MembersReport(true, new List<Speaker>());
                 }
             }
             return membersReport;

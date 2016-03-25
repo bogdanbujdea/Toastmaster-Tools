@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.Phone.Devices.Notification;
 using Windows.UI;
@@ -44,7 +43,7 @@ namespace ToastmasterTools.Core.ViewModels
             GreenTimeBackground = Colors.ForestGreen;
             YellowTimeBackground = Color.FromArgb(255, 242, 223, 116);
             RedTimeBackground = Color.FromArgb(255, 205, 32, 44);
-            ResetTimer();
+            Reset();
         }
 
         #region Properties
@@ -57,6 +56,7 @@ namespace ToastmasterTools.Core.ViewModels
             {
                 _timerIsRunning = value;
                 RaisePropertyChanged();
+                _timerIsRunning = value;
             }
         }
 
@@ -161,15 +161,17 @@ namespace ToastmasterTools.Core.ViewModels
         public void StopTimer()
         {
             _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "stop_" + _currentSpeech.SpeechType.Name);
-            ResetTimer();
             OnSpeechStopped(CurrentSpeech);
+            CurrentSpeech.SpeechTimeInSeconds = _stopWatch.Elapsed.TotalSeconds;
+            _dispatcherTimer?.Stop();
+            _stopWatch?.Stop();
         }
 
         #endregion
 
         #region Private
 
-        private void ResetTimer()
+        public void Reset()
         {
             SelectedBackground = DarkBackground;
             MinutesText = SecondsText = "00";

@@ -24,39 +24,31 @@ namespace ToastmasterTools.Core.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("SpeechSpeechId");
+                    b.Property<int>("SpeechId");
 
                     b.HasKey("CounterId");
                 });
 
-            modelBuilder.Entity("ToastmasterTools.Core.Models.CardTime", b =>
+            modelBuilder.Entity("ToastmasterTools.Core.Models.Speaker", b =>
                 {
-                    b.Property<int>("CardTimeId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Minutes");
-
-                    b.Property<int>("Seconds");
-
-                    b.HasKey("CardTimeId");
-                });
-
-            modelBuilder.Entity("ToastmasterTools.Core.Models.Member", b =>
-                {
-                    b.Property<int>("MemberId")
+                    b.Property<int>("SpeakerId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Club");
 
-                    b.Property<int?>("CurrentLessonSpeechTypeId");
+                    b.Property<string>("CurrentLesson");
 
                     b.Property<string>("Function");
 
                     b.Property<string>("ImageUrl");
 
+                    b.Property<bool>("IsMember");
+
                     b.Property<string>("Name");
 
-                    b.HasKey("MemberId");
+                    b.Property<int>("SpeechId");
+
+                    b.HasKey("SpeakerId");
                 });
 
             modelBuilder.Entity("ToastmasterTools.Core.Models.Speech", b =>
@@ -70,7 +62,7 @@ namespace ToastmasterTools.Core.Migrations
 
                     b.Property<string>("Notes");
 
-                    b.Property<int?>("SpeakerMemberId");
+                    b.Property<int>("SpeakerId");
 
                     b.Property<double>("SpeechTimeInSeconds");
 
@@ -84,58 +76,27 @@ namespace ToastmasterTools.Core.Migrations
                     b.Property<int>("SpeechTypeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("GreenCardTimeCardTimeId");
-
                     b.Property<string>("Name");
 
-                    b.Property<int?>("RedCardTimeCardTimeId");
-
-                    b.Property<int?>("YellowCardTimeCardTimeId");
-
                     b.HasKey("SpeechTypeId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
                 });
 
             modelBuilder.Entity("ToastmasterTools.Core.Features.AHCounter.Counter", b =>
                 {
                     b.HasOne("ToastmasterTools.Core.Models.Speech")
                         .WithMany()
-                        .HasForeignKey("SpeechSpeechId");
-                });
-
-            modelBuilder.Entity("ToastmasterTools.Core.Models.Member", b =>
-                {
-                    b.HasOne("ToastmasterTools.Core.Models.SpeechType")
-                        .WithMany()
-                        .HasForeignKey("CurrentLessonSpeechTypeId");
+                        .HasForeignKey("SpeechId");
                 });
 
             modelBuilder.Entity("ToastmasterTools.Core.Models.Speech", b =>
                 {
-                    b.HasOne("ToastmasterTools.Core.Models.Member")
+                    b.HasOne("ToastmasterTools.Core.Models.Speaker")
                         .WithMany()
-                        .HasForeignKey("SpeakerMemberId");
+                        .HasForeignKey("SpeakerId");
 
                     b.HasOne("ToastmasterTools.Core.Models.SpeechType")
                         .WithMany()
                         .HasForeignKey("SpeechTypeSpeechTypeId");
-                });
-
-            modelBuilder.Entity("ToastmasterTools.Core.Models.SpeechType", b =>
-                {
-                    b.HasOne("ToastmasterTools.Core.Models.CardTime")
-                        .WithMany()
-                        .HasForeignKey("GreenCardTimeCardTimeId");
-
-                    b.HasOne("ToastmasterTools.Core.Models.CardTime")
-                        .WithMany()
-                        .HasForeignKey("RedCardTimeCardTimeId");
-
-                    b.HasOne("ToastmasterTools.Core.Models.CardTime")
-                        .WithMany()
-                        .HasForeignKey("YellowCardTimeCardTimeId");
                 });
         }
     }

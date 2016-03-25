@@ -13,22 +13,22 @@ namespace ToastmasterTools.Core.Controls
     public class MemberSelector: IMemberSelector, INotifyPropertyChanged
     {
         private readonly IMembersRepository _membersRepository;
-        private ObservableCollection<Member> _members;
+        private ObservableCollection<Speaker> _members;
 
         public MemberSelector(IMembersRepository membersRepository)
         {
             _membersRepository = membersRepository;
-            _members = new ObservableCollection<Member>();
+            _members = new ObservableCollection<Speaker>();
         }
 
         public async Task InitializeAsync()
         {
             var report = await _membersRepository.RefreshClubMembers();
             if (report.Successful)
-                Members = new ObservableCollection<Member>(report.Members);
+                Members = new ObservableCollection<Speaker>(report.Members);
         }
 
-        public ObservableCollection<Member> Members
+        public ObservableCollection<Speaker> Members
         {
             get { return _members; }
             set

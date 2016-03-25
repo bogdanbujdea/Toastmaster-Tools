@@ -11,6 +11,8 @@ namespace ToastmasterTools.Core.Features.AHCounter
 
         public int CounterId { get; set; }
 
+        public int SpeechId { get; set; }
+
         public int Count
         {
             get { return _count; }

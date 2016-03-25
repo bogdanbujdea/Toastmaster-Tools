@@ -35,7 +35,7 @@ namespace ToastmasterTools.Core.ViewModels
         {
             try
             {
-                SelectedMember = e.AddedItems[0] as Member;
+                SelectedSpeaker = e.AddedItems[0] as Speaker;
             }
             catch (Exception)
             {
@@ -52,7 +52,7 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
-        protected Member SelectedMember { get; set; }
+        protected Speaker SelectedSpeaker { get; set; }
 
         public bool IsLoggedIn
         {
