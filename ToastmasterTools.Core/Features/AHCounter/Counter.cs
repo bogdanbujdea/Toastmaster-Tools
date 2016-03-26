@@ -36,7 +36,6 @@ namespace ToastmasterTools.Core.Features.AHCounter
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

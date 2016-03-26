@@ -23,7 +23,7 @@ namespace ToastmasterTools.Core.Controls
 
         public async Task InitializeAsync()
         {
-            var report = await _membersRepository.RefreshClubMembers();
+            var report = await _membersRepository.RetrieveClubMembers();
             if (report.Successful)
                 Members = new ObservableCollection<Speaker>(report.Members);
         }

@@ -19,8 +19,7 @@ namespace ToastmasterTools.Core.Migrations
                     Function = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(nullable: true),
                     IsMember = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    SpeechId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

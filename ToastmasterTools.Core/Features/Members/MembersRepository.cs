@@ -73,22 +73,20 @@ namespace ToastmasterTools.Core.Features.Members
                 }
                 if (newMembers.Count > 0)
                     await context.SaveChangesAsync();
-                var allMembers = await context.Speakers.ToListAsync();
             }
         }
 
         public async Task<MembersReport> RetrieveClubMembers()
         {
-            MembersReport membersReport;
+            MembersReport membersReport = new MembersReport(true, new List<Speaker>());
             using (var context = new ToastmasterContext())
             {
                 var members = await context.Speakers.ToListAsync();
                 if (members == null || members.Count == 0)
                     membersReport = await RefreshClubMembers();
                 else
-                {
-                    membersReport = new MembersReport(true, new List<Speaker>());
-                }
+
+                    return new MembersReport(true, members);
             }
             return membersReport;
         }

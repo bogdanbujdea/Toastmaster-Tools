@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
-using Microsoft.Data.Entity.Metadata.Internal;
 using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.UWP.Annotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToastmasterTools.Core.Models
 {
-    public class Speech: INotifyPropertyChanged, ISpeech
+    public class Speech : INotifyPropertyChanged, ISpeech
     {
         private bool _isCustom;
         private double _speechTimeInSeconds;
@@ -29,8 +26,10 @@ namespace ToastmasterTools.Core.Models
             }
         }
 
-        [Key]
         public int SpeechId { get; set; }
+
+        public int SpeakerId { get; set; }
+
         public virtual Speaker Speaker
         {
             get { return _speaker; }
@@ -58,9 +57,7 @@ namespace ToastmasterTools.Core.Models
                 OnPropertyChanged();
             }
         }
-
-        public int SpeakerId { get; set; }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

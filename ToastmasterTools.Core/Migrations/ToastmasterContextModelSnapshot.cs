@@ -46,8 +46,6 @@ namespace ToastmasterTools.Core.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("SpeechId");
-
                     b.HasKey("SpeakerId");
                 });
 

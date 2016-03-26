@@ -75,7 +75,9 @@ namespace ToastmasterTools.Core.ViewModels
             if (string.IsNullOrWhiteSpace(sessionId) == false)
             {
                 if (expiration > DateTime.Now)
+                {
                     NavigationService.Navigate(Pages.Home);
+                }
                 else
                 {
                     if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))

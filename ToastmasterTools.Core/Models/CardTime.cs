@@ -7,15 +7,11 @@
             
         }
 
-        public int CardTimeId { get; set; }
-
         public CardTime(int minutes, int seconds)
         {
             Minutes = minutes;
             Seconds = seconds;
         }
-
-        public int SpeechTypeId { get; set; }
 
         public int Minutes { get; set; }
 

@@ -142,9 +142,9 @@
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
-    <Compile Include="Migrations\20160325083306_First.cs" />
-    <Compile Include="Migrations\20160325083306_First.designer.cs">
-      <DependentUpon>20160325083306_First.cs</DependentUpon>
+    <Compile Include="Migrations\20160326002133_First.cs" />
+    <Compile Include="Migrations\20160326002133_First.designer.cs">
+      <DependentUpon>20160326002133_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ToastmasterContextModelSnapshot.cs" />
     <Compile Include="Models\CardTime.cs" />

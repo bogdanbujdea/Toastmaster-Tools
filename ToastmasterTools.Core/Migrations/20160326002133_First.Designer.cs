@@ -8,7 +8,7 @@ using ToastmasterTools.Core.Features.Storage;
 namespace ToastmasterTools.Core.Migrations
 {
     [DbContext(typeof(ToastmasterContext))]
-    [Migration("20160325083306_First")]
+    [Migration("20160326002133_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,8 +46,6 @@ namespace ToastmasterTools.Core.Migrations
                     b.Property<bool>("IsMember");
 
                     b.Property<string>("Name");
-
-                    b.Property<int>("SpeechId");
 
                     b.HasKey("SpeakerId");
                 });

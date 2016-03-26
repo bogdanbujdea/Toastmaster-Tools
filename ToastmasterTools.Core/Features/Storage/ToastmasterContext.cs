@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Features.AHCounter;
@@ -23,8 +24,6 @@ namespace ToastmasterTools.Core.Features.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Speaker>()
-                .HasMany(s => s.Speeches);
 
         }
 
@@ -32,14 +31,49 @@ namespace ToastmasterTools.Core.Features.Storage
         {
             try
             {
-                AddDefaultLessons();
+                await AddDefaultLessons();
             }
             catch (Exception exception)
             {
             }
         }
 
-        private void AddDefaultLessons()
+        public async Task DisplayDbData(ToastmasterContext context)
+        {
+            var speakers = await context.Speakers.ToListAsync();
+            Debug.WriteLine("Speakers count: " + speakers.Count);
+            foreach (var speaker in speakers)
+            {
+                Debug.WriteLine("Speaker: " + speaker.Name);
+                Debug.WriteLine("SpeakerId: " + speaker.SpeakerId);
+            }
+
+            var speechTypes = await context.SpeechTypes.ToListAsync();
+            Debug.WriteLine("Speech types count: " + speechTypes.Count);
+            foreach (var speechType in speechTypes)
+            {
+                Debug.WriteLine("Speech: " + speechType.Name);
+                Debug.WriteLine("SpeechId: " + speechType.SpeechTypeId);
+            }
+
+            var speechList = await context.Speeches.ToListAsync();
+            Debug.WriteLine("Speeches count: " + speechList.Count);
+            foreach (var speech in speechList)
+            {
+                Debug.WriteLine("Speech id: " + speech.SpeechId);
+                Debug.WriteLine("Speech date: " + speech.Date);
+                Debug.WriteLine("Speech type: " + speech.SpeechType.Name);
+            }
+            var speeches = await context.Speeches.Include(s => s.SpeechType).Include(s => s.Speaker).ToListAsync();
+            foreach (var speech in speeches)
+            {
+                Debug.WriteLine("Speech id: " + speech.SpeechId);
+                Debug.WriteLine("Speech date: " + speech.Date);
+                Debug.WriteLine("Speech type: " + speech.SpeechType.Name);
+            }
+        }
+
+        private async Task AddDefaultLessons()
         {
             ListOfLessons = new List<SpeechType>
             {
@@ -99,6 +133,14 @@ namespace ToastmasterTools.Core.Features.Storage
                     RedCardTime = new CardTime(3, 0)
                 },
             };
+            using (var context = new ToastmasterContext())
+            {
+                var count = await context.SpeechTypes.CountAsync();
+                if (count > 0)
+                    return;
+                context.SpeechTypes.AddRange(ListOfLessons);
+                await context.SaveChangesAsync();
+            }
         }
 
         public static List<SpeechType> ListOfLessons { get; set; }

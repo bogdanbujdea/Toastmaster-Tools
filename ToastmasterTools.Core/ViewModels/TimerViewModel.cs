@@ -61,17 +61,17 @@ namespace ToastmasterTools.Core.ViewModels
             if (saveSpeech)
             {
                 speech.Date = DateTime.Now;
-                speech.Speaker = SelectedSpeaker;
-                speech.SpeechType = SelectedSpeechType;
                 using (var context = new ToastmasterContext())
                 {
-                    var allSpeeches = await context.Speeches.Include(s => s.Speaker).Include(s => s.SpeechType).ToListAsync();
-                    var speakers = await context.Speakers.ToListAsync();
-                    var speaker = context.Speakers.FirstOrDefaultAsync(s => s.Name == speech.Speaker.Name);
-                    speech.SpeakerId = speaker.Id;
-                    context.Entry(speech).State = EntityState.Added;
+                    await context.DisplayDbData(context);
+                    var speaker = await context.Speakers.FirstOrDefaultAsync(s => s.Name == SelectedSpeaker.Name);
+                    var speechType =
+                        await context.SpeechTypes.FirstOrDefaultAsync(s => s.Name == SelectedSpeechType.Name);
+                    speech.Speaker = speaker;
+                    speech.SpeechType = speechType;
                     context.Speeches.Add(speech);
                     await context.SaveChangesAsync();
+                    await context.DisplayDbData(context);
                 }
             }
             InitializeWithDefaults();

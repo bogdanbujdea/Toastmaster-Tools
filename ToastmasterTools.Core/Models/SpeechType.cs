@@ -13,7 +13,6 @@ namespace ToastmasterTools.Core.Models
         private CardTime _yellowCardTime;
         private CardTime _redCardTime;
 
-        [Key]
         public int SpeechTypeId { get; set; }
 
         public string Name
