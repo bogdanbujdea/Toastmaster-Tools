@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Storage;
+using ToastmasterTools.Core.Features.UserDialogs;
+using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
@@ -11,16 +15,23 @@ namespace ToastmasterTools.Core.ViewModels
     public class AHCounterViewModel : RoleViewModel
     {
         private readonly IStatisticsService _statisticsService;
+        private readonly IDialogService _dialogService;
+        private readonly ISpeechRepository _speechRepository;
 
-        public AHCounterViewModel(IStatisticsService statisticsService, IAppSettings appSettings, IMemberSelector memberSelector) : base(appSettings, memberSelector)
+        public AHCounterViewModel(IStatisticsService statisticsService, 
+            IAppSettings appSettings, 
+            IDialogService dialogService, 
+            IMemberSelector memberSelector, 
+            ISpeechRepository speechRepository) : base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
+            _dialogService = dialogService;
+            _speechRepository = speechRepository;
             Counters = new ObservableCollection<Counter>
             {
-                new Counter {Name = "AH", Count = 12},
-                new Counter {Name = "Pause", Count = 3},
-                new Counter {Name = "Mmm", Count = 0},
-                new Counter {Name = "ABC", Count = 20},
+                new Counter {Name = "Ahh", Count = 0},
+                new Counter {Name = "Pause", Count = 0},
+                new Counter {Name = "Mmm", Count = 0}
             };
         }
 
@@ -44,7 +55,18 @@ namespace ToastmasterTools.Core.ViewModels
 
         public async Task SaveSession()
         {
-
+            if (SelectedSpeaker == null)
+            {
+                await _dialogService.ShowMessageDialog("You must select a speaker!");
+                return;
+            }
+            var speech = new Speech
+            {
+                Date = DateTime.Now,
+                Counters = Counters.ToList()
+            };
+            await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, string.Empty);
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, "AH-Counter", "saved speech");
         }
     }
 }

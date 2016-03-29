@@ -40,13 +40,7 @@ namespace ToastmasterTools.Core.Features.Storage
 
         public async Task DisplayDbData(ToastmasterContext context)
         {
-            var speakers = await context.Speakers.ToListAsync();
-            Debug.WriteLine("Speakers count: " + speakers.Count);
-            foreach (var speaker in speakers)
-            {
-                Debug.WriteLine("Speaker: " + speaker.Name);
-                Debug.WriteLine("SpeakerId: " + speaker.SpeakerId);
-            }
+            await ShowSpeakers(context);
 
             var speechTypes = await context.SpeechTypes.ToListAsync();
             Debug.WriteLine("Speech types count: " + speechTypes.Count);
@@ -56,20 +50,46 @@ namespace ToastmasterTools.Core.Features.Storage
                 Debug.WriteLine("SpeechId: " + speechType.SpeechTypeId);
             }
 
-            var speechList = await context.Speeches.ToListAsync();
-            Debug.WriteLine("Speeches count: " + speechList.Count);
-            foreach (var speech in speechList)
-            {
-                Debug.WriteLine("Speech id: " + speech.SpeechId);
-                Debug.WriteLine("Speech date: " + speech.Date);
-                Debug.WriteLine("Speech type: " + speech.SpeechType.Name);
-            }
+            await ShowSpeechList(context);
+            return;
             var speeches = await context.Speeches.Include(s => s.SpeechType).Include(s => s.Speaker).ToListAsync();
             foreach (var speech in speeches)
             {
                 Debug.WriteLine("Speech id: " + speech.SpeechId);
                 Debug.WriteLine("Speech date: " + speech.Date);
                 Debug.WriteLine("Speech type: " + speech.SpeechType.Name);
+            }
+        }
+
+        private static async Task ShowSpeechList(ToastmasterContext context)
+        {
+            var speechList = await context.Speeches.ToListAsync();
+            Debug.WriteLine("Speeches count: " + speechList.Count);
+            foreach (var speech in speechList)
+            {
+                Debug.WriteLine("Speech id: " + speech.SpeechId);
+                Debug.WriteLine("Speech date: " + speech.Date);
+                if (speech.SpeechType != null)
+                    Debug.WriteLine("Speech type: " + speech.SpeechType.Name);
+                Debug.WriteLine("Speech counters");
+                if (speech.Counters != null)
+                    foreach (var counter in speech.Counters)
+                    {
+                        Debug.WriteLine(counter.Name + " : " + counter.Count);
+                    }
+                Debug.WriteLine(string.Empty);
+            }
+        }
+
+        private static async Task ShowSpeakers(ToastmasterContext context)
+        {
+            var speakers = await context.Speakers.ToListAsync();
+            Debug.WriteLine("Speakers count: " + speakers.Count);
+            return;
+            foreach (var speaker in speakers)
+            {
+                Debug.WriteLine("Speaker: " + speaker.Name);
+                Debug.WriteLine("SpeakerId: " + speaker.SpeakerId);
             }
         }
 

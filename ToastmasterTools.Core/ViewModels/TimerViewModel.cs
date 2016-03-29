@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Storage;
@@ -23,7 +22,8 @@ namespace ToastmasterTools.Core.ViewModels
         private ObservableCollection<SpeechType> _lessons;
         private SpeechType _selectedSpeechType;
 
-        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository) : base(appSettings, memberSelector)
+        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, 
+            IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository) : base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
@@ -62,19 +62,7 @@ namespace ToastmasterTools.Core.ViewModels
             var saveSpeech = await _dialogService.AskQuestion("Do you want to save this speech?");
             if (saveSpeech)
             {
-                speech.Date = DateTime.Now;
-                using (var context = new ToastmasterContext())
-                {
-                    await context.DisplayDbData(context);
-                    var speaker = await context.Speakers.FirstOrDefaultAsync(s => s.Name == SelectedSpeaker.Name);
-                    var speechType =
-                        await context.SpeechTypes.FirstOrDefaultAsync(s => s.Name == SelectedSpeechType.Name);
-                    speech.Speaker = speaker;
-                    speech.SpeechType = speechType;
-                    context.Speeches.Add(speech);
-                    await context.SaveChangesAsync();
-                    await context.DisplayDbData(context);
-                }
+                await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, SelectedSpeechType.Name);
             }
             InitializeWithDefaults();
             Timer.Reset();

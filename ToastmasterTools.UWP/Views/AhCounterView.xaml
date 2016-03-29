@@ -32,7 +32,7 @@
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Name="Show" Icon="Add" Label="Add counter" Click="{x:Bind ViewModel.AddCounter}"/>
-            <AppBarButton Name="Save" Icon="Save" Label="Add counter" Click="{x:Bind ViewModel.SaveSession}"/>
+            <AppBarButton Name="Save" Icon="Save" Label="Save speech" Click="{x:Bind ViewModel.SaveSession}"/>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{StaticResource AppBackgroundColor}">
