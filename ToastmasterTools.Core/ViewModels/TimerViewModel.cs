@@ -18,14 +18,16 @@ namespace ToastmasterTools.Core.ViewModels
     {
         private readonly IStatisticsService _statisticsService;
         private readonly IDialogService _dialogService;
+        private readonly ISpeechRepository _speechRepository;
         private bool _speechUIIsVisible;
         private ObservableCollection<SpeechType> _lessons;
         private SpeechType _selectedSpeechType;
 
-        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector) : base(appSettings, memberSelector)
+        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository) : base(appSettings, memberSelector)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
+            _speechRepository = speechRepository;
             SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
         }
 

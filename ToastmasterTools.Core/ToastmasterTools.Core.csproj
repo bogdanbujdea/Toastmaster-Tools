@@ -135,6 +135,8 @@
     <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
     <Compile Include="Features\Members\IMembersRepository.cs" />
     <Compile Include="Features\Members\MembersRepository.cs" />
+    <Compile Include="Features\Storage\ISpeechRepository.cs" />
+    <Compile Include="Features\Storage\SpeechRepository.cs" />
     <Compile Include="Features\Storage\ToastmasterContext.cs" />
     <Compile Include="Features\UserDialogs\DialogService.cs" />
     <Compile Include="Features\UserDialogs\IDialogService.cs" />

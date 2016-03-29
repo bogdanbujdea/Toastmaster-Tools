@@ -6,6 +6,7 @@ using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
 using ToastmasterTools.Core.Features.Feedback;
 using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Services.SettingsServices;
 
@@ -17,6 +18,7 @@ namespace ToastmasterTools.Core.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<ISpeechRepository, SpeechRepository>();
             SimpleIoc.Default.Register<IMembersRepository, MembersRepository>();
             SimpleIoc.Default.Register<IWebClient, WebClient>();
             SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
