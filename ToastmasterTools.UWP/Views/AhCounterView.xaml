@@ -56,14 +56,18 @@
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="150"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:ToastmasterPicker Grid.Row="0"
+            <StackPanel>
+                <controls:ToastmasterMemberPicker 
                                                 VerticalAlignment="Center"
                                                 Foreground="{StaticResource AppDefaultColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
+                <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
+
+            </StackPanel>
             <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>

@@ -11,12 +11,7 @@ namespace ToastmasterTools.Core.Controls
         public TimePicker()
         {
             InitializeComponent();
-            Loaded += ViewLoaded;
             ViewModel.Initialize();
-        }
-
-        private void ViewLoaded(object sender, RoutedEventArgs e)
-        {
         }
 
         public TimePickerViewModel ViewModel => DataContext as TimePickerViewModel;

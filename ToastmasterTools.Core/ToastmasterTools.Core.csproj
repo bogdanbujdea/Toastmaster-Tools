@@ -110,13 +110,18 @@
     <Compile Include="Controls\CounterControl.xaml.cs">
       <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IMemberSelector.cs" />
-    <Compile Include="Controls\MemberSelector.cs" />
+    <Compile Include="Features\SpeechTools\ISpeechSelector.cs" />
+    <Compile Include="Features\SpeechTools\SpeechSelector.cs" />
+    <Compile Include="Controls\ToastmasterSpeechSelector.xaml.cs">
+      <DependentUpon>ToastmasterSpeechSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Members\IMemberSelector.cs" />
+    <Compile Include="Features\Members\MemberSelector.cs" />
     <Compile Include="Controls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ToastmasterPicker.xaml.cs">
-      <DependentUpon>ToastmasterPicker.xaml</DependentUpon>
+    <Compile Include="Controls\ToastmasterMemberPicker.xaml.cs">
+      <DependentUpon>ToastmasterMemberPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
@@ -188,7 +193,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\ToastmasterPicker.xaml">
+    <Page Include="Controls\ToastmasterMemberPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToastmasterSpeechSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

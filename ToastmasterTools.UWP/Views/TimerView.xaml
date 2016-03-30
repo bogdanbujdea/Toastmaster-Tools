@@ -66,7 +66,7 @@
                                      FontSize="18"
                                      Foreground="White"
                                      Padding="0" />
-                    <controls:ToastmasterPicker Grid.Row="1" Foreground="White"
+                    <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="White"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
                 </Grid>
@@ -75,7 +75,6 @@
                       Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}">
                     <controls:ToastmastersTimer DataContextChanged="{x:Bind ViewModel.SetTimer}" />
                 </Grid>
-
             </Grid>
             <Grid Visibility="{x:Bind ViewModel.SpeechUIIsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}">
                 <Grid.RowDefinitions>
@@ -83,27 +82,7 @@
                     <RowDefinition Height="60*" />
                     <RowDefinition Height="20*" />
                 </Grid.RowDefinitions>
-                <ComboBox x:Name="DefaultTimes"
-                          MinWidth="300"
-                          Margin="0 20 0 0"
-                          HorizontalAlignment="Center"
-                          ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}"
-                          SelectedItem="{Binding SelectedSpeechType,
-                                                 Mode=TwoWay}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40*" />
-                                    <ColumnDefinition Width="20*" />
-                                    <ColumnDefinition Width="20*" />
-                                    <ColumnDefinition Width="20*" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock FontSize="18" Text="{Binding Name}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <controls:ToastmasterSpeechSelector Margin="0 20 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition />

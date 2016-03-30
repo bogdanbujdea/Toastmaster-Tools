@@ -1,10 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
+using ToastmasterTools.Core.Features.Members;
 
 namespace ToastmasterTools.Core.Controls
 {
-    public sealed partial class ToastmasterPicker
+    public sealed partial class ToastmasterMemberPicker
     {
-        public ToastmasterPicker()
+        public ToastmasterMemberPicker()
         {
             InitializeComponent();
         }

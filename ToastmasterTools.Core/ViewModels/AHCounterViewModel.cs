@@ -2,9 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
 using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models;
@@ -22,7 +23,8 @@ namespace ToastmasterTools.Core.ViewModels
             IAppSettings appSettings, 
             IDialogService dialogService, 
             IMemberSelector memberSelector, 
-            ISpeechRepository speechRepository) : base(appSettings, memberSelector)
+            ISpeechRepository speechRepository,
+            ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
@@ -63,7 +65,7 @@ namespace ToastmasterTools.Core.ViewModels
             var speech = new Speech
             {
                 Date = DateTime.Now,
-                Counters = Counters.ToList()
+                Counters = Counters.Where(c => string.IsNullOrWhiteSpace(c.Name) == false).ToList()
             };
             await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, string.Empty);
             _statisticsService.RegisterEvent(EventCategory.UserEvent, "AH-Counter", "saved speech");

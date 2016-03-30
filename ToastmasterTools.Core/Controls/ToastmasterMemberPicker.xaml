@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ToastmasterTools.Core.Controls.ToastmasterPicker"
+﻿<UserControl x:Class="ToastmasterTools.Core.Controls.ToastmasterMemberPicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

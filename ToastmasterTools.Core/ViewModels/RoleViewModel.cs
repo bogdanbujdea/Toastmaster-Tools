@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
-using ToastmasterTools.Core.Controls;
+using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
 using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Services.SettingsServices;
 
@@ -14,11 +15,12 @@ namespace ToastmasterTools.Core.ViewModels
     {
         private readonly IAppSettings _appSettings;
         private IMemberSelector _memberSelector;
+        private ISpeechSelector _speechSelector;
 
-        public RoleViewModel(IAppSettings appSettings, IMemberSelector memberSelector)
+        public RoleViewModel(IAppSettings appSettings, IMemberSelector memberSelector, ISpeechSelector speechSelector)
         {
             _appSettings = appSettings;
-            _memberSelector = memberSelector;
+            SpeechSelector = speechSelector;
             MemberSelector = memberSelector;
         }
 
@@ -27,7 +29,21 @@ namespace ToastmasterTools.Core.ViewModels
             if (IsLoggedIn)
             {
                 MemberSelector.SelectedMemberChanged += SelectedMemberChanged;
+                SpeechSelector.SelectedSpeechChanged += SelectedSpeechChanged;
                 await MemberSelector.InitializeAsync();
+                SpeechSelector.Initialize();
+            }
+        }
+
+        private void SelectedSpeechChanged(object sender, SelectionChangedEventArgs args)
+        {
+            try
+            {
+                SelectedSpeechType = args.AddedItems[0] as SpeechType;                
+            }
+            catch (Exception)
+            {
+                
             }
         }
 
@@ -52,7 +68,19 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
+        public ISpeechSelector SpeechSelector
+        {
+            get { return _speechSelector; }
+            set
+            {
+                _speechSelector = value; 
+                RaisePropertyChanged();
+            }
+        }
+
         protected Speaker SelectedSpeaker { get; set; }
+
+        public SpeechType SelectedSpeechType { get; set; }
 
         public bool IsLoggedIn
         {

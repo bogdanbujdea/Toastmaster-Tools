@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using ToastmasterTools.Core.Models;
 
-namespace ToastmasterTools.Core.Controls
+namespace ToastmasterTools.Core.Features.Members
 {
     public interface IMemberSelector
     {

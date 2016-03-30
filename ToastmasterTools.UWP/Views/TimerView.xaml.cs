@@ -14,8 +14,7 @@ namespace ToastmasterTools.UWP.Views
 
         private void ShowSpeechUI(object sender, RoutedEventArgs e)
         {
-            DefaultTimes.SelectedIndex = 0;
-            ViewModel.SelectedSpeechType = ViewModel.Lessons[0];
+            ViewModel.SelectedSpeechType = ViewModel.SpeechSelector.Lessons[0];
             ViewModel.ShowSpeechUI();
         }
     }

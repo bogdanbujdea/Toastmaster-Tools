@@ -6,6 +6,7 @@ using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
 using ToastmasterTools.Core.Features.Feedback;
 using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
 using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Services.SettingsServices;
@@ -27,6 +28,7 @@ namespace ToastmasterTools.Core.ViewModels
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
             SimpleIoc.Default.Register<IMemberSelector, MemberSelector>();
+            SimpleIoc.Default.Register<ISpeechSelector, SpeechSelector>();
             SimpleIoc.Default.Register<AHCounterViewModel>();        
             SimpleIoc.Default.Register<LoginViewModel>();        
             SimpleIoc.Default.Register<GroupViewModel>();        

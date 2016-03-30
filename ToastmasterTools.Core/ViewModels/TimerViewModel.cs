@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
-using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
 using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models;
@@ -19,11 +20,9 @@ namespace ToastmasterTools.Core.ViewModels
         private readonly IDialogService _dialogService;
         private readonly ISpeechRepository _speechRepository;
         private bool _speechUIIsVisible;
-        private ObservableCollection<SpeechType> _lessons;
-        private SpeechType _selectedSpeechType;
 
         public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, 
-            IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository) : base(appSettings, memberSelector)
+            IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository, ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
@@ -33,21 +32,14 @@ namespace ToastmasterTools.Core.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            _statisticsService.RegisterPage("TimerView");
-            InitializeLessons();
             await base.OnNavigatedToAsync(parameter, mode, state);
-        }
-
-        private void InitializeLessons()
-        {
-
-            Lessons = new ObservableCollection<SpeechType>(ToastmasterContext.ListOfLessons);
+            _statisticsService.RegisterPage("TimerView");
             InitializeWithDefaults();
         }
 
         private void InitializeWithDefaults()
         {
-            SelectedSpeechType = Lessons[0];
+            SelectedSpeechType = SpeechSelector.Lessons[0];
             SelectLesson();
         }
 
@@ -82,26 +74,6 @@ namespace ToastmasterTools.Core.ViewModels
                 SpeechType = SelectedSpeechType,
                 Date = DateTime.Now
             };
-        }
-
-        public ObservableCollection<SpeechType> Lessons
-        {
-            get { return _lessons; }
-            set
-            {
-                _lessons = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public SpeechType SelectedSpeechType
-        {
-            get { return _selectedSpeechType; }
-            set
-            {
-                _selectedSpeechType = value;
-                RaisePropertyChanged();
-            }
         }
 
         public bool SpeechUIIsVisible
