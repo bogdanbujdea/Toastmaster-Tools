@@ -23,7 +23,7 @@
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="LowHeight">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger x:Name="LowestHeightTrigger"
+                        <AdaptiveTrigger x:Name="LowestHeightAndWidthTrigger"
                                          MinWindowWidth="0" 
                                          MinWindowHeight="0"/>
                     </VisualState.StateTriggers>
@@ -54,9 +54,10 @@
                                          MinWindowHeight="500"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="LogoImageRow.Height" Value="100"></Setter>
                         <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
                             <Setter.Value>
-                                <x:Double>90</x:Double>
+                                <x:Double>80</x:Double>
                             </Setter.Value>
                         </Setter>
                         <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
@@ -69,7 +70,8 @@
                 <VisualState x:Name="NormalWidth">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="NormalWidthTrigger"
-                                         MinWindowWidth="600" />
+                                         MinWindowWidth="0"
+                                         MinWindowHeight="600"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
@@ -80,6 +82,25 @@
                         <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
                             <Setter.Value>
                                 <x:Double>70</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideWidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="WideWidthTrigger"
+                                         MinWindowWidth="1000"
+                                         MinWindowHeight="800"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>170</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>100</x:Double>
                             </Setter.Value>
                         </Setter>
                     </VisualState.Setters>
