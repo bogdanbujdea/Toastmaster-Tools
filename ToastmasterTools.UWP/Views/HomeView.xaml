@@ -3,41 +3,159 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:converters="using:ToastmasterTools.Core.Helpers.Converters"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=HomeViewModel}"
       mc:Ignorable="d">
+    <Page.Resources>
+        <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
+        <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
+        <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
+        <x:Double x:Key="NavigationTextSize">18</x:Double>
+    </Page.Resources>
+    <Grid Background="#2E373E">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="LowHeight">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="LowestHeightTrigger"
+                                         MinWindowWidth="0" 
+                                         MinWindowHeight="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>60</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="UserNameText.Margin" Value="0 0 100 0"></Setter>
+                        <Setter Target="LogoImageRow.Height" Value="0"></Setter>
+                        <Setter Target="ProfileRow.Height" Value="40"></Setter>
+                        <Setter Target="UserPanel.HorizontalAlignment" Value="Center"></Setter>
+                        <Setter Target="UserNameText.HorizontalAlignment" Value="Left"></Setter>
+                        <Setter Target="AuthenticationPanel.HorizontalAlignment" Value="Right"></Setter>
+                        <Setter Target="UserPanel.Orientation" Value="Horizontal"></Setter>
+                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>30</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LowestWidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="LowestWidthTrigger"
+                                         MinWindowWidth="0"
+                                         MinWindowHeight="500"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>90</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>40</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NormalWidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="NormalWidthTrigger"
+                                         MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>120</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
+                            <Setter.Value>
+                                <x:Double>70</x:Double>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
-    <Grid Background="#EEEEEE">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
+            <RowDefinition x:Name="LogoImageRow" Height="150" />
+            <RowDefinition x:Name="ProfileRow" Height="100" />
+            <RowDefinition Height="60*" />
         </Grid.RowDefinitions>
-        <Grid Background="#003F61">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image Height="40"
-                       Margin="0 0 0 0"
+        <Grid Background="#2E373E">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Margin="10 10">
+                <Image Visibility="Visible"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Source="../Assets/logo_transparent.png" />
-                <TextBlock HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="30"
-                           Foreground="White"
-                           Text="Toastmaster Tools" />
+                       VerticalAlignment="Center"                       
+                       Source="../Assets/Icons/logo.png" />
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="1"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
-            <HyperlinkButton Margin="20 5"
+        <Grid Grid.Row="1" Grid.Column="0" >
+            <StackPanel x:Name="UserPanel" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <HyperlinkButton x:Name="UserNameText"
                              Content="{x:Bind ViewModel.UserDisplayName, Mode=TwoWay}"
-                             FontSize="20"
-                             Foreground="Black" />
-        </StackPanel>
+                             FontSize="20" HorizontalAlignment="Center"
+                             Foreground="{StaticResource ComplementaryColor}" />
+                <StackPanel x:Name="AuthenticationPanel" HorizontalAlignment="Center">
+                    <HyperlinkButton Content="Login" Foreground="{StaticResource ComplementaryColor}" Visibility="{Binding IsLoggedIn, Converter={StaticResource ReversedBooleanToVisiblityConverter}, Mode=TwoWay}"  Click="{x:Bind ViewModel.Login, Mode=OneWay}" FontSize="20" ></HyperlinkButton>
+                    <HyperlinkButton Content="Logout" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}, Mode=TwoWay}"  Foreground="{StaticResource ComplementaryColor}" Click="{x:Bind ViewModel.Logout, Mode=OneWay}" FontSize="20"></HyperlinkButton>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
 
+        <Grid Grid.Row="2" Margin="20 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Tapped="{x:Bind ViewModel.GoToTimerView}">
+                <StackPanel VerticalAlignment="Center">
+                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                        <Image Source="../Assets/Icons/timer.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
+                    </Border>
+                    <TextBlock Text="Timer" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToAhCounter}">
+                <StackPanel VerticalAlignment="Center">
+                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                        <Image Source="../Assets/Icons/counting.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
+                    </Border>
+                    <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Tapped="{x:Bind ViewModel.GoToSettings}">
+                <StackPanel VerticalAlignment="Center">
+                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                        <Image Source="../Assets/Icons/grammar.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
+                    </Border>
+                    <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToSettings}">
+                <StackPanel VerticalAlignment="Center">
+                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                        <Image Source="../Assets/Icons/settings.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
+                    </Border>
+                    <TextBlock Text="Settings" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Image Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="130" Source="../Assets/Icons/logo.png" Visibility="Collapsed"></Image>
         <StackPanel Grid.Row="1"
                     Margin="0 20"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Visibility="Collapsed">
+
             <Button Width="250"
                     Height="60"
                     HorizontalAlignment="Center"
@@ -67,27 +185,6 @@
                     FontSize="30"
                     Foreground="White"
                     Style="{StaticResource ToastmastersButtonStyle}" />
-            <Button Width="250"
-                    Height="60"
-                    Margin="0 0 0 30"
-                    HorizontalAlignment="Center"
-                    Background="#003F61"
-                    Click="{x:Bind ViewModel.Login, Mode=OneWay}"
-                    Content="Login"
-                    FontSize="30"
-                    Foreground="White"
-                    Style="{StaticResource ToastmastersButtonStyle}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource ReversedBooleanToVisiblityConverter}, Mode=TwoWay}" />
-            <Button Width="250"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    Background="#003F61"
-                    Click="{x:Bind ViewModel.Logout, Mode=OneWay}"
-                    Content="Logout"
-                    FontSize="30"
-                    Foreground="White"
-                    Style="{StaticResource ToastmastersButtonStyle}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}, Mode=TwoWay}" />
             <!-- <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>-->
         </StackPanel>
     </Grid>

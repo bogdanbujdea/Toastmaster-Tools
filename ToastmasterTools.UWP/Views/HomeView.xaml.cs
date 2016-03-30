@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
 using Template10.Common;
 using ToastmasterTools.Core.ViewModels;
@@ -13,6 +14,9 @@ namespace ToastmasterTools.UWP.Views
 
             Window = WindowWrapper.Current();
             CoreWindow.GetForCurrentThread().VisibilityChanged += OnVisibilityChanged;
+            var currentView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+            currentView.SetPreferredMinSize(new Size(500, 500));
+            Windows.UI.ViewManagement.ApplicationView.PreferredLaunchViewSize = new Size(600, 600);
         }
 
         private void OnVisibilityChanged(CoreWindow sender, VisibilityChangedEventArgs args)

@@ -142,6 +142,11 @@
     <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\Icons\counting.png" />
+    <Content Include="Assets\Icons\grammar.png" />
+    <Content Include="Assets\Icons\logo.png" />
+    <Content Include="Assets\Icons\settings.png" />
+    <Content Include="Assets\Icons\timer.png" />
     <Content Include="Assets\logo_dark.png" />
     <Content Include="Assets\logo_transparent.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

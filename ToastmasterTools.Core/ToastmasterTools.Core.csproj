@@ -146,6 +146,7 @@
     <Compile Include="Features\UserDialogs\DialogService.cs" />
     <Compile Include="Features\UserDialogs\IDialogService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\DoubleWrapper.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />

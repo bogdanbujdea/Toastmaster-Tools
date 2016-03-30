@@ -35,7 +35,7 @@
             <AppBarButton Name="Save" Icon="Save" Label="Save speech" Click="{x:Bind ViewModel.SaveSession}"/>
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="{StaticResource AppBackgroundColor}">
+    <Grid Background="#2F363E">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
