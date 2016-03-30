@@ -199,8 +199,8 @@
             </Grid.RowDefinitions>
             <Grid>
                 <StackPanel>
-                    <TextBox Text="{Binding Name, Mode=TwoWay}" PlaceholderText="Enter the name here..." HorizontalAlignment="Stretch" Background="{StaticResource AppBackgroundColor}" FontSize="18" Padding="0" TextAlignment="Center" IsReadOnly="False" Style="{StaticResource CounterTextBoxStyle}"></TextBox>
-                    <TextBlock Text="{Binding Count}" HorizontalAlignment="Center"></TextBlock>
+                    <TextBox Text="{Binding Name, Mode=TwoWay}" PlaceholderText="Enter the name here..." HorizontalAlignment="Stretch" Background="{StaticResource ComplementaryColor}" FontSize="18" Padding="0" TextAlignment="Center" IsReadOnly="False" Style="{StaticResource CounterTextBoxStyle}"></TextBox>
+                    <TextBlock Text="{Binding Count}" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -209,11 +209,11 @@
                     <ColumnDefinition Width="1"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button HorizontalAlignment="Stretch" Tapped="IncreaseCount" VerticalAlignment="Stretch" Foreground="White" Background="{StaticResource AppDefaultColor}">
+                <Button HorizontalAlignment="Stretch" Tapped="IncreaseCount" VerticalAlignment="Stretch" Foreground="White" Background="{StaticResource ComplementaryColor}">
                     <SymbolIcon Symbol="Add" />
                 </Button>
                 <Border Grid.Column="1" BorderThickness="1" BorderBrush="White"></Border>
-                <Button Grid.Column="2" Tapped="DecreaseCount" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Background="{StaticResource AppDefaultColor}">
+                <Button Grid.Column="2" Tapped="DecreaseCount" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Background="{StaticResource ComplementaryColor}">
                     <SymbolIcon Symbol="Remove" />
                 </Button>
             </Grid>

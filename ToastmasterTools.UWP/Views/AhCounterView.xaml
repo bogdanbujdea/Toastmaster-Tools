@@ -40,18 +40,13 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="#003F61">
+        <Grid Background="#2E373E">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image Height="40"
+                <Image Height="80"
                        Margin="0 0 10 0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Source="../Assets/logo_transparent.png" />
-                <TextBlock HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="30"
-                           Foreground="White"
-                           Text="AH Counter" />
+                       Source="../Assets/Icons/counting.png" />
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" >
@@ -62,7 +57,7 @@
             <StackPanel>
                 <controls:ToastmasterMemberPicker 
                                                 VerticalAlignment="Center"
-                                                Foreground="{StaticResource AppDefaultColor}"
+                                                Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
                 <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>

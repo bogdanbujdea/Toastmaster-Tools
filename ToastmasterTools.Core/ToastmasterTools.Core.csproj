@@ -107,6 +107,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BorderControl.xaml.cs">
+      <DependentUpon>BorderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CounterControl.xaml.cs">
       <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
     <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\BorderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CounterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

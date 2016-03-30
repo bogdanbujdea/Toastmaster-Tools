@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="ToastmasterTools.Core.Controls.BorderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToastmasterTools.Core.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:ToastmasterTools.Core.Helpers.Converters"
+    mc:Ignorable="d"
+    x:Name="UserControlBase"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
+        <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
+        <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
+        <x:Double x:Key="NavigationTextSize">18</x:Double>
+        <Style x:Key="BorderStyle" TargetType="Border" >
+            <Setter Property="BorderBrush" Value="{StaticResource ComplementaryColor}"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+        </Style>
+        <Style x:Key="BorderButton" TargetType="Button">
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Normal" GeneratedDuration="0" To="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:1" To="360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="TestBorder" d:IsOptimized="True"/>
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextControl">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <StackPanel >
+                                <Border x:Name="TestBorder" Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <CompositeTransform/>
+                                    </Border.RenderTransform>
+                                    <Image Source="{Binding ElementName=UserControlBase, Path=ImageSource, Mode=TwoWay}" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
+                                </Border>
+                                <TextBlock x:Name="TextControl" Text="{Binding ElementName=UserControlBase, Path=ItemText, Mode=TwoWay}" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid >
+        <Button Style="{StaticResource BorderButton}" VerticalAlignment="Center" HorizontalAlignment="Center">
+        </Button>
+    </Grid>
+</UserControl>

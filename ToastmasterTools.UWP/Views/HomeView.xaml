@@ -4,13 +4,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:converters="using:ToastmasterTools.Core.Helpers.Converters"
+      xmlns:controls="using:ToastmasterTools.Core.Controls"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=HomeViewModel}"
       mc:Ignorable="d">
     <Page.Resources>
         <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
         <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
-        <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
         <x:Double x:Key="NavigationTextSize">18</x:Double>
         <Style x:Key="BorderStyle" TargetType="Border" >
             <Setter Property="BorderBrush" Value="{StaticResource ComplementaryColor}"></Setter>
@@ -21,6 +21,7 @@
     <Grid Background="#2E373E">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
+                
                 <VisualState x:Name="LowHeight">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="LowestHeightAndWidthTrigger"
@@ -132,7 +133,6 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-
         <Grid Grid.Row="2" Margin="20 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -143,50 +143,10 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Tapped="{x:Bind ViewModel.GoToTimerView}">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="BorderGroup">
-                        <VisualState x:Name="Pressed">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="TestBorder" 
-                                                    Storyboard.TargetProperty="Background" 
-                                                    To="Yellow" />
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <StackPanel VerticalAlignment="Center">
-                    <Border x:Name="TestBorder" Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
-                       
-                        <Image Source="../Assets/Icons/timer.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
-                    </Border>
-                    <TextBlock Text="Timer" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToAhCounter}">
-                <StackPanel VerticalAlignment="Center">
-                    <Border Style="{StaticResource BorderStyle}"  Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
-                        <Image Source="../Assets/Icons/counting.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
-                    </Border>
-                    <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" Tapped="{x:Bind ViewModel.GoToSettings}">
-                <StackPanel VerticalAlignment="Center">
-                    <Border Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
-                        <Image Source="../Assets/Icons/grammar.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
-                    </Border>
-                    <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="1" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToSettings}">
-                <StackPanel VerticalAlignment="Center">
-                    <Border Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
-                        <Image Source="../Assets/Icons/settings.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
-                    </Border>
-                    <TextBlock Text="Settings" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
-                </StackPanel>
-            </Grid>
+            <controls:BorderControl ItemText="Timer" ImageSource="ms-appx:///Assets/Icons/timer.png" Tapped="{x:Bind ViewModel.GoToTimerView}"></controls:BorderControl>
+            <controls:BorderControl Grid.Row="0" Grid.Column="2" ItemText="AH Counter"  ImageSource="ms-appx:///Assets/Icons/counting.png" Tapped="{x:Bind ViewModel.GoToAhCounter}"></controls:BorderControl>
+            <controls:BorderControl Grid.Row="1" Grid.Column="0" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
+            <controls:BorderControl Grid.Row="1" Grid.Column="2" ItemText="Settings" ImageSource="ms-appx:///Assets/Icons/settings.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
         </Grid>
         <Image Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="130" Source="../Assets/Icons/logo.png" Visibility="Collapsed"></Image>
         <StackPanel Grid.Row="1"

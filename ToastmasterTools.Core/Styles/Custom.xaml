@@ -176,6 +176,7 @@
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="White" />
             <SolidColorBrush x:Key="AppDefaultColor" Color="#003F61" />
             <SolidColorBrush x:Key="AppBackgroundColor" Color="#EEEEEE" />
+            <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
 
             <Style TargetType="controls:HamburgerMenu">
                 <!--  size  -->
@@ -213,6 +214,7 @@
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="DimGray" />
             <SolidColorBrush x:Key="AppDefaultColor" Color="#003F61" />
             <SolidColorBrush x:Key="AppBackgroundColor" Color="#EEEEEE" />
+            <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
 
             <Style TargetType="controls:HamburgerMenu">
                 <!--  size  -->
