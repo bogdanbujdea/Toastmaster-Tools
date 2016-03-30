@@ -12,6 +12,11 @@
         <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
         <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
         <x:Double x:Key="NavigationTextSize">18</x:Double>
+        <Style x:Key="BorderStyle" TargetType="Border" >
+            <Setter Property="BorderBrush" Value="{StaticResource ComplementaryColor}"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+        </Style>
     </Page.Resources>
     <Grid Background="#2E373E">
         <VisualStateManager.VisualStateGroups>
@@ -81,7 +86,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
         <Grid.RowDefinitions>
             <RowDefinition x:Name="LogoImageRow" Height="150" />
             <RowDefinition x:Name="ProfileRow" Height="100" />
@@ -119,8 +123,20 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Tapped="{x:Bind ViewModel.GoToTimerView}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="BorderGroup">
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="TestBorder" 
+                                                    Storyboard.TargetProperty="Background" 
+                                                    To="Yellow" />
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
                 <StackPanel VerticalAlignment="Center">
-                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                    <Border x:Name="TestBorder" Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                       
                         <Image Source="../Assets/Icons/timer.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
                     </Border>
                     <TextBlock Text="Timer" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
@@ -128,7 +144,7 @@
             </Grid>
             <Grid Grid.Row="0" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToAhCounter}">
                 <StackPanel VerticalAlignment="Center">
-                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                    <Border Style="{StaticResource BorderStyle}"  Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
                         <Image Source="../Assets/Icons/counting.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
                     </Border>
                     <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
@@ -136,7 +152,7 @@
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Tapped="{x:Bind ViewModel.GoToSettings}">
                 <StackPanel VerticalAlignment="Center">
-                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                    <Border Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
                         <Image Source="../Assets/Icons/grammar.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
                     </Border>
                     <TextBlock Text="AH Counter" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
@@ -144,7 +160,7 @@
             </Grid>
             <Grid Grid.Row="1" Grid.Column="2" Tapped="{x:Bind ViewModel.GoToSettings}">
                 <StackPanel VerticalAlignment="Center">
-                    <Border BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="4" CornerRadius="100" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
+                    <Border Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}">
                         <Image Source="../Assets/Icons/settings.png" Height="{Binding Value, Source={StaticResource IconSizeWrapper}}"></Image>
                     </Border>
                     <TextBlock Text="Settings" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="{StaticResource NavigationTextSize}" Margin="0 0 0 0"></TextBlock>
