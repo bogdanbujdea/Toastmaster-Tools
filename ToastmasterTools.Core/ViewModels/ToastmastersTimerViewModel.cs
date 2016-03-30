@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.Phone.Devices.Notification;
 using Windows.UI;
@@ -23,7 +22,6 @@ namespace ToastmasterTools.Core.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
-        private ObservableCollection<Member> _members;
 
         private TimerState CurrentState { get; set; }
 
@@ -45,7 +43,7 @@ namespace ToastmasterTools.Core.ViewModels
             GreenTimeBackground = Colors.ForestGreen;
             YellowTimeBackground = Color.FromArgb(255, 242, 223, 116);
             RedTimeBackground = Color.FromArgb(255, 205, 32, 44);
-            ResetTimer();
+            Reset();
         }
 
         #region Properties
@@ -58,6 +56,7 @@ namespace ToastmasterTools.Core.ViewModels
             {
                 _timerIsRunning = value;
                 RaisePropertyChanged();
+                _timerIsRunning = value;
             }
         }
 
@@ -121,24 +120,25 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
-        private TimeSpan GreenCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.GreenCardTime);
+        private TimeSpan GreenCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.SpeechType.GreenCardTime);
 
-        private TimeSpan YellowCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.YellowCardTime);
+        private TimeSpan YellowCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.SpeechType.YellowCardTime);
 
-        private TimeSpan RedCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.Lesson.RedCardTime);
+        private TimeSpan RedCardTimeSpan => GetTimeSpanFromCardTime(CurrentSpeech.SpeechType.RedCardTime);
 
         #endregion
 
         #region Timer
 
         public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 63, 97);
+        public event EventHandler<Speech> SpeechStopped ;
 
         public void StartTimer()
         {
             _dispatcherTimer.Start();
             _stopWatch.Start();
             TimerIsRunning = true;
-            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "start_" + _currentSpeech.Lesson.Name);
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "start_" + _currentSpeech.SpeechType.Name);
         }
 
         public void PauseTimer()
@@ -155,20 +155,23 @@ namespace ToastmasterTools.Core.ViewModels
                 _stopWatch.Start();
                 TimerIsRunning = true;
             }
-            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "pause_" + _currentSpeech.Lesson.Name);
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "pause_" + _currentSpeech.SpeechType.Name);
         }
 
         public void StopTimer()
         {
-            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "stop_" + _currentSpeech.Lesson.Name);
-            ResetTimer();
+            _statisticsService.RegisterEvent(EventCategory.UserEvent, EventAction.Timer, "stop_" + _currentSpeech.SpeechType.Name);
+            OnSpeechStopped(CurrentSpeech);
+            CurrentSpeech.SpeechTimeInSeconds = _stopWatch.Elapsed.TotalSeconds;
+            _dispatcherTimer?.Stop();
+            _stopWatch?.Stop();
         }
 
         #endregion
 
         #region Private
 
-        private void ResetTimer()
+        public void Reset()
         {
             SelectedBackground = DarkBackground;
             MinutesText = SecondsText = "00";
@@ -249,5 +252,10 @@ namespace ToastmasterTools.Core.ViewModels
         }
 
         #endregion
+
+        protected virtual void OnSpeechStopped(Speech e)
+        {
+            SpeechStopped?.Invoke(this, e);
+        }
     }
 }

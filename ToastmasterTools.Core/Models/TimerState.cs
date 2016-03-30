@@ -1,4 +1,4 @@
-namespace ToastmasterTools.Core.ViewModels
+namespace ToastmasterTools.Core.Models
 {
     public enum TimerState
     {

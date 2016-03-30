@@ -77,8 +77,8 @@
         </Setter>
     </Style>
     <Style x:Key="MembersComboBoxStyle" TargetType="ComboBox">
-        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="Foreground" Value="{ThemeResource AppDefaultColor}"></Setter>        
         <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"/>
         <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
         <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThemeThickness}"/>
@@ -152,7 +152,7 @@
                         <Border x:Name="HighlightBackground" Grid.ColumnSpan="2" Opacity="0" Grid.Row="1"/>
                         <ContentPresenter x:Name="ContentPresenter" Padding="0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Border BorderThickness="0 0 0 1" Width="{Binding ElementName=PlaceholderTextBlock, Path=ActualWidth}" HorizontalAlignment="Center" BorderBrush="White">
-                                <TextBlock x:Name="PlaceholderTextBlock" HorizontalAlignment="Center" Foreground="White" FontSize="18" Padding="0" Text="{TemplateBinding PlaceholderText}"/>
+                                <TextBlock x:Name="PlaceholderTextBlock" HorizontalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="18" Padding="0" Text="{TemplateBinding PlaceholderText}"/>
                             </Border>
                         </ContentPresenter>
                         <Popup x:Name="Popup">
@@ -174,6 +174,8 @@
 
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="Black" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="White" />
+            <SolidColorBrush x:Key="AppDefaultColor" Color="#003F61" />
+            <SolidColorBrush x:Key="AppBackgroundColor" Color="#EEEEEE" />
 
             <Style TargetType="controls:HamburgerMenu">
                 <!--  size  -->
@@ -209,6 +211,8 @@
 
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="White" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="DimGray" />
+            <SolidColorBrush x:Key="AppDefaultColor" Color="#003F61" />
+            <SolidColorBrush x:Key="AppBackgroundColor" Color="#EEEEEE" />
 
             <Style TargetType="controls:HamburgerMenu">
                 <!--  size  -->

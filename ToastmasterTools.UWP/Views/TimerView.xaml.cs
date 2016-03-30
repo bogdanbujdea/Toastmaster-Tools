@@ -8,20 +8,13 @@ namespace ToastmasterTools.UWP.Views
         public TimerView()
         {
             InitializeComponent();
-            Loaded += ViewLoaded;
-        }
-
-        private void ViewLoaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel.SelectLesson();
         }
 
         public TimerViewModel ViewModel => DataContext as TimerViewModel;
 
         private void ShowSpeechUI(object sender, RoutedEventArgs e)
         {
-            DefaultTimes.SelectedIndex = 0;
-            ViewModel.SelectedLesson = ViewModel.Lessons[0];
+            ViewModel.SelectedSpeechType = ViewModel.SpeechSelector.Lessons[0];
             ViewModel.ShowSpeechUI();
         }
     }

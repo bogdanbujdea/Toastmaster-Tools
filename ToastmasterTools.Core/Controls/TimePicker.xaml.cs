@@ -11,12 +11,7 @@ namespace ToastmasterTools.Core.Controls
         public TimePicker()
         {
             InitializeComponent();
-            Loaded += ViewLoaded;
             ViewModel.Initialize();
-        }
-
-        private void ViewLoaded(object sender, RoutedEventArgs e)
-        {
         }
 
         public TimePickerViewModel ViewModel => DataContext as TimePickerViewModel;
@@ -37,8 +32,8 @@ namespace ToastmasterTools.Core.Controls
             if (timePicker != null && timePicker.ViewModel.IsInitialized)
             {
                 timePicker.SelectedCardTime = time;
-                var minute = timePicker.ViewModel.Minutes.FirstOrDefault(m => int.Parse(m) == time.Minutes);
-                var second = timePicker.ViewModel.Seconds.FirstOrDefault(m => int.Parse(m) == time.Seconds);
+                var minute = timePicker.ViewModel.Minutes.FirstOrDefault(m => time != null && int.Parse(m) == time.Minutes);
+                var second = timePicker.ViewModel.Seconds.FirstOrDefault(m => time != null && int.Parse(m) == time.Seconds);
                 if (!timePicker.MinutesBox.Items.Any() || !timePicker.MinutesBox.Items.Any())
                     return;
                 timePicker.MinutesBox.SelectedIndex = timePicker.ViewModel.Minutes.IndexOf(minute);
@@ -48,14 +43,14 @@ namespace ToastmasterTools.Core.Controls
 
         private void MinutesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectedCardTime == null)
+            if (SelectedCardTime == null || MinutesBox.SelectedItem == null)
                 SelectedCardTime = new CardTime();
             SelectedCardTime = new CardTime(int.Parse(MinutesBox.SelectedItem as string), SelectedCardTime.Seconds);
         }
 
         private void SecondsChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectedCardTime == null)
+            if (SelectedCardTime == null || SecondsBox.SelectedItem == null)
                 SelectedCardTime = new CardTime();
             SelectedCardTime = new CardTime(SelectedCardTime.Minutes, int.Parse(SecondsBox.SelectedItem as string));
         }

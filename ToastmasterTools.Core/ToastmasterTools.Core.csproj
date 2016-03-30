@@ -107,40 +107,21 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ToastmasterTools.UWP\Views\GroupView.xaml.cs">
-      <Link>Views\GroupView.xaml.cs</Link>
-      <DependentUpon>GroupView.xaml</DependentUpon>
+    <Compile Include="Controls\CounterControl.xaml.cs">
+      <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\HomeView.xaml.cs">
-      <Link>Views\HomeView.xaml.cs</Link>
-      <DependentUpon>HomeView.xaml</DependentUpon>
+    <Compile Include="Features\SpeechTools\ISpeechSelector.cs" />
+    <Compile Include="Features\SpeechTools\SpeechSelector.cs" />
+    <Compile Include="Controls\ToastmasterSpeechSelector.xaml.cs">
+      <DependentUpon>ToastmasterSpeechSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\LoginView.xaml.cs">
-      <Link>Views\LoginView.xaml.cs</Link>
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml.cs">
-      <Link>Views\SettingsView.xaml.cs</Link>
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\Shell.xaml.cs">
-      <Link>Views\Shell.xaml.cs</Link>
-      <DependentUpon>Shell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml.cs">
-      <Link>Views\SpeechPracticeView.xaml.cs</Link>
-      <DependentUpon>SpeechPracticeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\Splash.xaml.cs">
-      <Link>Views\Splash.xaml.cs</Link>
-      <DependentUpon>Splash.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\ToastmasterTools.UWP\Views\TimerView.xaml.cs">
-      <Link>Views\TimerView.xaml.cs</Link>
-      <DependentUpon>TimerView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Features\Members\IMemberSelector.cs" />
+    <Compile Include="Features\Members\MemberSelector.cs" />
     <Compile Include="Controls\TimePicker.xaml.cs">
       <DependentUpon>TimePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToastmasterMemberPicker.xaml.cs">
+      <DependentUpon>ToastmasterMemberPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ToastmastersTimer.xaml.cs">
       <DependentUpon>ToastmastersTimer.xaml</DependentUpon>
@@ -159,14 +140,24 @@
     <Compile Include="Features\Feedback\IFeedbackCollector.cs" />
     <Compile Include="Features\Members\IMembersRepository.cs" />
     <Compile Include="Features\Members\MembersRepository.cs" />
+    <Compile Include="Features\Storage\ISpeechRepository.cs" />
+    <Compile Include="Features\Storage\SpeechRepository.cs" />
+    <Compile Include="Features\Storage\ToastmasterContext.cs" />
     <Compile Include="Features\UserDialogs\DialogService.cs" />
     <Compile Include="Features\UserDialogs\IDialogService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Migrations\20160326002133_First.cs" />
+    <Compile Include="Migrations\20160326002133_First.designer.cs">
+      <DependentUpon>20160326002133_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ToastmasterContextModelSnapshot.cs" />
     <Compile Include="Models\CardTime.cs" />
-    <Compile Include="Models\Lesson.cs" />
+    <Compile Include="Models\ILesson.cs" />
+    <Compile Include="Models\ISpeech.cs" />
+    <Compile Include="Models\SpeechType.cs" />
     <Compile Include="Models\Reports\AuthenticationReport.cs" />
     <Compile Include="Models\Reports\MembersReport.cs" />
     <Compile Include="Models\Reports\Report.cs" />
@@ -177,63 +168,38 @@
     <Compile Include="Services\SettingsServices\AppSettings.cs" />
     <Compile Include="Services\SettingsServices\IAppSettings.cs" />
     <Compile Include="Services\SettingsServices\StorageKey.cs" />
+    <Compile Include="ViewModels\AHCounterViewModel.cs" />
+    <Compile Include="Features\AHCounter\Counter.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\Member.cs" />
+    <Compile Include="Models\Speaker.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SpeechPracticeViewModel.cs" />
     <Compile Include="ViewModels\TimePickerViewModel.cs" />
-    <Compile Include="ViewModels\TimerState.cs" />
+    <Compile Include="Models\TimerState.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\ToastmastersTimerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\ToastmasterTools.UWP\Views\GroupView.xaml">
-      <Link>Views\GroupView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\CounterControl.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\HomeView.xaml">
-      <Link>Views\HomeView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\LoginView.xaml">
-      <Link>Views\LoginView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\SettingsView.xaml">
-      <Link>Views\SettingsView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\Shell.xaml">
-      <Link>Views\Shell.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\SpeechPracticeView.xaml">
-      <Link>Views\SpeechPracticeView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\Splash.xaml">
-      <Link>Views\Splash.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\ToastmasterTools.UWP\Views\TimerView.xaml">
-      <Link>Views\TimerView.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\TimePicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ToastmasterMemberPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToastmasterSpeechSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToastmastersTimer.xaml">
       <Generator>MSBuild:Compile</Generator>

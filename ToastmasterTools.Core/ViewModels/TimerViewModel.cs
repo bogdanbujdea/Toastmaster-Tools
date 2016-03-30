@@ -1,109 +1,63 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Models;
-using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
 {
-    public class TimerViewModel : ViewModelBase
+    public class TimerViewModel : RoleViewModel
     {
         private readonly IStatisticsService _statisticsService;
-        private readonly IMembersRepository _membersRepository;
         private readonly IDialogService _dialogService;
-        private readonly IAppSettings _appSettings;
+        private readonly ISpeechRepository _speechRepository;
         private bool _speechUIIsVisible;
-        private ObservableCollection<Lesson> _lessons;
-        private Lesson _selectedLesson;
-        private ObservableCollection<Member> _members;
 
-        public TimerViewModel(IStatisticsService statisticsService, IMembersRepository membersRepository, IDialogService dialogService, IAppSettings appSettings)
+        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, 
+            IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository, ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector)
         {
             _statisticsService = statisticsService;
-            _membersRepository = membersRepository;
             _dialogService = dialogService;
-            _appSettings = appSettings;
-            InitializeLessons();
-            SelectedLesson = Lessons[0];
+            _speechRepository = speechRepository;
+            SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (IsLoggedIn)
-            {
-                var report = await _membersRepository.RefreshClubMembers();
-                if (report.Successful)
-                    Members = new ObservableCollection<Member>(report.Members);
-                else await _dialogService.AskQuestion(report.ErrorMessage);
-            }
+            await base.OnNavigatedToAsync(parameter, mode, state);
             _statisticsService.RegisterPage("TimerView");
+            InitializeWithDefaults();
         }
 
-        private void InitializeLessons()
+        private void InitializeWithDefaults()
         {
-            Lessons = new ObservableCollection<Lesson>
-            {
-                new Lesson
-                {
-                    Name = "Ice Breaker",
-                    GreenCardTime = new CardTime(4, 0),
-                    YellowCardTime = new CardTime(5, 0),
-                    RedCardTime = new CardTime(6, 0)
-                },
-                new Lesson
-                {
-                    Name = "Standard Breaker",
-                    GreenCardTime = new CardTime(5, 0),
-                    YellowCardTime = new CardTime(6, 00),
-                    RedCardTime = new CardTime(7, 0)
-                },
-                new Lesson
-                {
-                    Name = "Advanced Breaker",
-                    GreenCardTime = new CardTime(7, 0),
-                    YellowCardTime = new CardTime(8, 0),
-                    RedCardTime = new CardTime(9, 0)
-                },
-                new Lesson
-                {
-                    Name = "Speech Evaluator",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-                new Lesson
-                {
-                    Name = "AH Counter",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-                new Lesson
-                {
-                    Name = "Gramatician",
-                    GreenCardTime = new CardTime(3, 0),
-                    YellowCardTime = new CardTime(3, 30),
-                    RedCardTime = new CardTime(4, 0)
-                },
-                new Lesson
-                {
-                    Name = "Timer",
-                    GreenCardTime = new CardTime(2, 0),
-                    YellowCardTime = new CardTime(2, 30),
-                    RedCardTime = new CardTime(3, 0)
-                },
-            };
+            SelectedSpeechType = SpeechSelector.Lessons[0];
+            SelectLesson();
         }
 
         public void SetTimer(object element, DataContextChangedEventArgs context)
         {
             Timer = context.NewValue as ToastmastersTimerViewModel;
+            Timer.SpeechStopped += SaveSpeech;
+        }
+
+        private async void SaveSpeech(object sender, Speech speech)
+        {
+            var saveSpeech = await _dialogService.AskQuestion("Do you want to save this speech?");
+            if (saveSpeech)
+            {
+                await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, SelectedSpeechType.Name);
+            }
+            InitializeWithDefaults();
+            Timer.Reset();
         }
 
         public void ShowSpeechUI()
@@ -117,48 +71,9 @@ namespace ToastmasterTools.Core.ViewModels
 
             Timer.CurrentSpeech = new Speech
             {
-                Lesson = SelectedLesson
+                SpeechType = SelectedSpeechType,
+                Date = DateTime.Now
             };
-        }
-
-        public bool IsLoggedIn
-        {
-            get
-            {
-                var sessionId = _appSettings.Get<string>(StorageKey.SessionId);
-                return string.IsNullOrWhiteSpace(sessionId) == false;
-            }
-        }
-
-        public ObservableCollection<Member> Members
-        {
-            get { return _members; }
-            set
-            {
-                _members = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        public ObservableCollection<Lesson> Lessons
-        {
-            get { return _lessons; }
-            set
-            {
-                _lessons = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public Lesson SelectedLesson
-        {
-            get { return _selectedLesson; }
-            set
-            {
-                _selectedLesson = value;
-                RaisePropertyChanged();
-            }
         }
 
         public bool SpeechUIIsVisible

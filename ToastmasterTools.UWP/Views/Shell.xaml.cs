@@ -1,5 +1,4 @@
 ﻿using Template10.Services.NavigationService;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace ToastmasterTools.UWP.Views

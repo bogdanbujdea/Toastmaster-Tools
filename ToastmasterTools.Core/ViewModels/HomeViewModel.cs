@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ToastmasterTools.UWP.Views;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Mvvm;
 using ToastmasterTools.Core.Services.SettingsServices;
 
@@ -32,6 +32,10 @@ namespace ToastmasterTools.Core.ViewModels
             IsLoggedIn = string.IsNullOrWhiteSpace(sessionId) == false;
             if (IsLoggedIn)
                 UserDisplayName = _appSettings.Get<string>(StorageKey.UserDisplayName);
+            using (var context = new ToastmasterContext())
+            {
+                await context.Seed();
+            }
         }        
 
         public bool IsLoggedIn
@@ -47,6 +51,11 @@ namespace ToastmasterTools.Core.ViewModels
         public void GoToSettings()
         {
             NavigationService.Navigate(Pages.Settings);            
+        }
+
+        public void GoToAhCounter()
+        {
+            NavigationService.Navigate(Pages.AhCounter);            
         }
 
         public void Login()
@@ -69,7 +78,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void GoToSpeechPractice()
         {
-            NavigationService.Navigate(typeof(SpeechPracticeView));
+            //NavigationService.Navigate(typeof(SpeechPracticeView));
         }
 
         public string UserDisplayName
@@ -90,6 +99,7 @@ namespace ToastmasterTools.Core.ViewModels
         Home,
         Timer,
         Settings,
-        Login
+        Login,
+        AhCounter
     }
 }

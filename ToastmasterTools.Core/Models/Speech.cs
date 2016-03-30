@@ -1,28 +1,19 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Models
 {
-    public class Speech: INotifyPropertyChanged
+    public class Speech : INotifyPropertyChanged, ISpeech
     {
-        private string _speakerName;
-        private string _name;
         private bool _isCustom;
         private double _speechTimeInSeconds;
+        private Speaker _speaker;
 
-        public Lesson Lesson { get; set; }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public virtual SpeechType SpeechType { get; set; }
 
         public bool IsCustom
         {
@@ -35,16 +26,26 @@ namespace ToastmasterTools.Core.Models
             }
         }
 
-        public string SpeakerName
+        public int SpeechId { get; set; }
+
+        public int SpeakerId { get; set; }
+
+        public virtual Speaker Speaker
         {
-            get { return _speakerName; }
+            get { return _speaker; }
             set
             {
-                if (value == _speakerName) return;
-                _speakerName = value;
+                if (Equals(value, _speaker)) return;
+                _speaker = value;
                 OnPropertyChanged();
             }
         }
+
+        public DateTime Date { get; set; }
+
+        public virtual ICollection<Counter> Counters { get; set; }
+
+        public string Notes { get; set; }
 
         public double SpeechTimeInSeconds
         {
@@ -56,7 +57,7 @@ namespace ToastmasterTools.Core.Models
                 OnPropertyChanged();
             }
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

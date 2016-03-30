@@ -1,10 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
 using ToastmasterTools.Core.Features.Feedback;
 using ToastmasterTools.Core.Features.Members;
+using ToastmasterTools.Core.Features.SpeechTools;
+using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Services.SettingsServices;
 
@@ -16,6 +19,7 @@ namespace ToastmasterTools.Core.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<ISpeechRepository, SpeechRepository>();
             SimpleIoc.Default.Register<IMembersRepository, MembersRepository>();
             SimpleIoc.Default.Register<IWebClient, WebClient>();
             SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
@@ -23,6 +27,9 @@ namespace ToastmasterTools.Core.ViewModels
             SimpleIoc.Default.Register<IAppSettings, AppSettings>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
+            SimpleIoc.Default.Register<IMemberSelector, MemberSelector>();
+            SimpleIoc.Default.Register<ISpeechSelector, SpeechSelector>();
+            SimpleIoc.Default.Register<AHCounterViewModel>();        
             SimpleIoc.Default.Register<LoginViewModel>();        
             SimpleIoc.Default.Register<GroupViewModel>();        
             SimpleIoc.Default.Register<ToastmastersTimerViewModel>();
@@ -37,5 +44,6 @@ namespace ToastmasterTools.Core.ViewModels
         public SettingsViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsViewModel>();
         public GroupViewModel GroupViewModel => ServiceLocator.Current.GetInstance<GroupViewModel>();
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
+        public AHCounterViewModel AHCounterViewModel => ServiceLocator.Current.GetInstance<AHCounterViewModel>();
     }
 }
