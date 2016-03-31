@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using ToastmasterTools.Core.Features.AHCounter;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Members;
 using ToastmasterTools.Core.Features.SpeechTools;
+using ToastmasterTools.Core.Features.Storage;
+using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Services.SettingsServices;
 
 namespace ToastmasterTools.Core.ViewModels
@@ -15,9 +14,15 @@ namespace ToastmasterTools.Core.ViewModels
     {
         private readonly IStatisticsService _statisticsService;
 
-        public GrammarViewModel(IStatisticsService statisticsService, IMemberSelector memberSelector, IAppSettings appSettings, ISpeechSelector speechSelector): base(appSettings, memberSelector, speechSelector)
+        public GrammarViewModel(IStatisticsService statisticsService,
+            IAppSettings appSettings,
+            IDialogService dialogService,
+            IMemberSelector memberSelector,
+            ISpeechRepository speechRepository,
+            ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector, dialogService, speechRepository, statisticsService)
         {
             _statisticsService = statisticsService;
+            ReviewerRole = ReviewerRole.Grammarian;
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -26,21 +31,9 @@ namespace ToastmasterTools.Core.ViewModels
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
-        public ObservableCollection<Counter> Counters { get; set; }
-
-        public void AddCounter()
-        {
-            
-        }
-
-        public void RemoveCounter(string counterName)
-        {
-            
-        }
-
         public async Task SaveSession()
         {
-            
+            await SaveSessionAsync();
         }
     }
 }

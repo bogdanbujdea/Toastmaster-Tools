@@ -8,9 +8,10 @@ using ToastmasterTools.Core.Features.Storage;
 namespace ToastmasterTools.Core.Migrations
 {
     [DbContext(typeof(ToastmasterContext))]
-    partial class ToastmasterContextModelSnapshot : ModelSnapshot
+    [Migration("20160331185127_AddedReviewerRole")]
+    partial class AddedReviewerRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");

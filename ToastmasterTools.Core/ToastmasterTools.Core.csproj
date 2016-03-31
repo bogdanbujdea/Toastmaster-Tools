@@ -157,6 +157,10 @@
     <Compile Include="Migrations\20160326002133_First.designer.cs">
       <DependentUpon>20160326002133_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20160331185127_AddedReviewerRole.cs" />
+    <Compile Include="Migrations\20160331185127_AddedReviewerRole.designer.cs">
+      <DependentUpon>20160331185127_AddedReviewerRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ToastmasterContextModelSnapshot.cs" />
     <Compile Include="Models\CardTime.cs" />
     <Compile Include="Models\ILesson.cs" />

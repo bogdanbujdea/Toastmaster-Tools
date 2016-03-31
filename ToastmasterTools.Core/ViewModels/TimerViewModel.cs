@@ -20,12 +20,17 @@ namespace ToastmasterTools.Core.ViewModels
         private readonly ISpeechRepository _speechRepository;
         private bool _speechUIIsVisible;
 
-        public TimerViewModel(IStatisticsService statisticsService, IDialogService dialogService, 
-            IAppSettings appSettings, IMemberSelector memberSelector, ISpeechRepository speechRepository, ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector)
+        public TimerViewModel(IStatisticsService statisticsService,
+            IAppSettings appSettings,
+            IDialogService dialogService,
+            IMemberSelector memberSelector,
+            ISpeechRepository speechRepository,
+            ISpeechSelector speechSelector) : base(appSettings, memberSelector, speechSelector, dialogService, speechRepository, statisticsService)
         {
             _statisticsService = statisticsService;
             _dialogService = dialogService;
             _speechRepository = speechRepository;
+            ReviewerRole = ReviewerRole.Timer;
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)

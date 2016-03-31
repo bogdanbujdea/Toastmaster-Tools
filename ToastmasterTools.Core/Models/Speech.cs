@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ToastmasterTools.Core.Features.AHCounter;
+using ToastmasterTools.Core.ViewModels;
 using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Models
@@ -57,7 +58,9 @@ namespace ToastmasterTools.Core.Models
                 OnPropertyChanged();
             }
         }
-        
+
+        public ReviewerRole Reviewer { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
