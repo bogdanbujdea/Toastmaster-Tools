@@ -105,6 +105,9 @@
     <Compile Include="Views\AHCounterView.xaml.cs">
       <DependentUpon>AHCounterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GrammarView.xaml.cs">
+      <DependentUpon>GrammarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AHCounterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GrammarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

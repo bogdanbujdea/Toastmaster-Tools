@@ -20,8 +20,10 @@ namespace ToastmasterTools.Core.ViewModels
         public RoleViewModel(IAppSettings appSettings, IMemberSelector memberSelector, ISpeechSelector speechSelector)
         {
             _appSettings = appSettings;
+            speechSelector.Initialize();
             SpeechSelector = speechSelector;
             MemberSelector = memberSelector;
+            SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)

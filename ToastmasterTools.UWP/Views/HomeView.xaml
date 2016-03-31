@@ -145,7 +145,7 @@
             </Grid.RowDefinitions>
             <controls:BorderControl ItemText="Timer" ImageSource="ms-appx:///Assets/Icons/timer.png" Tapped="{x:Bind ViewModel.GoToTimerView}"></controls:BorderControl>
             <controls:BorderControl Grid.Row="0" Grid.Column="2" ItemText="AH Counter"  ImageSource="ms-appx:///Assets/Icons/counting.png" Tapped="{x:Bind ViewModel.GoToAhCounter}"></controls:BorderControl>
-            <controls:BorderControl Grid.Row="1" Grid.Column="0" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
+            <controls:BorderControl Grid.Row="1" Grid.Column="0" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToGrammarian}"></controls:BorderControl>
             <controls:BorderControl Grid.Row="1" Grid.Column="2" ItemText="Settings" ImageSource="ms-appx:///Assets/Icons/settings.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
         </Grid>
         <Image Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="130" Source="../Assets/Icons/logo.png" Visibility="Collapsed"></Image>

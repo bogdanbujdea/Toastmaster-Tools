@@ -1,12 +1,14 @@
 ﻿<Page
-    x:Class="ToastmasterTools.UWP.Views.AHCounterView"
+    x:Class="ToastmasterTools.UWP.Views.GrammarView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToastmasterTools.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    DataContext="{Binding Source={StaticResource Locator}, Path=AHCounterViewModel}"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:ToastmasterTools.Core.Controls"
+    DataContext="{Binding Source={StaticResource Locator}, Path=GrammarViewModel}"
     mc:Ignorable="d">
+
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Name="Show" Icon="Add" Label="Add counter" Click="{x:Bind ViewModel.AddCounter}"/>
@@ -38,8 +40,7 @@
                                                 Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
-                <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
-
+                <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
             </StackPanel>
             <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>

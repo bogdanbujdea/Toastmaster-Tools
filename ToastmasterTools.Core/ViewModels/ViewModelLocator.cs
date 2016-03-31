@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using ToastmasterTools.Core.Controls;
 using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Authentication;
 using ToastmasterTools.Core.Features.Communication;
@@ -29,6 +28,7 @@ namespace ToastmasterTools.Core.ViewModels
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
             SimpleIoc.Default.Register<IMemberSelector, MemberSelector>();
             SimpleIoc.Default.Register<ISpeechSelector, SpeechSelector>();
+            SimpleIoc.Default.Register<GrammarViewModel>();        
             SimpleIoc.Default.Register<AHCounterViewModel>();        
             SimpleIoc.Default.Register<LoginViewModel>();        
             SimpleIoc.Default.Register<GroupViewModel>();        
@@ -45,5 +45,6 @@ namespace ToastmasterTools.Core.ViewModels
         public GroupViewModel GroupViewModel => ServiceLocator.Current.GetInstance<GroupViewModel>();
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
         public AHCounterViewModel AHCounterViewModel => ServiceLocator.Current.GetInstance<AHCounterViewModel>();
+        public GrammarViewModel GrammarViewModel => ServiceLocator.Current.GetInstance<GrammarViewModel>();
     }
 }

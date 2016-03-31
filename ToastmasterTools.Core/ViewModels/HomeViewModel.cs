@@ -58,6 +58,11 @@ namespace ToastmasterTools.Core.ViewModels
             NavigationService.Navigate(Pages.AhCounter);            
         }
 
+        public void GoToGrammarian()
+        {
+            NavigationService.Navigate(Pages.Grammarian);            
+        }
+
         public void Login()
         {
             NavigationService.Navigate(Pages.Login);
@@ -100,6 +105,7 @@ namespace ToastmasterTools.Core.ViewModels
         Timer,
         Settings,
         Login,
-        AhCounter
+        AhCounter,
+        Grammarian
     }
 }
