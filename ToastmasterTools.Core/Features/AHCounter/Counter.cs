@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ToastmasterTools.UWP.Annotations;
 
@@ -36,12 +37,18 @@ namespace ToastmasterTools.Core.Features.AHCounter
             }
         }
 
+        public event EventHandler RemoveCounter;
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void NotifyDelete()
+        {
+            RemoveCounter?.Invoke(this, EventArgs.Empty);
         }
     }
 }

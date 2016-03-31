@@ -38,12 +38,10 @@ namespace ToastmasterTools.Core.ViewModels
             SpeechSelector = speechSelector;
             MemberSelector = memberSelector;
             SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
-            Counters = new ObservableCollection<Counter>
-            {
-                new Counter {Name = "Ahh", Count = 0},
-                new Counter {Name = "Pause", Count = 0},
-                new Counter {Name = "Mmm", Count = 0}
-            };
+            Counters = new ObservableCollection<Counter>();
+            AddCounterToList("Ahh");
+            AddCounterToList("Pause");
+            AddCounterToList("Mmm");
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -128,10 +126,23 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void AddCounter()
         {
-            if (Counters.Any(c => c.Name == CounterName && string.IsNullOrWhiteSpace(c.Name) == false))
+            AddCounterToList(CounterName);
+        }
+
+        private void AddCounterToList(string name)
+        {
+            if (Counters.Any(c => c.Name == name && string.IsNullOrWhiteSpace(c.Name) == false))
                 return;
-            var counter = new Counter { Name = CounterName };
+            var counter = new Counter {Name = name };
+            counter.RemoveCounter += RemoveCounter;
             Counters.Add(counter);
+        }
+
+        private void RemoveCounter(object sender, EventArgs e)
+        {
+            var counter = sender as Counter;
+            if (counter != null)
+                RemoveCounter(counter.Name);
         }
 
         public void RemoveCounter(string counterName)

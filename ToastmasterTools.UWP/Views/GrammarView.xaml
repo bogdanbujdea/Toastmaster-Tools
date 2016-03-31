@@ -63,7 +63,7 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CounterControl />
+                        <controls:CounterControl Margin="15 30"></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
@@ -72,8 +72,8 @@
                      AcceptsReturn="True"
                      Background="Transparent"
                      BorderBrush="{StaticResource ComplementaryColor}"
-                     Foreground="White"
-                     Header="Write your notes here"
+                     Foreground="{StaticResource ComplementaryColor}"
+                     PlaceholderText="Write your notes here"
                      Text="{x:Bind ViewModel.Notes, Mode=TwoWay}"
                      TextAlignment="Left" />
         </Grid>

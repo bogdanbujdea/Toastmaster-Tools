@@ -8,7 +8,7 @@
     xmlns:converters="using:ToastmasterTools.Core.Helpers.Converters"
     mc:Ignorable="d"
     x:Name="UserControlBase"
-    d:DesignHeight="300"
+    d:DesignHeight="300" Background="{StaticResource AppBackgroundColor}"
     d:DesignWidth="400">
     <UserControl.Resources>
         <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
@@ -53,7 +53,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <StackPanel >
-                                <Border x:Name="TestBorder" Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}" RenderTransformOrigin="0.5,0.5">
+                                <Border x:Name="TestBorder" Background="{StaticResource AppBackgroundColor}" Style="{StaticResource BorderStyle}" Width="{Binding Value, Source={StaticResource SizeWrapper}}" Height="{Binding Value, Source={StaticResource SizeWrapper}}" RenderTransformOrigin="0.5,0.5">
                                     <Border.RenderTransform>
                                         <CompositeTransform/>
                                     </Border.RenderTransform>
@@ -67,8 +67,6 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid >
-        <Button Style="{StaticResource BorderButton}" VerticalAlignment="Center" HorizontalAlignment="Center">
-        </Button>
-    </Grid>
+    <Button Style="{StaticResource BorderButton}" VerticalAlignment="Center" HorizontalAlignment="Center">
+    </Button>
 </UserControl>

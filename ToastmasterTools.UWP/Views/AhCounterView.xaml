@@ -44,7 +44,7 @@
             <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CounterControl></controls:CounterControl>
+                        <controls:CounterControl Margin="15 30"></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>

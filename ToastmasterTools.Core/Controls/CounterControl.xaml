@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ahCounter="using:ToastmasterTools.Core.Features.AHCounter"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:ToastmasterTools.Core.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="using:ToastmasterTools.Core.ViewModels"
              d:DesignHeight="100"
              d:DesignSource="{d:DesignInstance ahCounter:Counter}"
              d:DesignWidth="500"
@@ -176,18 +174,15 @@
                                               x:DeferLoadStrategy="Lazy" />
                             <Border x:Name="BackgroundElement"
                                     Grid.Row="1"
-                                    Grid.RowSpan="1"
                                     Grid.ColumnSpan="2"
-                                    Background="{StaticResource AppBackgroundColor}"
-                                    Opacity="{ThemeResource TextControlBackgroundRestOpacity}" />
+                                    Background="Transparent" />
                             <Border x:Name="BorderElement"
                                     Grid.Row="1"
-                                    Grid.RowSpan="1"
                                     Grid.ColumnSpan="2"
                                     BorderBrush="Transparent"
                                     BorderThickness="0" />
                             <ScrollViewer x:Name="ContentElement"
-                                          Grid.Row="1"
+                                          Grid.Row="1" BorderBrush="Transparent" BorderThickness="1"
                                           Margin="{TemplateBinding BorderThickness}"
                                           AutomationProperties.AccessibilityView="Raw"
                                           HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -203,10 +198,10 @@
                             <ContentControl x:Name="PlaceholderTextContentPresenter"
                                             Grid.Row="1"
                                             Grid.ColumnSpan="2"
-                                    Background="{StaticResource ComplementaryColor}"
                                             Margin="{TemplateBinding BorderThickness}"
+                                            Background="Transparent"
                                             Content="{TemplateBinding PlaceholderText}"
-                                            Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"
+                                            Foreground="{StaticResource ComplementaryColor}"
                                             IsHitTestVisible="False"
                                             IsTabStop="False"
                                             Padding="{TemplateBinding Padding}" />
@@ -216,9 +211,9 @@
                                     MinWidth="34"
                                     Margin="{ThemeResource HelperButtonThemePadding}"
                                     VerticalAlignment="Stretch"
-                                    Foreground="{StaticResource ComplementaryColor}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     FontSize="{TemplateBinding FontSize}"
+                                    Foreground="{StaticResource ComplementaryColor}"
                                     IsTabStop="False"
                                     Style="{StaticResource DeleteButtonStyle}"
                                     Visibility="Collapsed" />
@@ -227,115 +222,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="CounterButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
-            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
-            <Setter Property="Padding" Value="8,4,8,4" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="ButtonBorder"
-                                    BorderBrush="Red"
-                                    BorderThickness="1">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="60*" />
-                                        <RowDefinition Height="40*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="50" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.RowSpan="2"
-                                            Grid.Column="0"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Background="{StaticResource ComplementaryColor}"
-                                            Foreground="White"
-                                            Tapped="DecreaseCount">
-                                        <SymbolIcon Symbol="Remove" />
-                                    </Button>
-                                    <Button Grid.RowSpan="2"
-                                            Grid.Column="2"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Background="{StaticResource ComplementaryColor}"
-                                            Foreground="White"
-                                            Tapped="IncreaseCount">
-                                        <SymbolIcon Symbol="Add" />
-                                    </Button>
-                                    <Viewbox Grid.Row="0"
-                                             Grid.Column="1"
-                                             Stretch="Uniform">
-                                        <TextBlock HorizontalAlignment="Center"
-                                                   Foreground="{StaticResource ComplementaryColor}"
-                                                   Text="{Binding Count}" />
-                                    </Viewbox>
-                                    <TextBox Grid.Row="1"
-                                             Grid.Column="1"
-                                             HorizontalAlignment="Stretch"
-                                             Background="{StaticResource AppDefaultColor}"
-                                             FontSize="18"
-                                             IsReadOnly="False"
-                                             Padding="0"
-                                             PlaceholderText="Enter the name here..."
-                                             Style="{StaticResource CounterTextBoxStyle}"
-                                             Text="{Binding Name,
-                                                            Mode=TwoWay}"
-                                             TextAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </UserControl.Resources>
 
     <Border x:Name="CounterBorder"
-            Margin="5"
-            HorizontalAlignment="Center"
-            BorderBrush="Black"
-            BorderThickness="1">
+            Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            BorderBrush="Transparent"
+            BorderThickness="0">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="LowestWidth">
@@ -358,9 +250,90 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Button HorizontalAlignment="Stretch"
+        <Border x:Name="ButtonBorder"
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Style="{StaticResource CounterButtonStyle}" />
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*" />
+                    <RowDefinition Height="40*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.RowSpan="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ComplementaryColor}"
+                        BorderBrush="White"
+                        BorderThickness="1 1 1 1"
+                        Foreground="White"
+                        Tapped="Remove">
+                        <SymbolIcon Symbol="Delete" />
+                    </Button>
+                    <Button Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ComplementaryColor}"
+                        BorderBrush="White"
+                        BorderThickness="0 1 1 1"
+                        Foreground="White"
+                        Tapped="Reset">
+                        <SymbolIcon Symbol="Refresh" />
+                    </Button>
+                    <Viewbox Grid.Row="0"
+                         Grid.Column="2"
+                         Stretch="Uniform">
+                        <TextBlock HorizontalAlignment="Center"
+                               Foreground="{StaticResource ComplementaryColor}"
+                               Text="{Binding Count}" />
+                    </Viewbox>
+                    <Button Grid.Row="0"
+                        Grid.Column="3"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ComplementaryColor}"
+                        BorderBrush="White"
+                        BorderThickness="1 1 0 1"
+                        Foreground="White"
+                        Tapped="DecreaseCount">
+                        <SymbolIcon Symbol="Remove" />
+                    </Button>
+                    <Button Grid.Row="0"
+                        Grid.Column="4"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="{StaticResource ComplementaryColor}"
+                        BorderBrush="White"
+                        BorderThickness="1"
+                        Foreground="White"
+                        Tapped="IncreaseCount">
+                        <SymbolIcon Symbol="Add" />
+                    </Button>
+                </Grid>
+                <TextBox Grid.Row="0"
+                         Grid.Column="0"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center"
+                         Background="Transparent"
+                         FontSize="18"
+                         Foreground="{StaticResource ComplementaryColor}"
+                         IsReadOnly="False"
+                         Style="{StaticResource CounterTextBoxStyle}"
+                         Padding="0"
+                         PlaceholderText="Enter the name here..."
+                         Text="{Binding Name,
+                                        Mode=TwoWay}"
+                         TextAlignment="Center" />
+            </Grid>
+        </Border>
     </Border>
-
 </UserControl>
