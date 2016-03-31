@@ -13,12 +13,12 @@
             <AppBarButton Name="Save" Icon="Save" Label="Save speech" Click="{x:Bind ViewModel.SaveSession}"/>
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="#2F363E">
+    <Grid Background="{StaticResource AppBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="#2E373E">
+        <Grid Background="{StaticResource AppBackgroundColor}">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Height="80"
                        Margin="0 0 10 0"
@@ -38,7 +38,7 @@
                                                 Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
-                <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
+                <controls:ToastmasterSpeechSelector Margin="0" MinWidth="300" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
 
             </StackPanel>
             <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">

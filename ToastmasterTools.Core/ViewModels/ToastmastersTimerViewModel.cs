@@ -130,7 +130,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         #region Timer
 
-        public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 63, 97);
+        public Color DarkBackground { get; set; } = Color.FromArgb(0xff, 0x2E, 0x37, 0x3E);
         public event EventHandler<Speech> SpeechStopped ;
 
         public void StartTimer()

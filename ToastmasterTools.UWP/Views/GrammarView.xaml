@@ -22,18 +22,18 @@
                           Label="Save speech" />
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="#2F363E">
-        <Grid.RowDefinitions>
+    <Grid Background="{StaticResource AppBackgroundColor}">
+            <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="#2E373E">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <Grid Background="{StaticResource AppBackgroundColor}">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Height="80"
                        Margin="0 0 10 0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Source="../Assets/Icons/counting.png" />
+                       Source="../Assets/Icons/grammar.png" />
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid"

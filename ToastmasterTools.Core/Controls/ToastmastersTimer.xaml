@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=ToastmastersTimerViewModel}"
-             
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
@@ -19,37 +18,38 @@
                 <RowDefinition Height="85*" />
                 <RowDefinition Height="15*" />
             </Grid.RowDefinitions>
-            <Grid x:Name="TimerGrid" Grid.Row="0" VerticalAlignment="Top">
-               
+            <Grid x:Name="TimerGrid"
+                  Grid.Row="0"
+                  VerticalAlignment="Top">
                 <Grid x:Name="TimeGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="15" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+                    <Grid x:Name="MinutesGrid" Grid.Column="0">
+                        <Viewbox>
+                            <TextBlock x:Name="MinutesText"
+                                       HorizontalAlignment="Right"
+                                       FontSize="50"
+                                       Foreground="{StaticResource ComplementaryColor}"
+                                       Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" />
+                        </Viewbox>
+                    </Grid>
                     <Viewbox Grid.Column="1"
-                         VerticalAlignment="Center"
-                         Stretch="Uniform">
+                             VerticalAlignment="Center"
+                             Stretch="Uniform">
                         <TextBlock FontSize="50"
-                               Foreground="White"
-                               Text=":" />
+                                   Foreground="{StaticResource ComplementaryColor}"
+                                   Text=":" />
                     </Viewbox>
                     <Grid x:Name="SecondsGrid" Grid.Column="2">
                         <Viewbox>
                             <TextBlock x:Name="SecondsText"
-                                   HorizontalAlignment="Left"
-                                   FontSize="50"
-                                   Foreground="White"
-                                   Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" />
-                        </Viewbox>
-                    </Grid>
-                    <Grid x:Name="MinutesGrid" Grid.Column="0">
-                        <Viewbox>
-                            <TextBlock x:Name="MinutesText"
-                                   HorizontalAlignment="Right"
-                                   FontSize="50"
-                                   Foreground="White"
-                                   Text="{x:Bind ViewModel.MinutesText, Mode=OneWay}" />
+                                       HorizontalAlignment="Left"
+                                       FontSize="50"
+                                       Foreground="{StaticResource ComplementaryColor}"
+                                       Text="{x:Bind ViewModel.SecondsText, Mode=OneWay}" />
                         </Viewbox>
                     </Grid>
                 </Grid>
@@ -60,31 +60,39 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal">
-                <Grid>
-                    <AppBarButton x:Name="PauseTimer"
-                                  Background="White"
-                                  Click="{x:Bind ViewModel.PauseTimer}"
-                                  Content="Pause"
-                                  Icon="Pause"
-                                  IsCompact="True"
-                                  Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}" />
-                    <AppBarButton x:Name="StartTimer"
-                                  Background="White"
-                                  Click="{x:Bind ViewModel.StartTimer}"
-                                  Content="Play"
-                                  Icon="Play"
-                                  IsCompact="True"
-                                  IsEnabled="{Binding CurrentSpeech,
-                                                      Converter={StaticResource NullToBooleanConverter}}"
-                                  Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}" />
+                <Grid Margin="0 0 10 0" Height="50" Width="50">
+                    <Button x:Name="StartTimer"
+                            Background="{StaticResource ComplementaryColor}"
+                            Foreground="White"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Click="{x:Bind ViewModel.StartTimer}"
+                            IsEnabled="{Binding CurrentSpeech,
+                                                Converter={StaticResource NullToBooleanConverter}}"
+                            Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}">
+                        <SymbolIcon Symbol="Play" />
+                    </Button>
+                    <Button x:Name="PauseTimer"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{StaticResource ComplementaryColor}"
+                            BorderThickness="1"
+                            Click="{x:Bind ViewModel.PauseTimer}"
+                            Foreground="White"
+                            Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource BooleanToVisiblityConverter}}">
+                        <SymbolIcon Symbol="Pause" />
+                    </Button>
                 </Grid>
-                <AppBarButton x:Name="StopTimer"
-                              Margin="20 0 0 0"
-                              Background="White"
-                              Click="{x:Bind ViewModel.StopTimer}"
-                              Content="Stop"
-                              Icon="Stop"
-                              IsCompact="True" />
+                <Button x:Name="StopTimer"
+                            Background="{StaticResource ComplementaryColor}"
+                            Foreground="White" Height="50" Width="50"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                        Click="{x:Bind ViewModel.StopTimer}"
+                        IsEnabled="{Binding CurrentSpeech,
+                                            Converter={StaticResource NullToBooleanConverter}}">
+                    <SymbolIcon Symbol="Stop" />
+                </Button>
                 <!--<Button x:Name="PauseTimer"  HorizontalAlignment="Center" Content="Pause" Background="White" Margin="15 0"></Button>-->
             </StackPanel>
 

@@ -64,9 +64,9 @@
                                      Click="ShowSpeechUI"
                                      Content="{x:Bind ViewModel.Timer.CurrentSpeech.SpeechType.Name, Mode=OneWay}"
                                      FontSize="18"
-                                     Foreground="White"
+                                     Foreground="{StaticResource ComplementaryColor}"
                                      Padding="0" />
-                    <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="White"
+                    <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
                 </Grid>
@@ -82,7 +82,7 @@
                     <RowDefinition Height="60*" />
                     <RowDefinition Height="20*" />
                 </Grid.RowDefinitions>
-                <controls:ToastmasterSpeechSelector Margin="0 20 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
+                <controls:ToastmasterSpeechSelector Margin="0 20 0 0" MinWidth="300" HorizontalAlignment="Center" Foreground="{StaticResource ComplementaryColor}" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition />

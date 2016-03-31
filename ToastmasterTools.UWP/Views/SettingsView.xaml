@@ -7,20 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <DataTemplate x:Key="SettingsHeaderTemplate" >
             <TextBlock Text="{Binding}" FontSize="20" Foreground="White"></TextBlock>
-        </DataTemplate>            
+        </DataTemplate>
     </Page.Resources>
-    <Grid Background="#004165">
+    <Grid Background="{StaticResource AppBackgroundColor}">
         <Grid Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Settings" FontSize="40" Foreground="White"></TextBlock>
-            <ToggleSwitch Grid.Row="1" OnContent="On" OffContent="Off" Header="Vibration" IsOn="{Binding VibrationIsEnabled, Mode=TwoWay}" VerticalAlignment="Top" HeaderTemplate="{StaticResource SettingsHeaderTemplate}" Foreground="White"></ToggleSwitch>
+            <Grid Background="{StaticResource AppBackgroundColor}">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Image Height="80"
+                       Margin="0 0 10 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Source="../Assets/Icons/settings.png" />
+                </StackPanel>
+            </Grid>
+            <ToggleSwitch Grid.Row="1" OnContent="On" OffContent="Off" Header="Timer vibration" IsOn="{Binding VibrationIsEnabled, Mode=TwoWay}" VerticalAlignment="Top" HeaderTemplate="{StaticResource SettingsHeaderTemplate}" Foreground="White"></ToggleSwitch>
         </Grid>
     </Grid>
 </Page>
