@@ -60,7 +60,7 @@
                       VerticalAlignment="Top"
                       ItemContainerStyle="{StaticResource CounterContainerStyle}"
                       ItemsSource="{x:Bind ViewModel.Counters}"
-                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <controls:CounterControl />

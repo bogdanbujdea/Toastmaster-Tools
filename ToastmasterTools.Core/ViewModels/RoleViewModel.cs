@@ -128,7 +128,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void AddCounter()
         {
-            if (Counters.Any(c => c.Name == CounterName))
+            if (Counters.Any(c => c.Name == CounterName && string.IsNullOrWhiteSpace(c.Name) == false))
                 return;
             var counter = new Counter { Name = CounterName };
             Counters.Add(counter);
