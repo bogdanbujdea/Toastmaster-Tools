@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.System;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmasterTools.Core.Features.Analytics;
@@ -92,6 +94,12 @@ namespace ToastmasterTools.Core.ViewModels
         public void ContinueWithoutLogin()
         {
             NavigationService.Navigate(Pages.Home);
+        }
+
+        public async Task KeyPressed(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+                await Login();
         }
 
         public async Task Login()
