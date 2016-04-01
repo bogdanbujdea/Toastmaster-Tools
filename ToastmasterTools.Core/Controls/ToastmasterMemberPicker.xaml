@@ -8,7 +8,6 @@
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
-
     <Grid>
         <ComboBox x:Name="MembersList"
                   Height="60"

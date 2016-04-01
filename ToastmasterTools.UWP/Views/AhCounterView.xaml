@@ -14,6 +14,7 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{StaticResource AppBackgroundColor}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -21,7 +22,7 @@
         <Grid Background="{StaticResource AppBackgroundColor}">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Height="80"
-                       Margin="0 0 10 0"
+                       Margin="0 0 0 0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Source="../Assets/Icons/counting.png" />
@@ -29,7 +30,7 @@
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel>
@@ -41,10 +42,10 @@
                 <controls:ToastmasterSpeechSelector Margin="0" MinWidth="300" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
 
             </StackPanel>
-            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
+            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CounterControl Margin="15 30"></controls:CounterControl>
+                        <controls:CounterControl x:Name="CounterControl"></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>

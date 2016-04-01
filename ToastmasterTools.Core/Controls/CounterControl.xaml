@@ -7,6 +7,7 @@
              d:DesignHeight="100"
              d:DesignSource="{d:DesignInstance ahCounter:Counter}"
              d:DesignWidth="500"
+             x:Name="ControlContainer"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="CounterTextBoxStyle" TargetType="TextBox">
@@ -223,7 +224,6 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-
     <Border x:Name="CounterBorder"
             Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             BorderBrush="Transparent"
@@ -236,7 +236,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CounterBorder.Height" Value="80" />
-                        <Setter Target="CounterBorder.Width" Value="300" />
+                        <Setter Target="CounterBorder.Width" Value="250" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NormalWidth">
@@ -245,12 +245,28 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CounterBorder.Height" Value="100" />
-                        <Setter Target="CounterBorder.Width" Value="400" />
+                        <Setter Target="CounterBorder.Width" Value="350" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MinHeight">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="MinHeightTrigger" MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ButtonBorder.Margin" Value="15 5" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NormalHeight">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="NormalHeightTrigger" MinWindowHeight="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ButtonBorder.Margin" Value="15 30" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Border x:Name="ButtonBorder"
+        <Border x:Name="ButtonBorder" 
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 BorderThickness="1">
