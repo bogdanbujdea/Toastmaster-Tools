@@ -166,7 +166,7 @@
                           Label="Save speech" />
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="{StaticResource AppBackgroundColor}">
+    <Grid x:Name="LayoutRot" Background="{StaticResource AppBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -184,9 +184,9 @@
               Grid.Row="1"
               HorizontalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="150" />
-                <RowDefinition Height="5*" />
-                <RowDefinition Height="5*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="70*" />
+                <RowDefinition Height="30*" />
             </Grid.RowDefinitions>
             <StackPanel>
                 <controls:ToastmasterMemberPicker VerticalAlignment="Center"
@@ -199,7 +199,7 @@
                                                     DataContext="{x:Bind ViewModel.SpeechSelector}" />
             </StackPanel>
             <GridView x:Name="CounterGrid"
-                      Grid.Row="1"
+                      Grid.Row="1" 
                       HorizontalAlignment="Center"
                       VerticalAlignment="Top"
                       ItemContainerStyle="{StaticResource CounterContainerStyle}"
@@ -207,7 +207,7 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CounterControl Margin="15 30"></controls:CounterControl>
+                        <controls:CounterControl HorizontalAlignment="Center" ></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
