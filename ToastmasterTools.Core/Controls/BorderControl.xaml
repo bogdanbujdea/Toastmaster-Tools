@@ -11,6 +11,7 @@
     d:DesignHeight="300" Background="{StaticResource AppBackgroundColor}"
     d:DesignWidth="400">
     <UserControl.Resources>
+
         <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
         <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
         <SolidColorBrush x:Key="ComplementaryColor">#FF6762</SolidColorBrush>
@@ -25,7 +26,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid">
+                        <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <CompositeTransform/>
+                            </Grid.RenderTransform>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -34,20 +38,25 @@
                                                 <DoubleAnimation Duration="0:0:1" To="360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="TestBorder" d:IsOptimized="True"/>
                                             </Storyboard>
                                         </VisualTransition>
+                                        <VisualTransition GeneratedDuration="0">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0" To="269.511" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="TestBorder" d:IsOptimized="True"/>
+                                            </Storyboard>
+                                        </VisualTransition>
                                     </VisualStateGroup.Transitions>
                                     <VisualState x:Name="Normal">
                                         <Storyboard>
                                             <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
                                         </Storyboard>
                                     </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                    </VisualState>
+                                    <VisualState x:Name="PointerOver"/>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="TextControl">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
                                             </ObjectAnimationUsingKeyFrames>
                                             <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            <DoubleAnimation Duration="0:0:0.5" To="360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="TestBorder" d:IsOptimized="True"/>
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
@@ -67,6 +76,6 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Button Style="{StaticResource BorderButton}" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Button x:Name="BorderButtonControl" Style="{StaticResource BorderButton}" VerticalAlignment="Center" HorizontalAlignment="Center">
     </Button>
 </UserControl>

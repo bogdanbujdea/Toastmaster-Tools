@@ -19,8 +19,6 @@ namespace ToastmasterTools.Core.Controls
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(Uri), typeof(BorderControl), new PropertyMetadata(string.Empty));
 
-
-
         public string ItemText
         {
             get { return (string)GetValue(ItemTextProperty); }
@@ -30,7 +28,5 @@ namespace ToastmasterTools.Core.Controls
         // Using a DependencyProperty as the backing store for ItemText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemTextProperty =
             DependencyProperty.Register("ItemText", typeof(string), typeof(BorderControl), new PropertyMetadata(string.Empty));
-
-
     }
 }
