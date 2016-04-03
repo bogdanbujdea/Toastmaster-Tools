@@ -9,9 +9,16 @@
                             Path=HomeViewModel}"
       mc:Ignorable="d">
     <Page.Resources>
-        <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="120"/>
-        <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="70"/>
+        <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="0"/>
+        <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="0"/>
         <x:Double x:Key="NavigationTextSize">18</x:Double>
+        <DoubleAnimationUsingKeyFrames x:Name="RotationAnimation" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="12"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-12"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="6"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-6"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
         <Style x:Key="BorderStyle" TargetType="Border" >
             <Setter Property="BorderBrush" Value="{StaticResource ComplementaryColor}"></Setter>
             <Setter Property="BorderThickness" Value="4"></Setter>
@@ -21,19 +28,13 @@
     <Grid Background="#2E373E">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
-                
-                <VisualState x:Name="LowHeight">
+                <VisualState x:Name="LowHeightAndWidth">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="LowestHeightAndWidthTrigger"
                                          MinWindowWidth="0" 
                                          MinWindowHeight="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>60</x:Double>
-                            </Setter.Value>
-                        </Setter>
                         <Setter Target="UserNameText.Margin" Value="0 0 100 0"></Setter>
                         <Setter Target="LogoImageRow.Height" Value="0"></Setter>
                         <Setter Target="ProfileRow.Height" Value="40"></Setter>
@@ -41,69 +42,16 @@
                         <Setter Target="UserNameText.HorizontalAlignment" Value="Left"></Setter>
                         <Setter Target="AuthenticationPanel.HorizontalAlignment" Value="Right"></Setter>
                         <Setter Target="UserPanel.Orientation" Value="Horizontal"></Setter>
-                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>30</x:Double>
-                            </Setter.Value>
-                        </Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="LowestWidth">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="LowestWidthTrigger"
-                                         MinWindowWidth="0"
+                                         MinWindowWidth="300"
                                          MinWindowHeight="500"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LogoImageRow.Height" Value="100"></Setter>
-                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>80</x:Double>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>40</x:Double>
-                            </Setter.Value>
-                        </Setter>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NormalWidth">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger x:Name="NormalWidthTrigger"
-                                         MinWindowWidth="0"
-                                         MinWindowHeight="600"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>120</x:Double>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>70</x:Double>
-                            </Setter.Value>
-                        </Setter>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="WideWidth">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger x:Name="WideWidthTrigger"
-                                         MinWindowWidth="1000"
-                                         MinWindowHeight="800"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>170</x:Double>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Target="IconSizeWrapper.(DoubleWrapper.Value)" >
-                            <Setter.Value>
-                                <x:Double>100</x:Double>
-                            </Setter.Value>
-                        </Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -133,7 +81,7 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Margin="20 0">
+        <Grid x:Name="BordersGrid" Grid.Row="2" Margin="20 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="30"></ColumnDefinition>
@@ -143,10 +91,11 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:BorderControl ItemText="Timer" Background="{StaticResource AppBackgroundColor}" ImageSource="ms-appx:///Assets/Icons/timer.png" Tapped="{x:Bind ViewModel.GoToTimerView}"></controls:BorderControl>
-            <controls:BorderControl Grid.Row="0" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="AH Counter" ImageSource="ms-appx:///Assets/Icons/counting.png" Tapped="{x:Bind ViewModel.GoToAhCounter}"></controls:BorderControl>
-            <controls:BorderControl Grid.Row="1" Grid.Column="0" Background="{StaticResource AppBackgroundColor}" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToGrammarian}"></controls:BorderControl>
-            <controls:BorderControl Grid.Row="1" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="Settings" ImageSource="ms-appx:///Assets/Icons/settings.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" ItemText="Timer" Background="{StaticResource AppBackgroundColor}" ImageSource="ms-appx:///Assets/Icons/timer.png" Tapped="{x:Bind ViewModel.GoToTimerView}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="AH Counter" ImageSource="ms-appx:///Assets/Icons/counting.png" Tapped="{x:Bind ViewModel.GoToAhCounter}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.Column="0" Background="{StaticResource AppBackgroundColor}" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToGrammarian}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="Settings" ImageSource="ms-appx:///Assets/Icons/settings.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource AppBackgroundColor}" ItemText="History" ImageSource="ms-appx:///Assets/Icons/history.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
         </Grid>
         <Image Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="130" Source="../Assets/Icons/logo.png" Visibility="Collapsed"></Image>
         <StackPanel Grid.Row="1"

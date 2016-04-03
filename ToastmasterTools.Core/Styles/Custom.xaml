@@ -7,6 +7,8 @@
     <x:Double x:Key="NormalMinWidth">521</x:Double>
     <x:Double x:Key="WideMinWidth">1200</x:Double>
 
+    <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="0"/>
+    <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="0"/>
     <converters:BooleanToVisiblityConverter x:Key="BooleanToVisiblityConverter"></converters:BooleanToVisiblityConverter>
     <converters:ReversedBooleanToVisiblityConverter x:Key="ReversedBooleanToVisiblityConverter"></converters:ReversedBooleanToVisiblityConverter>
     <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"></converters:NullToBooleanConverter>
@@ -101,7 +103,7 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Foreground" Value="{ThemeResource AppDefaultColor}"></Setter>        
         <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltMediumLowBrush}"/>
-        <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ComplementaryColor}"/>
         <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThemeThickness}"/>
         <Setter Property="TabNavigation" Value="Once"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
@@ -168,11 +170,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontWeight="{ThemeResource ComboBoxHeaderThemeFontWeight}" FlowDirection="{TemplateBinding FlowDirection}" Margin="{ThemeResource ComboBoxHeaderThemeMargin}" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
+                        <ContentPresenter x:Name="HeaderContentPresenter" Foreground="{ThemeResource ComplementaryColor}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontWeight="{ThemeResource ComboBoxHeaderThemeFontWeight}" FlowDirection="{TemplateBinding FlowDirection}" Margin="{ThemeResource ComboBoxHeaderThemeMargin}" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
                         <Border x:Name="Background" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" Grid.Row="1"/>
                         <Border x:Name="HighlightBackground" Grid.ColumnSpan="2" Opacity="0" Grid.Row="1"/>
                         <ContentPresenter x:Name="ContentPresenter" Padding="0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Border BorderThickness="0 0 0 1" Width="{Binding ElementName=PlaceholderTextBlock, Path=ActualWidth}" HorizontalAlignment="Center" BorderBrush="White">
+                            <Border BorderThickness="0 0 0 1" Width="{Binding ElementName=PlaceholderTextBlock, Path=ActualWidth}" HorizontalAlignment="Center" BorderBrush="{ThemeResource ComplementaryColor}">
                                 <TextBlock x:Name="PlaceholderTextBlock" HorizontalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontSize="18" Padding="0" Text="{TemplateBinding PlaceholderText}"/>
                             </Border>
                         </ContentPresenter>

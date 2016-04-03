@@ -63,7 +63,7 @@
                                      HorizontalAlignment="Center"
                                      Click="ShowSpeechUI"
                                      Content="{x:Bind ViewModel.Timer.CurrentSpeech.SpeechType.Name, Mode=OneWay}"
-                                     FontSize="18"
+                                     FontSize="18" BorderBrush="{StaticResource ComplementaryColor}"
                                      Foreground="{StaticResource ComplementaryColor}"
                                      Padding="0" />
                     <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="{StaticResource ComplementaryColor}"

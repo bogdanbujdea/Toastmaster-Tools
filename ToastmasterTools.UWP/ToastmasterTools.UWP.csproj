@@ -147,6 +147,7 @@
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\Icons\counting.png" />
     <Content Include="Assets\Icons\grammar.png" />
+    <Content Include="Assets\Icons\history.png" />
     <Content Include="Assets\Icons\logo.png" />
     <Content Include="Assets\Icons\settings.png" />
     <Content Include="Assets\Icons\timer.png" />
