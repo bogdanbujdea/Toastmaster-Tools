@@ -67,8 +67,8 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Click="{x:Bind ViewModel.StartTimer}"
-                            IsEnabled="{Binding CurrentSpeech,
-                                                Converter={StaticResource NullToBooleanConverter}}"
+                            IsEnabled="{Binding CanStart,
+                                                Converter={StaticResource BooleanToVisiblityConverter}}"
                             Visibility="{x:Bind ViewModel.TimerIsRunning, Mode=OneWay, Converter={StaticResource ReversedBooleanToVisiblityConverter}}">
                         <SymbolIcon Symbol="Play" />
                     </Button>

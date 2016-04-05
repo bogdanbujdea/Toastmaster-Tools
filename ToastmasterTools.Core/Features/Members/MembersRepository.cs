@@ -62,7 +62,7 @@ namespace ToastmasterTools.Core.Features.Members
             var newMembers = new List<Speaker>();
             using (var context = new ToastmasterContext())
             {
-                foreach (var member in members)
+                foreach (var member in members.OrderBy(s => s.Name))
                 {
                     var foundMember = await context.Speakers.FirstOrDefaultAsync(m => m.Name == member.Name);
                     if (foundMember == null)
@@ -81,7 +81,7 @@ namespace ToastmasterTools.Core.Features.Members
             MembersReport membersReport = new MembersReport(true, new List<Speaker>());
             using (var context = new ToastmasterContext())
             {
-                var members = await context.Speakers.ToListAsync();
+                var members = await context.Speakers.OrderBy(s => s.Name).ToListAsync();
                 if (members == null || members.Count == 0)
                     membersReport = await RefreshClubMembers();
                 else

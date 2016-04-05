@@ -28,14 +28,15 @@ namespace ToastmasterTools.Core.ViewModels
             SimpleIoc.Default.Register<IFeedbackCollector, FeedbackCollector>();
             SimpleIoc.Default.Register<IMemberSelector, MemberSelector>();
             SimpleIoc.Default.Register<ISpeechSelector, SpeechSelector>();
-            SimpleIoc.Default.Register<GrammarViewModel>();        
-            SimpleIoc.Default.Register<AHCounterViewModel>();        
-            SimpleIoc.Default.Register<LoginViewModel>();        
-            SimpleIoc.Default.Register<GroupViewModel>();        
+            SimpleIoc.Default.Register<HistoryViewModel>();
+            SimpleIoc.Default.Register<GrammarViewModel>();
+            SimpleIoc.Default.Register<AHCounterViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<GroupViewModel>();
             SimpleIoc.Default.Register<ToastmastersTimerViewModel>();
             SimpleIoc.Default.Register<TimerViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
-            SimpleIoc.Default.Register<HomeViewModel>();        
+            SimpleIoc.Default.Register<HomeViewModel>();
         }
 
         public HomeViewModel HomeViewModel => ServiceLocator.Current.GetInstance<HomeViewModel>();
@@ -46,5 +47,6 @@ namespace ToastmasterTools.Core.ViewModels
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
         public AHCounterViewModel AHCounterViewModel => ServiceLocator.Current.GetInstance<AHCounterViewModel>();
         public GrammarViewModel GrammarViewModel => ServiceLocator.Current.GetInstance<GrammarViewModel>();
+        public HistoryViewModel HistoryViewModel => ServiceLocator.Current.GetInstance<HistoryViewModel>();
     }
 }

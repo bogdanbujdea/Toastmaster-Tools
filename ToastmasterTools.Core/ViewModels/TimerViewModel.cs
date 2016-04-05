@@ -50,6 +50,12 @@ namespace ToastmasterTools.Core.ViewModels
         {
             Timer = context.NewValue as ToastmastersTimerViewModel;
             Timer.SpeechStopped += SaveSpeech;
+            MemberSelector.SelectedMemberChanged += SelectedMemberChanged;
+        }
+
+        private void SelectedMemberChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        {
+            Timer.CanStart = e.AddedItems.Count > 0;
         }
 
         private async void SaveSpeech(object sender, Speech speech)
@@ -90,5 +96,11 @@ namespace ToastmasterTools.Core.ViewModels
         }
 
         public ToastmastersTimerViewModel Timer { get; set; }
+
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
+        {
+            MemberSelector.SelectedMemberChanged -= SelectedMemberChanged;
+            Timer.SpeechStopped -= SaveSpeech;
+        }
     }
 }

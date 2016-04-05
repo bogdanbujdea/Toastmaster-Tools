@@ -110,7 +110,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public string CounterName { get; set; }
 
-        protected Speaker SelectedSpeaker { get; set; }
+        public Speaker SelectedSpeaker { get; set; }
 
         public SpeechType SelectedSpeechType { get; set; }
 

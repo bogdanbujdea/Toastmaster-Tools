@@ -10,6 +10,7 @@
     <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="0"/>
     <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="0"/>
     <converters:BooleanToVisiblityConverter x:Key="BooleanToVisiblityConverter"></converters:BooleanToVisiblityConverter>
+    <converters:SecondsToTimeDisplayDateConverter x:Key="SecondsToTimeDisplayDateConverter"></converters:SecondsToTimeDisplayDateConverter>
     <converters:ReversedBooleanToVisiblityConverter x:Key="ReversedBooleanToVisiblityConverter"></converters:ReversedBooleanToVisiblityConverter>
     <converters:NullToBooleanConverter x:Key="NullToBooleanConverter"></converters:NullToBooleanConverter>
     <Style x:Key="CounterContainerStyle" TargetType="GridViewItem">

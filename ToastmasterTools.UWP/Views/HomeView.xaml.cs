@@ -1,5 +1,4 @@
-﻿using Windows.Foundation;
-using Windows.UI.Core;
+﻿using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Template10.Common;
