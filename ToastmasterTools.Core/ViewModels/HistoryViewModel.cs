@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Features.Storage;
@@ -89,6 +91,11 @@ namespace ToastmasterTools.Core.ViewModels
                 Speeches = new ObservableCollection<Speech>(speeches);
             }
             CloseSpeech();
+        }
+
+        public void ShowSpeech(Speech speech)
+        {
+            SelectedSpeech = speech;
         }
 
         public void CloseSpeech()

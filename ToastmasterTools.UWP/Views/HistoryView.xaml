@@ -7,6 +7,54 @@
       DataContext="{Binding Source={StaticResource Locator},
                             Path=HistoryViewModel}"
       mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="GridViewHeaderTemplate" >
+            <TextBlock Text="{Binding}" Foreground="{StaticResource ComplementaryColor}" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+        </DataTemplate>
+        <Style x:Key="GridViewHeaderStyle" TargetType="GridView">
+            <Setter Property="Padding" Value="0,0,0,10"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition/>
+                        <ContentThemeTransition/>
+                        <ReorderThemeTransition/>
+                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridView">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{StaticResource GridViewHeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{StaticResource AppBackgroundColor}">
         <VisualStateManager.VisualStateGroups>
@@ -70,13 +118,14 @@
                           HorizontalContentAlignment="Center"
                           ItemsSource="{Binding Speeches,
                                                 Mode=TwoWay}"
-                          SelectionMode="Single"
+                          SelectionMode="None"
                           SelectedItem="{Binding SelectedSpeech, Mode=TwoWay}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Border Width="150"
                                     Height="100"
                                     Margin="2"
+                                    Tapped="SpeechTapped"
                                     BorderBrush="{StaticResource ComplementaryColor}"
                                     BorderThickness="2"
                                     CornerRadius="15">
@@ -110,12 +159,12 @@
                       Margin="0 10 0 0" Visibility="{Binding SpeechDetailsAreVisible, Converter={StaticResource BooleanToVisiblityConverter}}"
                       Background="{StaticResource AppBackgroundColor}">
                     <ScrollViewer>
-                        <Grid Margin="20 0">
+                        <Grid Margin="20 0" VerticalAlignment="Top">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition MinHeight="200" />
-                                <RowDefinition Height="60" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="200" />
+                                <RowDefinition Height="100" />
                             </Grid.RowDefinitions>
                             <Grid x:Name="TimerGrid">
                                 <StackPanel VerticalAlignment="Center">
@@ -136,9 +185,9 @@
                                 </StackPanel>
                             </Grid>
                             <GridView x:Name="Counters"
-                                      Grid.Row="1"
-                                      Header="Counters"
-                                      ItemsSource="{Binding SelectedSpeech.Counters}">
+                                      Grid.Row="1" Visibility="{Binding SelectedSpeech.Counters, Converter={StaticResource EmptyCollectionToVisibilityConverter}, Mode=TwoWay}"
+                                      Header="Counters" HorizontalAlignment="Center"
+                                      ItemsSource="{Binding SelectedSpeech.Counters}" Style="{StaticResource GridViewHeaderStyle}">
                                 <GridView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="10" Orientation="Horizontal">
@@ -159,12 +208,12 @@
                                      Background="Transparent"
                                      BorderBrush="{StaticResource ComplementaryColor}"
                                      Foreground="{StaticResource ComplementaryColor}"
-                                     PlaceholderText="Write your notes here"
+                                     PlaceholderText="Nothing here yet. You can write some notes..."
                                      Style="{StaticResource GrammarNotesStyle}"
                                      Text="{Binding SelectedSpeech.Notes,
                                                     Mode=TwoWay}"
                                      TextAlignment="Left" />
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                                 <Button x:Name="UpdateSpeech"
                                         Width="50"
                                         Height="50"

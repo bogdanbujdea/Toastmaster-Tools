@@ -1,4 +1,7 @@
-﻿using ToastmasterTools.Core.ViewModels;
+﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using ToastmasterTools.Core.Models;
+using ToastmasterTools.Core.ViewModels;
 
 namespace ToastmasterTools.UWP.Views
 {
@@ -10,5 +13,10 @@ namespace ToastmasterTools.UWP.Views
         }
 
         public HistoryViewModel ViewModel => DataContext as HistoryViewModel;
+
+        private void SpeechTapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.ShowSpeech((sender as Border)?.DataContext as Speech);
+        }
     }
 }

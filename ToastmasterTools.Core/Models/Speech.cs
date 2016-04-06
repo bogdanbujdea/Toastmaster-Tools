@@ -13,6 +13,7 @@ namespace ToastmasterTools.Core.Models
         private bool _isCustom;
         private double _speechTimeInSeconds;
         private Speaker _speaker;
+        private ICollection<Counter> _counters;
 
         public virtual SpeechType SpeechType { get; set; }
 
@@ -44,7 +45,15 @@ namespace ToastmasterTools.Core.Models
 
         public DateTime Date { get; set; }
 
-        public virtual ICollection<Counter> Counters { get; set; }
+        public virtual ICollection<Counter> Counters
+        {
+            get { return _counters; }
+            set
+            {
+                _counters = value; 
+                OnPropertyChanged();
+            }
+        }
 
         public string Notes { get; set; }
 
