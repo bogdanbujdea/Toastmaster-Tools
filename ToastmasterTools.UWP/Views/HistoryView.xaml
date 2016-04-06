@@ -1,52 +1,205 @@
-﻿<Page
-    x:Class="ToastmasterTools.UWP.Views.HistoryView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ToastmasterTools.UWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+﻿<Page x:Class="ToastmasterTools.UWP.Views.HistoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:ToastmasterTools.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=HistoryViewModel}"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+      mc:Ignorable="d">
 
     <Grid Background="{StaticResource AppBackgroundColor}">
-        <Grid Margin="20">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="LowHeight">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="LowHeightTrigger" MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ImageRow.Height" Value="40" />
+                        <Setter Target="HelpText.FontSize" Value="14" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NormalHeight">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="NormalHeightTrigger" MinWindowHeight="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="HelpText.FontSize" Value="20" />
+                        <Setter Target="ImageRow.Height" Value="60" />
+                        <Setter Target="SpeechGridView.Margin" Value="0 60 0 0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid Margin="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition x:Name="ImageRow" Height="120" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Background="{StaticResource AppBackgroundColor}">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Image Height="80"
-                       Margin="0 0 10 0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Source="../Assets/Icons/history.png" />
+                    <Image x:Name="LogoImage"
+                           Margin="0 0 10 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Source="../Assets/Icons/history.png" />
                 </StackPanel>
             </Grid>
-            <TextBlock Grid.Row="1" Text="Here are your recorded speeches:" FontSize="18" TextAlignment="Center" Foreground="{StaticResource ComplementaryColor}" TextWrapping="Wrap"></TextBlock>
-            <GridView Grid.Row="1" x:Name="SpeechGridView" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="0 40 0 0" ItemsSource="{Binding Speeches, Mode=TwoWay}">
-                <GridView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="150" Height="100" BorderBrush="{StaticResource ComplementaryColor}" BorderThickness="2" CornerRadius="15" Margin="2">
-                            <Grid HorizontalAlignment="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Viewbox Margin="3">
-                                    <TextBlock Text="{Binding Speaker.Name}" TextAlignment="Center" Foreground="{StaticResource ComplementaryColor}" TextWrapping="Wrap"></TextBlock>
-                                </Viewbox>
-                                <TextBlock Grid.Row="1" Text="{Binding SpeechType.Name}" TextAlignment="Center" Foreground="{StaticResource ComplementaryColor}"></TextBlock>
-                                <TextBlock Grid.Row="2" Text="{Binding SpeechTimeInSeconds, Converter={StaticResource SecondsToTimeDisplayDateConverter}}" TextAlignment="Center" Foreground="{StaticResource ComplementaryColor}"></TextBlock>
+            <TextBlock Grid.Row="0"
+                       Grid.RowSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="30"
+                       Foreground="{StaticResource ComplementaryColor}"
+                       Text="Nothing here yet..."
+                       Visibility="{Binding HistoryIsEmpty,
+                                            Converter={StaticResource BooleanToVisiblityConverter}}" />
+            <Grid Grid.Row="1">
+                <TextBlock x:Name="HelpText"
+                           FontSize="18" Margin="0 5 0 0"
+                           Foreground="{StaticResource ComplementaryColor}"
+                           Text="Here are your recorded speeches:"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <GridView x:Name="SpeechGridView"
+                          Margin="0 40 0 0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          ItemsSource="{Binding Speeches,
+                                                Mode=TwoWay}"
+                          SelectionMode="Single"
+                          SelectedItem="{Binding SelectedSpeech, Mode=TwoWay}">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="150"
+                                    Height="100"
+                                    Margin="2"
+                                    BorderBrush="{StaticResource ComplementaryColor}"
+                                    BorderThickness="2"
+                                    CornerRadius="15">
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Viewbox Margin="3">
+                                        <TextBlock Foreground="{StaticResource ComplementaryColor}"
+                                                   Text="{Binding Speaker.Name}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap" />
+                                    </Viewbox>
+                                    <TextBlock Grid.Row="1"
+                                               Foreground="{StaticResource ComplementaryColor}"
+                                               Text="{Binding SpeechType.Name}"
+                                               TextAlignment="Center" />
+                                    <TextBlock Grid.Row="2"
+                                               Foreground="{StaticResource ComplementaryColor}"
+                                               Text="{Binding SpeechTimeInSeconds,
+                                                              Converter={StaticResource SecondsToTimeDisplayDateConverter}}"
+                                               TextAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                <Grid x:Name="SpeechGrid"
+                      Margin="0 10 0 0" Visibility="{Binding SpeechDetailsAreVisible, Converter={StaticResource BooleanToVisiblityConverter}}"
+                      Background="{StaticResource AppBackgroundColor}">
+                    <ScrollViewer>
+                        <Grid Margin="20 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition MinHeight="200" />
+                                <RowDefinition Height="60" />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="TimerGrid">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock FontSize="20"
+                                               Foreground="{StaticResource ComplementaryColor}"
+                                               Text="{Binding SelectedSpeech.Speaker.Name}"
+                                               TextAlignment="Left"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock FontSize="20"
+                                               Foreground="{StaticResource ComplementaryColor}"
+                                               Text="{Binding SelectedSpeech.SpeechType.Name}"
+                                               TextAlignment="Left" />
+                                    <TextBlock FontSize="20"
+                                               Foreground="{StaticResource ComplementaryColor}"
+                                               Text="{Binding SelectedSpeech.SpeechTimeInSeconds,
+                                                              Converter={StaticResource SecondsToTimeDisplayDateConverter}}"
+                                               TextAlignment="Left" />
+                                </StackPanel>
                             </Grid>
-                        </Border>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
-            <TextBlock Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding HistoryIsEmpty, Converter={StaticResource BooleanToVisiblityConverter}}" Text="Nothing here yet..." Foreground="{StaticResource ComplementaryColor}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <GridView x:Name="Counters"
+                                      Grid.Row="1"
+                                      Header="Counters"
+                                      ItemsSource="{Binding SelectedSpeech.Counters}">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="10" Orientation="Horizontal">
+                                            <TextBlock Foreground="{StaticResource ComplementaryColor}" Text="{Binding Name}" />
+                                            <TextBlock Margin="2 0"
+                                                       Foreground="{StaticResource ComplementaryColor}"
+                                                       Text=":" />
+                                            <TextBlock Foreground="{StaticResource ComplementaryColor}" Text="{Binding Count}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                            <TextBox Grid.Row="2"
+                                     Width="{Binding ElementName=PageControl,
+                                                     Path=ActualWidth,
+                                                     Mode=TwoWay}"
+                                     AcceptsReturn="True"
+                                     Background="Transparent"
+                                     BorderBrush="{StaticResource ComplementaryColor}"
+                                     Foreground="{StaticResource ComplementaryColor}"
+                                     PlaceholderText="Write your notes here"
+                                     Style="{StaticResource GrammarNotesStyle}"
+                                     Text="{Binding SelectedSpeech.Notes,
+                                                    Mode=TwoWay}"
+                                     TextAlignment="Left" />
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="UpdateSpeech"
+                                        Width="50"
+                                        Height="50"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Background="{StaticResource ComplementaryColor}"
+                                        Click="{x:Bind ViewModel.UpdateSpeech}"
+                                        Foreground="White">
+                                    <SymbolIcon Symbol="Save" />
+                                </Button>
+                                <Button x:Name="DeleteSpeech"
+                                        Width="50" Margin="20 0"
+                                        Height="50"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Background="{StaticResource ComplementaryColor}"
+                                        Click="{x:Bind ViewModel.DeleteSpeech}"
+                                        Foreground="White">
+                                    <SymbolIcon Symbol="Delete" />
+                                </Button>
+                                <Button x:Name="CloseSpeech"
+                                        Width="50"
+                                        Height="50"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Background="{StaticResource ComplementaryColor}"
+                                        Click="{x:Bind ViewModel.CloseSpeech}"
+                                        Foreground="White">
+                                    <SymbolIcon Symbol="Cancel" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
-
 </Page>

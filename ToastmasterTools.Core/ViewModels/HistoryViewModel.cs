@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Features.Storage;
@@ -10,14 +11,18 @@ using ToastmasterTools.Core.Mvvm;
 
 namespace ToastmasterTools.Core.ViewModels
 {
-    public class HistoryViewModel: ViewModelBase
+    public class HistoryViewModel : ViewModelBase
     {
         private ObservableCollection<Speech> _speeches;
         private bool _historyIsEmpty;
+        private Speech _selectedSpeech;
+        private bool _speechDetailsAreVisible;
 
         public HistoryViewModel()
         {
-            Speeches = new ObservableCollection<Speech>
+            if (DesignMode.DesignModeEnabled)
+            {
+                Speeches = new ObservableCollection<Speech>
             {
                 new Speech
                 {
@@ -25,7 +30,7 @@ namespace ToastmasterTools.Core.ViewModels
                     SpeechType = new SpeechType {Name = "Ice Breaker"},
                     Notes = "Good speech",
                     SpeechTimeInSeconds = 500,
-                    Date = DateTime.Now                    
+                    Date = DateTime.Now
                 },
                 new Speech
                 {
@@ -60,14 +65,60 @@ namespace ToastmasterTools.Core.ViewModels
                     Date = DateTime.Now
                 }
             };
+                SelectedSpeech = new Speech
+                {
+                    Speaker = new Speaker { Name = "Bogdan Bujdea", CurrentLesson = "Ice Breaker" },
+                    SpeechType = new SpeechType { Name = "Ice Breaker" },
+                    Notes = "Good speech",
+                    SpeechTimeInSeconds = 500,
+                    Date = DateTime.Now
+                };
+            }
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            await RefreshSpeeches();
+        }
+
+        private async Task RefreshSpeeches()
+        {
             using (var db = new ToastmasterContext())
             {
-                var speeches = await db.Speeches.Include(s => s.Speaker).Include(s => s.SpeechType).ToListAsync();
+                var speeches = await db.Speeches.Include(s => s.Speaker).Include(s => s.SpeechType).Include(s => s.Counters).ToListAsync();
                 Speeches = new ObservableCollection<Speech>(speeches);
+            }
+            CloseSpeech();
+        }
+
+        public void CloseSpeech()
+        {
+            SpeechDetailsAreVisible = false;
+        }
+
+        public async Task DeleteSpeech()
+        {
+            if (SelectedSpeech != null)
+            {
+                using (var context = new ToastmasterContext())
+                {
+                    context.Speeches.Remove(SelectedSpeech);
+                    await context.SaveChangesAsync();
+                }
+                await RefreshSpeeches();
+            }
+        }
+
+        public async void UpdateSpeech()
+        {
+            if (SelectedSpeech != null)
+            {
+                using (var context = new ToastmasterContext())
+                {
+                    context.Speeches.Update(SelectedSpeech);
+                    await context.SaveChangesAsync();
+                }
+                await RefreshSpeeches();
             }
         }
 
@@ -89,6 +140,31 @@ namespace ToastmasterTools.Core.ViewModels
             {
                 _historyIsEmpty = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public bool SpeechDetailsAreVisible
+        {
+            get { return _speechDetailsAreVisible; }
+            set
+            {
+                _speechDetailsAreVisible = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Speech SelectedSpeech
+        {
+            get { return _selectedSpeech; }
+            set
+            {
+                if (_selectedSpeech != value)
+                {
+                    if (value != null)
+                        SpeechDetailsAreVisible = true;
+                    _selectedSpeech = value;
+                    RaisePropertyChanged();
+                }
             }
         }
     }

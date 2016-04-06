@@ -9,6 +9,6 @@ namespace ToastmasterTools.UWP.Views
             InitializeComponent();
         }
 
-        public HistoryViewModel ViewModel { get; set; }
+        public HistoryViewModel ViewModel => DataContext as HistoryViewModel;
     }
 }
