@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Controls;
-using ToastmasterTools.Core.Annotations;
 using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Models;
+using ToastmasterTools.UWP.Annotations;
 
 namespace ToastmasterTools.Core.Features.SpeechTools
 {
