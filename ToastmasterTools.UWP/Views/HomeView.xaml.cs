@@ -42,6 +42,8 @@ namespace ToastmasterTools.UWP.Views
             BootStrapper.Current.Exit();
         }
 
+        
+
         private static WindowWrapper Window { get; set; }
 
         public HomeViewModel ViewModel => this.DataContext as HomeViewModel;
