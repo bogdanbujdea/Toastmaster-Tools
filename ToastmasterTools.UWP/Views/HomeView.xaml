@@ -3,41 +3,105 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:converters="using:ToastmasterTools.Core.Helpers.Converters"
+      xmlns:controls="using:ToastmasterTools.Core.Controls"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=HomeViewModel}"
       mc:Ignorable="d">
-
-    <Grid Background="#EEEEEE">
+    <Page.Resources>
+        <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="0"/>
+        <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="0"/>
+        <x:Double x:Key="NavigationTextSize">18</x:Double>
+        <DoubleAnimationUsingKeyFrames x:Name="RotationAnimation" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)">
+            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="12"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-12"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="6"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-6"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <Style x:Key="BorderStyle" TargetType="Border" >
+            <Setter Property="BorderBrush" Value="{StaticResource ComplementaryColor}"></Setter>
+            <Setter Property="BorderThickness" Value="4"></Setter>
+            <Setter Property="CornerRadius" Value="100"></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid Background="#2E373E">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="LowHeightAndWidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="LowestHeightAndWidthTrigger"
+                                         MinWindowWidth="0" 
+                                         MinWindowHeight="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="UserNameText.Margin" Value="0 0 100 0"></Setter>
+                        <Setter Target="LogoImageRow.Height" Value="0"></Setter>
+                        <Setter Target="ProfileRow.Height" Value="40"></Setter>
+                        <Setter Target="UserPanel.HorizontalAlignment" Value="Center"></Setter>
+                        <Setter Target="UserNameText.HorizontalAlignment" Value="Left"></Setter>
+                        <Setter Target="AuthenticationPanel.HorizontalAlignment" Value="Right"></Setter>
+                        <Setter Target="UserPanel.Orientation" Value="Horizontal"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LowestWidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger x:Name="LowestWidthTrigger"
+                                         MinWindowWidth="300"
+                                         MinWindowHeight="500"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LogoImageRow.Height" Value="100"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="*" />
+            <RowDefinition x:Name="LogoImageRow" Height="150" />
+            <RowDefinition x:Name="ProfileRow" Height="100" />
+            <RowDefinition Height="60*" />
         </Grid.RowDefinitions>
-        <Grid Background="#003F61">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image Height="40"
-                       Margin="0 0 0 0"
+        <Grid Background="{StaticResource AppBackgroundColor}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Margin="10 10">
+                <Image Visibility="Visible"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Source="../Assets/logo_transparent.png" />
-                <TextBlock HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="30"
-                           Foreground="White"
-                           Text="Toastmaster Tools" />
+                       VerticalAlignment="Center"                       
+                       Source="../Assets/Icons/logo.png" />
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="1"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
-            <HyperlinkButton Margin="20 5"
+        <Grid Grid.Row="1" Grid.Column="0" >
+            <StackPanel x:Name="UserPanel" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <HyperlinkButton x:Name="UserNameText"
                              Content="{x:Bind ViewModel.UserDisplayName, Mode=TwoWay}"
-                             FontSize="20"
-                             Foreground="Black" />
-        </StackPanel>
-
+                             FontSize="20" HorizontalAlignment="Center"
+                             Foreground="{StaticResource ComplementaryColor}" />
+                <StackPanel x:Name="AuthenticationPanel" HorizontalAlignment="Center">
+                    <HyperlinkButton Content="Login" Foreground="{StaticResource ComplementaryColor}" Visibility="{Binding IsLoggedIn, Converter={StaticResource ReversedBooleanToVisiblityConverter}, Mode=TwoWay}"  Click="{x:Bind ViewModel.Login, Mode=OneWay}" FontSize="20" ></HyperlinkButton>
+                    <HyperlinkButton Content="Logout" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}, Mode=TwoWay}"  Foreground="{StaticResource ComplementaryColor}" Click="{x:Bind ViewModel.Logout, Mode=OneWay}" FontSize="20"></HyperlinkButton>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="BordersGrid" Grid.Row="2" Margin="20 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" ItemText="Timer" Background="{StaticResource AppBackgroundColor}" ImageSource="ms-appx:///Assets/Icons/timer.png" Tapped="{x:Bind ViewModel.GoToTimerView}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="AH Counter" ImageSource="ms-appx:///Assets/Icons/counting.png" Tapped="{x:Bind ViewModel.GoToAhCounter}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.Column="0" Background="{StaticResource AppBackgroundColor}" ItemText="Grammar" ImageSource="ms-appx:///Assets/Icons/grammar.png" Tapped="{x:Bind ViewModel.GoToGrammarian}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.Column="2" Background="{StaticResource AppBackgroundColor}" ItemText="Settings" ImageSource="ms-appx:///Assets/Icons/settings.png" Tapped="{x:Bind ViewModel.GoToSettings}"></controls:BorderControl>
+            <controls:BorderControl RenderTransformOrigin="0.5,0.5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource AppBackgroundColor}" ItemText="History" ImageSource="ms-appx:///Assets/Icons/history.png" Tapped="{x:Bind ViewModel.GoToHistory}"></controls:BorderControl>
+        </Grid>
+        <Image Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="130" Source="../Assets/Icons/logo.png" Visibility="Collapsed"></Image>
         <StackPanel Grid.Row="1"
                     Margin="0 20"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Visibility="Collapsed">
+
             <Button Width="250"
                     Height="60"
                     HorizontalAlignment="Center"
@@ -67,27 +131,6 @@
                     FontSize="30"
                     Foreground="White"
                     Style="{StaticResource ToastmastersButtonStyle}" />
-            <Button Width="250"
-                    Height="60"
-                    Margin="0 0 0 30"
-                    HorizontalAlignment="Center"
-                    Background="#003F61"
-                    Click="{x:Bind ViewModel.Login, Mode=OneWay}"
-                    Content="Login"
-                    FontSize="30"
-                    Foreground="White"
-                    Style="{StaticResource ToastmastersButtonStyle}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource ReversedBooleanToVisiblityConverter}, Mode=TwoWay}" />
-            <Button Width="250"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    Background="#003F61"
-                    Click="{x:Bind ViewModel.Logout, Mode=OneWay}"
-                    Content="Logout"
-                    FontSize="30"
-                    Foreground="White"
-                    Style="{StaticResource ToastmastersButtonStyle}"
-                    Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}, Mode=TwoWay}" />
             <!-- <Button Content="Practice Speech" HorizontalAlignment="Center" VerticalAlignment="Center" Click="{x:Bind ViewModel.GoToSpeechPractice}"></Button>-->
         </StackPanel>
     </Grid>

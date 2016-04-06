@@ -21,5 +21,15 @@ namespace ToastmasterTools.Core.Controls
         {
             CounterViewModel.Count--;
         }
+
+        private void Reset(object sender, TappedRoutedEventArgs e)
+        {
+            CounterViewModel.Count = 0;
+        }
+
+        private void Remove(object sender, TappedRoutedEventArgs e)
+        {
+            CounterViewModel.NotifyDelete();
+        }
     }
 }

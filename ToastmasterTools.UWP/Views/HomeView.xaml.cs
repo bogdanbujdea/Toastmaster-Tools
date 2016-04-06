@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using Template10.Common;
 using ToastmasterTools.Core.ViewModels;
@@ -13,6 +14,11 @@ namespace ToastmasterTools.UWP.Views
 
             Window = WindowWrapper.Current();
             CoreWindow.GetForCurrentThread().VisibilityChanged += OnVisibilityChanged;
+            Loaded += ViewLoaded;
+        }
+
+        private void ViewLoaded(object sender, RoutedEventArgs e)
+        {
         }
 
         private void OnVisibilityChanged(CoreWindow sender, VisibilityChangedEventArgs args)
@@ -35,6 +41,8 @@ namespace ToastmasterTools.UWP.Views
         {
             BootStrapper.Current.Exit();
         }
+
+        
 
         private static WindowWrapper Window { get; set; }
 

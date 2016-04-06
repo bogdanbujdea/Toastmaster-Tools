@@ -14,5 +14,4 @@
             <viewModels:ViewModelLocator x:Key="Locator" />
         </ResourceDictionary>
     </common:BootStrapper.Resources>
-
 </common:BootStrapper>

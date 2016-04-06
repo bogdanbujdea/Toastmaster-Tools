@@ -107,6 +107,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BorderControl.xaml.cs">
+      <DependentUpon>BorderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CounterControl.xaml.cs">
       <DependentUpon>CounterControl.xaml</DependentUpon>
     </Compile>
@@ -146,12 +149,21 @@
     <Compile Include="Features\UserDialogs\DialogService.cs" />
     <Compile Include="Features\UserDialogs\IDialogService.cs" />
     <Compile Include="Helpers\Converters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\DoubleWrapper.cs" />
+    <Compile Include="Helpers\Converters\EmptyCollectionToVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Helpers\Converters\NullToCommandBarVisibility.cs" />
+    <Compile Include="Helpers\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
+    <Compile Include="Helpers\Converters\SecondsToTimeDisplayDateConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Migrations\20160326002133_First.cs" />
     <Compile Include="Migrations\20160326002133_First.designer.cs">
       <DependentUpon>20160326002133_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20160331185127_AddedReviewerRole.cs" />
+    <Compile Include="Migrations\20160331185127_AddedReviewerRole.designer.cs">
+      <DependentUpon>20160331185127_AddedReviewerRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ToastmasterContextModelSnapshot.cs" />
     <Compile Include="Models\CardTime.cs" />
@@ -164,13 +176,16 @@
     <Compile Include="Models\Speech.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices\AppSettings.cs" />
     <Compile Include="Services\SettingsServices\IAppSettings.cs" />
     <Compile Include="Services\SettingsServices\StorageKey.cs" />
     <Compile Include="ViewModels\AHCounterViewModel.cs" />
     <Compile Include="Features\AHCounter\Counter.cs" />
+    <Compile Include="ViewModels\GrammarViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\Speaker.cs" />
@@ -185,6 +200,10 @@
     <EmbeddedResource Include="Properties\ToastmasterTools.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\BorderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CounterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

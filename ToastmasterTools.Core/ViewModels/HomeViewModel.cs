@@ -23,7 +23,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void GoToTimerView()
         {
-            NavigationService.Navigate(Pages.Timer);            
+            NavigationService.Navigate(Pages.Timer);
         }
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -36,31 +36,41 @@ namespace ToastmasterTools.Core.ViewModels
             {
                 await context.Seed();
             }
-        }        
+        }
 
         public bool IsLoggedIn
         {
             get { return _isLoggedIn; }
             set
             {
-                _isLoggedIn = value; 
+                _isLoggedIn = value;
                 RaisePropertyChanged();
             }
         }
 
         public void GoToSettings()
         {
-            NavigationService.Navigate(Pages.Settings);            
+            NavigationService.Navigate(Pages.Settings);
         }
 
         public void GoToAhCounter()
         {
-            NavigationService.Navigate(Pages.AhCounter);            
+            NavigationService.Navigate(Pages.AhCounter);
+        }
+
+        public void GoToGrammarian()
+        {
+            NavigationService.Navigate(Pages.Grammarian);
         }
 
         public void Login()
         {
             NavigationService.Navigate(Pages.Login);
+        }
+
+        public void GoToHistory()
+        {
+            NavigationService.Navigate(Pages.History);
         }
 
         public void Logout()
@@ -100,6 +110,8 @@ namespace ToastmasterTools.Core.ViewModels
         Timer,
         Settings,
         Login,
-        AhCounter
+        AhCounter,
+        Grammarian,
+        History
     }
 }

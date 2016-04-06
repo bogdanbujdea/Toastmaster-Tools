@@ -60,6 +60,8 @@ namespace ToastmasterTools.Core.Migrations
 
                     b.Property<string>("Notes");
 
+                    b.Property<int>("Reviewer");
+
                     b.Property<int>("SpeakerId");
 
                     b.Property<double>("SpeechTimeInSeconds");

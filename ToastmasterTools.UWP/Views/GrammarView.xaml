@@ -1,0 +1,81 @@
+﻿<Page x:Class="ToastmasterTools.UWP.Views.GrammarView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:ToastmasterTools.Core.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:ToastmasterTools.UWP.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=GrammarViewModel}"
+      x:Name="PageControl"
+      mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact">
+            <AppBarButton Name="Show"
+                          Click="{x:Bind ViewModel.AddCounter}"
+                          Icon="Add"
+                          Label="Add counter" />
+            <AppBarButton Name="Save"
+                          Click="{x:Bind ViewModel.SaveSession}"
+                          Icon="Save"
+                          Label="Save speech" />
+        </CommandBar>
+    </Page.BottomAppBar>
+    <Grid x:Name="LayoutRot" Background="{StaticResource AppBackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource AppBackgroundColor}">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Height="80"
+                       Margin="0 0 10 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Source="../Assets/Icons/grammar.png" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="ContentGrid"
+              Grid.Row="1"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="70*" />
+                <RowDefinition Height="30*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <controls:ToastmasterMemberPicker VerticalAlignment="Center"
+                                                  DataContext="{x:Bind ViewModel.MemberSelector}"
+                                                  Foreground="{StaticResource ComplementaryColor}"
+                                                  Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
+                <controls:ToastmasterSpeechSelector MinWidth="300"
+                                                    Margin="0 0 0 0"
+                                                    HorizontalAlignment="Center"
+                                                    DataContext="{x:Bind ViewModel.SpeechSelector}" />
+            </StackPanel>
+            <GridView x:Name="CounterGrid"
+                      Grid.Row="1" 
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      ItemContainerStyle="{StaticResource CounterContainerStyle}"
+                      ItemsSource="{x:Bind ViewModel.Counters}"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CounterControl HorizontalAlignment="Center" ></controls:CounterControl>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+            <TextBox Grid.Row="2"
+                     Width="{Binding ElementName=PageControl, Path=ActualWidth, Mode=TwoWay}"
+                     AcceptsReturn="True"
+                     Background="Transparent"
+                     BorderBrush="{StaticResource ComplementaryColor}"
+                     Foreground="{StaticResource ComplementaryColor}"
+                     PlaceholderText="Write your notes here"
+                     Text="{x:Bind ViewModel.Notes, Mode=TwoWay}"
+                     TextAlignment="Left" Style="{StaticResource GrammarNotesStyle}" />
+        </Grid>
+    </Grid>
+</Page>

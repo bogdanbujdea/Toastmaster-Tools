@@ -1,4 +1,5 @@
-﻿<Page x:Class="ToastmasterTools.UWP.Views.TimerView"
+﻿<Page
+    x:Class="ToastmasterTools.UWP.Views.TimerView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="using:ToastmasterTools.Core.Controls"
@@ -11,26 +12,6 @@
     <Grid x:Name="LayoutGrid">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
-                <VisualState x:Name="VisualStateNarrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger x:Name="VisualStateNarrowTrigger"
-                                         MinWindowHeight="500"
-                                         MinWindowWidth="{StaticResource NarrowMinWidth}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DefaultTimes.Margin" Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="VisualStateNarrowWidth">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger x:Name="VisualStateNarrowWidthTrigger"
-                                         MinWindowHeight="0"
-                                         MinWindowWidth="{StaticResource NarrowMinWidth}" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DefaultTimes.Margin" Value="0" />
-                    </VisualState.Setters>
-                </VisualState>
                 <VisualState x:Name="VisualStateNormal">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger x:Name="VisualStateNormalTrigger" MinWindowWidth="{StaticResource NormalMinWidth}" />
@@ -63,10 +44,10 @@
                                      HorizontalAlignment="Center"
                                      Click="ShowSpeechUI"
                                      Content="{x:Bind ViewModel.Timer.CurrentSpeech.SpeechType.Name, Mode=OneWay}"
-                                     FontSize="18"
-                                     Foreground="White"
+                                     FontSize="18" BorderBrush="{StaticResource ComplementaryColor}"
+                                     Foreground="{StaticResource ComplementaryColor}"
                                      Padding="0" />
-                    <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="White"
+                    <controls:ToastmasterMemberPicker Grid.Row="1" Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
                 </Grid>
@@ -82,7 +63,7 @@
                     <RowDefinition Height="60*" />
                     <RowDefinition Height="20*" />
                 </Grid.RowDefinitions>
-                <controls:ToastmasterSpeechSelector Margin="0 20 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
+                <controls:ToastmasterSpeechSelector Margin="0 20 0 0" MinWidth="300" HorizontalAlignment="Center" Foreground="{StaticResource ComplementaryColor}" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition />

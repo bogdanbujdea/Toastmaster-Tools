@@ -7,28 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:ToastmasterTools.Core.Controls"
     mc:Ignorable="d">
-    <Page.Resources>
-        <Style x:Key="CounterContainerStyle" TargetType="GridViewItem">
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="TabNavigation" Value="Local"/>
-            <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,4,4"/>
-            <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="GridViewItem">
-                        <ListViewItemPresenter/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Name="Show" Icon="Add" Label="Add counter" Click="{x:Bind ViewModel.AddCounter}"/>
@@ -36,42 +14,38 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{StaticResource AppBackgroundColor}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Background="#003F61">
+        <Grid Background="{StaticResource AppBackgroundColor}">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image Height="40"
-                       Margin="0 0 10 0"
+                <Image Height="80"
+                       Margin="0 0 0 0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Source="../Assets/logo_transparent.png" />
-                <TextBlock HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="30"
-                           Foreground="White"
-                           Text="AH Counter" />
+                       Source="../Assets/Icons/counting.png" />
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid" Grid.Row="1" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel>
                 <controls:ToastmasterMemberPicker 
                                                 VerticalAlignment="Center"
-                                                Foreground="{StaticResource AppDefaultColor}"
+                                                Foreground="{StaticResource ComplementaryColor}"
                                                 DataContext="{x:Bind ViewModel.MemberSelector}"
                                                 Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisiblityConverter}}" />
-                <controls:ToastmasterSpeechSelector Margin="0 0 0 0" MinWidth="300" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector}"></controls:ToastmasterSpeechSelector>
+                <controls:ToastmasterSpeechSelector Margin="0" MinWidth="300" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
 
             </StackPanel>
-            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CounterContainerStyle}">
+            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <controls:CounterControl></controls:CounterControl>
+                        <controls:CounterControl x:Name="CounterControl"></controls:CounterControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>

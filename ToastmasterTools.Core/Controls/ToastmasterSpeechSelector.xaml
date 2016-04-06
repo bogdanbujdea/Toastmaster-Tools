@@ -13,11 +13,12 @@
     <Grid>
         <ComboBox x:Name="Lessons"
                           MinWidth="300"
-                          Margin="0 20 0 0"
                           HorizontalAlignment="Center"
+                            Foreground="{StaticResource ComplementaryColor}"
+                  PlaceholderText="Choose a speech"
                           ItemsSource="{x:Bind ViewModel.Lessons, Mode=OneWay}"
                           SelectedItem="{Binding SelectedSpeechType,
-                                                 Mode=TwoWay}">
+                                                 Mode=TwoWay}" Style="{StaticResource MembersComboBoxStyle}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

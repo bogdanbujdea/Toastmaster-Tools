@@ -27,9 +27,15 @@ namespace ToastmasterTools.UWP
             CacheMaxDuration = TimeSpan.FromDays(2);
             ShowShellBackButton = true;
             SplashFactory = e => new Splash(e);
-            using (var db = new ToastmasterContext())
+            try
             {
-                db.Database.Migrate();
+                using (var db = new ToastmasterContext())
+                {
+                    db.Database.Migrate();
+                }
+            }
+            catch (Exception exception)
+            {
             }
         }
 
@@ -43,6 +49,8 @@ namespace ToastmasterTools.UWP
             keys.Add(Pages.Timer, typeof(TimerView));
             keys.Add(Pages.Login, typeof(LoginView));
             keys.Add(Pages.AhCounter, typeof(AHCounterView));
+            keys.Add(Pages.Grammarian, typeof(GrammarView));
+            keys.Add(Pages.History, typeof(HistoryView));
             return Task.CompletedTask;
         }
 

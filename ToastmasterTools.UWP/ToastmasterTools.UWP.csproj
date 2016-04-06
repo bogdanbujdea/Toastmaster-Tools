@@ -105,8 +105,14 @@
     <Compile Include="Views\AHCounterView.xaml.cs">
       <DependentUpon>AHCounterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GrammarView.xaml.cs">
+      <DependentUpon>GrammarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -142,6 +148,12 @@
     <Content Include="analytics.xml" />
     <Content Include="Assets\icon-hammer.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\Icons\counting.png" />
+    <Content Include="Assets\Icons\grammar.png" />
+    <Content Include="Assets\Icons\history.png" />
+    <Content Include="Assets\Icons\logo.png" />
+    <Content Include="Assets\Icons\settings.png" />
+    <Content Include="Assets\Icons\timer.png" />
     <Content Include="Assets\logo_dark.png" />
     <Content Include="Assets\logo_transparent.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -202,7 +214,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GrammarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GroupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

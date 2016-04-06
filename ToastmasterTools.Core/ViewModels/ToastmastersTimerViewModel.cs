@@ -4,6 +4,7 @@ using Windows.Phone.Devices.Notification;
 using Windows.UI;
 using Windows.UI.Xaml;
 using ToastmasterTools.Core.Features.Analytics;
+using ToastmasterTools.Core.Features.UserDialogs;
 using ToastmasterTools.Core.Helpers;
 using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Mvvm;
@@ -15,6 +16,7 @@ namespace ToastmasterTools.Core.ViewModels
     {
         private readonly IStatisticsService _statisticsService;
         private readonly IAppSettings _appSettings;
+        private readonly IDialogService _dialogService;
         private bool _timerIsRunning;
         Stopwatch _stopWatch;
         private string _secondsText;
@@ -22,7 +24,7 @@ namespace ToastmasterTools.Core.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private Color _selectedBackground;
         private Speech _currentSpeech;
-
+        
         private TimerState CurrentState { get; set; }
 
         private Color GreenTimeBackground { get; }
@@ -31,10 +33,11 @@ namespace ToastmasterTools.Core.ViewModels
 
         private Color RedTimeBackground { get; }
 
-        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings)
+        public ToastmastersTimerViewModel(IStatisticsService statisticsService, IAppSettings appSettings, IDialogService dialogService)
         {
             _statisticsService = statisticsService;
             _appSettings = appSettings;
+            _dialogService = dialogService;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 SelectedBackground = DarkBackground;
@@ -130,11 +133,16 @@ namespace ToastmasterTools.Core.ViewModels
 
         #region Timer
 
-        public Color DarkBackground { get; set; } = Color.FromArgb(255, 0, 63, 97);
+        public Color DarkBackground { get; set; } = Color.FromArgb(0xff, 0x2E, 0x37, 0x3E);
         public event EventHandler<Speech> SpeechStopped ;
 
-        public void StartTimer()
+        public async void StartTimer()
         {
+            if (CanStart == false)
+            {
+                await _dialogService.ShowMessageDialog("You must first select a speaker!");
+                return;
+            }
             _dispatcherTimer.Start();
             _stopWatch.Start();
             TimerIsRunning = true;
@@ -168,6 +176,8 @@ namespace ToastmasterTools.Core.ViewModels
         }
 
         #endregion
+
+        public bool CanStart { get; set; }
 
         #region Private
 

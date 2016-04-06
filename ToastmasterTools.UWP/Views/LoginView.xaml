@@ -39,8 +39,8 @@
                 </StackPanel>
             </Grid>
             <StackPanel x:Name="LoginPanel" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
-                <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" PlaceholderText="Username" InputScope="EmailSmtpAddress"></TextBox>
-                <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" PlaceholderText="Password" Margin="0 10"></PasswordBox>
+                <TextBox Text="{x:Bind ViewModel.Username, Mode=TwoWay}" KeyUp="{x:Bind ViewModel.KeyPressed}" PlaceholderText="Username" InputScope="EmailSmtpAddress"></TextBox>
+                <PasswordBox Password="{x:Bind ViewModel.Password, Mode=TwoWay}" KeyUp="{x:Bind ViewModel.KeyPressed}" PlaceholderText="Password" Margin="0 10"></PasswordBox>
                 <CheckBox Content="Remember me" IsChecked="{Binding RememberMe, Mode=TwoWay}"></CheckBox>
                 <Button Content="Login" Click="{x:Bind ViewModel.Login}" Width="{Binding ElementName=LoginPanel, Path=ActualWidth}" Background="#003F61" Foreground="White" HorizontalAlignment="Center" Margin="0 10 0 10"></Button>
                 <HyperlinkButton Content="Continue without an account" Click="{x:Bind ViewModel.ContinueWithoutLogin}" HorizontalAlignment="Center"></HyperlinkButton>

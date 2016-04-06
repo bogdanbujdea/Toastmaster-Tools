@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Template10.Mvvm;
 using ToastmasterTools.Core.Features.Analytics;
@@ -76,7 +79,7 @@ namespace ToastmasterTools.Core.ViewModels
             {
                 if (expiration > DateTime.Now)
                 {
-                    NavigationService.Navigate(Pages.Home);
+                    NavigateWIthLoggedInUser();
                 }
                 else
                 {
@@ -89,9 +92,22 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
+        private void NavigateWIthLoggedInUser()
+        {
+            NavigationService.Navigate(Pages.Home);
+            var count = NavigationService.Frame.BackStack.Count;
+            NavigationService.Frame.BackStack.RemoveAt(count - 1);
+        }
+
         public void ContinueWithoutLogin()
         {
             NavigationService.Navigate(Pages.Home);
+        }
+
+        public async Task KeyPressed(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+                await Login();
         }
 
         public async Task Login()
@@ -117,7 +133,7 @@ namespace ToastmasterTools.Core.ViewModels
                     _appSettings.Set(StorageKey.Password, Password);
                 }
                 await _membersRepository.RefreshClubMembers();
-                NavigationService.Navigate(Pages.Home);
+                NavigateWIthLoggedInUser();
                 _statisticsService.RegisterEvent(EventCategory.UserEvent, "logged in", userData.DisplayName);
             }
             else
