@@ -42,7 +42,7 @@
                 <controls:ToastmasterSpeechSelector Margin="0" MinWidth="300" Foreground="{StaticResource ComplementaryColor}" HorizontalAlignment="Center" DataContext="{x:Bind ViewModel.SpeechSelector, Mode=OneWay}"></controls:ToastmasterSpeechSelector>
 
             </StackPanel>
-            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Counters}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
+            <GridView x:Name="CounterGrid" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{Binding Counters, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{StaticResource CounterContainerStyle}">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <controls:CounterControl x:Name="CounterControl"></controls:CounterControl>

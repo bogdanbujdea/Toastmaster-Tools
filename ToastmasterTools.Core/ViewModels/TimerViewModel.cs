@@ -64,6 +64,7 @@ namespace ToastmasterTools.Core.ViewModels
             if (saveSpeech)
             {
                 await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, SelectedSpeechType.Name);
+                await _dialogService.ShowMessageDialog("The speech was saved!");
             }
             InitializeWithDefaults();
             Timer.Reset();

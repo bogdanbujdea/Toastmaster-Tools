@@ -39,6 +39,11 @@ namespace ToastmasterTools.Core.ViewModels
             MemberSelector = memberSelector;
             SelectedSpeechType = new SpeechType { GreenCardTime = new CardTime(), RedCardTime = new CardTime(), YellowCardTime = new CardTime() };
             Counters = new ObservableCollection<Counter>();
+            AddDefaultCounters();
+        }
+
+        private void AddDefaultCounters()
+        {
             AddCounterToList("Ahh");
             AddCounterToList("Pause");
             AddCounterToList("Mmm");
@@ -160,6 +165,11 @@ namespace ToastmasterTools.Core.ViewModels
                 await _dialogService.ShowMessageDialog("You must select a speaker!");
                 return;
             }
+            if (string.IsNullOrWhiteSpace(SelectedSpeechType.Name))
+            {
+                await _dialogService.ShowMessageDialog("You must select a speech!");
+                return;
+            }
             var speech = new Speech
             {
                 Date = DateTime.Now,
@@ -168,6 +178,10 @@ namespace ToastmasterTools.Core.ViewModels
                 Notes = Notes
             };
             await _speechRepository.SaveSpeech(speech, SelectedSpeaker.Name, SelectedSpeechType.Name);
+            await _dialogService.ShowMessageDialog("The speech was saved!");
+            Counters = new ObservableCollection<Counter>();
+            AddDefaultCounters();
+            Notes = string.Empty;            
             _statisticsService.RegisterEvent(EventCategory.UserEvent, ReviewerRole.ToString(), "saved speech");
         }
 

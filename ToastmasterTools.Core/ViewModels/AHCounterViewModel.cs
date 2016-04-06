@@ -23,7 +23,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public async Task SaveSession()
         {
-            await base.SaveSessionAsync();
+            await SaveSessionAsync();
         }
     }
 }
