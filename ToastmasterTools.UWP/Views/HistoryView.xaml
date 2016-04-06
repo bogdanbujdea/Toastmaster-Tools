@@ -55,6 +55,18 @@
             </Setter>
         </Style>
     </Page.Resources>
+    <Page.BottomAppBar >
+        <CommandBar ClosedDisplayMode="{Binding SelectedSpeech, Converter={StaticResource NullToCommandBarVisibility}, Mode=TwoWay}">
+            <AppBarButton x:Name="DeleteSpeech"
+                                        Click="{x:Bind ViewModel.DeleteSpeech}"
+                          Icon="Delete"
+                          Label="Delete" />
+            <AppBarButton x:Name="CloseSpeech"
+                          Icon="Cancel"
+                                        Click="{x:Bind ViewModel.CloseSpeech}"
+                          Label="Close" />
+        </CommandBar>
+    </Page.BottomAppBar>
 
     <Grid Background="{StaticResource AppBackgroundColor}">
         <VisualStateManager.VisualStateGroups>
@@ -138,6 +150,7 @@
                                     <Viewbox Margin="3">
                                         <TextBlock Foreground="{StaticResource ComplementaryColor}"
                                                    Text="{Binding Speaker.Name}"
+                                               FontWeight="SemiBold"
                                                    TextAlignment="Center"
                                                    TextWrapping="Wrap" />
                                     </Viewbox>
@@ -156,20 +169,20 @@
                     </GridView.ItemTemplate>
                 </GridView>
                 <Grid x:Name="SpeechGrid"
-                      Margin="0 10 0 0" Visibility="{Binding SpeechDetailsAreVisible, Converter={StaticResource BooleanToVisiblityConverter}}"
+                      Margin="0 10 0 0" Visibility="{Binding SelectedSpeech, Converter={StaticResource NullToVisibilityConverter}, Mode=TwoWay}"
                       Background="{StaticResource AppBackgroundColor}">
                     <ScrollViewer>
                         <Grid Margin="20 0" VerticalAlignment="Top">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="200" />
-                                <RowDefinition Height="100" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid x:Name="TimerGrid">
                                 <StackPanel VerticalAlignment="Center">
-                                    <TextBlock FontSize="20"
-                                               Foreground="{StaticResource ComplementaryColor}"
+                                    <TextBlock FontSize="22"
+                                               Foreground="White"
+                                               FontWeight="SemiBold"
                                                Text="{Binding SelectedSpeech.Speaker.Name}"
                                                TextAlignment="Left"
                                                TextWrapping="Wrap" />
@@ -212,39 +225,8 @@
                                      Style="{StaticResource GrammarNotesStyle}"
                                      Text="{Binding SelectedSpeech.Notes,
                                                     Mode=TwoWay}"
+                                     Visibility="{Binding SelectedSpeech.Notes, Converter={StaticResource NullToVisibilityConverter}, Mode=TwoWay}"
                                      TextAlignment="Left" />
-                            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                                <Button x:Name="UpdateSpeech"
-                                        Width="50"
-                                        Height="50"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Background="{StaticResource ComplementaryColor}"
-                                        Click="{x:Bind ViewModel.UpdateSpeech}"
-                                        Foreground="White">
-                                    <SymbolIcon Symbol="Save" />
-                                </Button>
-                                <Button x:Name="DeleteSpeech"
-                                        Width="50" Margin="20 0"
-                                        Height="50"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Background="{StaticResource ComplementaryColor}"
-                                        Click="{x:Bind ViewModel.DeleteSpeech}"
-                                        Foreground="White">
-                                    <SymbolIcon Symbol="Delete" />
-                                </Button>
-                                <Button x:Name="CloseSpeech"
-                                        Width="50"
-                                        Height="50"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Background="{StaticResource ComplementaryColor}"
-                                        Click="{x:Bind ViewModel.CloseSpeech}"
-                                        Foreground="White">
-                                    <SymbolIcon Symbol="Cancel" />
-                                </Button>
-                            </StackPanel>
                         </Grid>
                     </ScrollViewer>
                 </Grid>

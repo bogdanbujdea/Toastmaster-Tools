@@ -152,6 +152,8 @@
     <Compile Include="Helpers\Converters\DoubleWrapper.cs" />
     <Compile Include="Helpers\Converters\EmptyCollectionToVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Helpers\Converters\NullToCommandBarVisibility.cs" />
+    <Compile Include="Helpers\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\ReversedBooleanToVisiblityConverter.cs" />
     <Compile Include="Helpers\Converters\SecondsToTimeDisplayDateConverter.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />

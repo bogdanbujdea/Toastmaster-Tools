@@ -9,6 +9,8 @@
 
     <converters:DoubleWrapper x:Name="SizeWrapper" x:Key="SizeWrapper" Value="0"/>
     <converters:DoubleWrapper x:Name="IconSizeWrapper" x:Key="IconSizeWrapper" Value="0"/>
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"></converters:NullToVisibilityConverter>
+    <converters:NullToCommandBarVisibility x:Key="NullToCommandBarVisibility"></converters:NullToCommandBarVisibility>
     <converters:EmptyCollectionToVisibilityConverter x:Key="EmptyCollectionToVisibilityConverter"></converters:EmptyCollectionToVisibilityConverter>
     <converters:BooleanToVisiblityConverter x:Key="BooleanToVisiblityConverter"></converters:BooleanToVisiblityConverter>
     <converters:SecondsToTimeDisplayDateConverter x:Key="SecondsToTimeDisplayDateConverter"></converters:SecondsToTimeDisplayDateConverter>

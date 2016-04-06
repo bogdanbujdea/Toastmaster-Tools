@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Data.Entity;
 using ToastmasterTools.Core.Features.Storage;
@@ -18,7 +16,6 @@ namespace ToastmasterTools.Core.ViewModels
         private ObservableCollection<Speech> _speeches;
         private bool _historyIsEmpty;
         private Speech _selectedSpeech;
-        private bool _speechDetailsAreVisible;
 
         public HistoryViewModel()
         {
@@ -67,14 +64,6 @@ namespace ToastmasterTools.Core.ViewModels
                     Date = DateTime.Now
                 }
             };
-                SelectedSpeech = new Speech
-                {
-                    Speaker = new Speaker { Name = "Bogdan Bujdea", CurrentLesson = "Ice Breaker" },
-                    SpeechType = new SpeechType { Name = "Ice Breaker" },
-                    Notes = "Good speech",
-                    SpeechTimeInSeconds = 500,
-                    Date = DateTime.Now
-                };
             }
         }
 
@@ -100,7 +89,7 @@ namespace ToastmasterTools.Core.ViewModels
 
         public void CloseSpeech()
         {
-            SpeechDetailsAreVisible = false;
+            SelectedSpeech = null;
         }
 
         public async Task DeleteSpeech()
@@ -150,28 +139,13 @@ namespace ToastmasterTools.Core.ViewModels
             }
         }
 
-        public bool SpeechDetailsAreVisible
-        {
-            get { return _speechDetailsAreVisible; }
-            set
-            {
-                _speechDetailsAreVisible = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public Speech SelectedSpeech
         {
             get { return _selectedSpeech; }
             set
             {
-                if (_selectedSpeech != value)
-                {
-                    if (value != null)
-                        SpeechDetailsAreVisible = true;
-                    _selectedSpeech = value;
-                    RaisePropertyChanged();
-                }
+                _selectedSpeech = value;
+                RaisePropertyChanged();
             }
         }
     }
