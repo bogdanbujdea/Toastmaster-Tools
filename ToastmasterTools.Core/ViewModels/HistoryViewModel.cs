@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Data.Entity;
+using ToastmasterTools.Core.Features.Analytics;
 using ToastmasterTools.Core.Features.Storage;
 using ToastmasterTools.Core.Models;
 using ToastmasterTools.Core.Mvvm;
@@ -13,12 +14,14 @@ namespace ToastmasterTools.Core.ViewModels
 {
     public class HistoryViewModel : ViewModelBase
     {
+        private readonly IStatisticsService _statisticsService;
         private ObservableCollection<Speech> _speeches;
         private bool _historyIsEmpty;
         private Speech _selectedSpeech;
 
-        public HistoryViewModel()
+        public HistoryViewModel(IStatisticsService statisticsService)
         {
+            _statisticsService = statisticsService;
             if (DesignMode.DesignModeEnabled)
             {
                 Speeches = new ObservableCollection<Speech>
@@ -70,6 +73,7 @@ namespace ToastmasterTools.Core.ViewModels
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             await RefreshSpeeches();
+            _statisticsService.RegisterPage("HistoryView");
         }
 
         private async Task RefreshSpeeches()

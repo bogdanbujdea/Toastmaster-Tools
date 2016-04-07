@@ -21,11 +21,14 @@
       An Assembly element with Name="*Application*" applies to all assemblies in
       the application package. The asterisks are not wildcards.
     -->
-    <Assembly Name="*Application*" Dynamic="Required All" />
+    <Assembly Name="*ToastmasterTools*" Dynamic="Required All" />
     
     
     <!-- Add your application specific runtime directives here. -->
-
-
+	<Namespace Name="System" Dynamic="Required All" />
+	<Type Name="System.MarshalByRefObject" Dynamic="Required All" />
+	<Type Name="System.Collections.ArrayList" Dynamic="Required All" />
+	<Type Name="System.Linq.Expressions.Expression" Dynamic="Required All" />
+	<Assembly Name="System" Dynamic="Required All" />
   </Application>
 </Directives>
